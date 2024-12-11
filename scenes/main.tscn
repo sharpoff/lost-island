@@ -7,6 +7,7 @@
 [node name="Main" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 offset_left = -613.0
 offset_top = -445.0
 offset_right = 1836.0
@@ -24,3 +25,5 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="TouchControls" parent="Control" instance=ExtResource("3_j665c")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
