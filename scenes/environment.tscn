@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bja5cekt6w7il"]
+
+[ext_resource type="PackedScene" uid="uid://kh2acv2jodjg" path="res://scenes/touch_controls.tscn" id="2_3e7nm"]
+
+[sub_resource type="TileSet" id="TileSet_gjtdi"]
+tile_size = Vector2i(32, 32)
+
+[node name="Environment" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TouchControls" parent="Control" instance=ExtResource("2_3e7nm")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_gjtdi")

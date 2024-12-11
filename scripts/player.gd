@@ -1,12 +1,21 @@
 extends CharacterBody2D
 
-const SPEED = 500.0
+@export var SPEED = 500.0
+
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int())
 
 func _process(delta: float) -> void:
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	# we can't control other characters only yours
+	if not is_multiplayer_authority():
+		return
+	
+	# let camera follow current player
+	$Camera2D.make_current()
+	
 	var speed = SPEED * delta
 	var velocity = Vector2.ZERO # The player's movement vector.
+	
 	if Input.is_action_pressed("down"):
 		velocity.y += speed
 	if Input.is_action_pressed("up"):
