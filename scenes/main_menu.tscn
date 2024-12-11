@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bn0sqxi41x57p"]
 
-[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_2n36x"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_2n36x"]
 [ext_resource type="Texture2D" uid="uid://d2u5xj2kdsrx6" path="res://assets/ui/button.png" id="2_6dgky"]
 
 [sub_resource type="FontVariation" id="FontVariation_upiyq"]
@@ -68,8 +68,6 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_krd0m")
 theme_override_styles/normal = SubResource("StyleBoxTexture_5jc82")
 text = "Host"
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="VBoxContainer2/VBoxContainer/Host"]
-
 [node name="Join" type="Button" parent="VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -79,8 +77,6 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_krd0m")
 theme_override_styles/normal = SubResource("StyleBoxTexture_5jc82")
 text = "Join"
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="VBoxContainer2/VBoxContainer/Join"]
-
 [node name="Quit" type="Button" parent="VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -89,8 +85,6 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_iiu4e")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_krd0m")
 theme_override_styles/normal = SubResource("StyleBoxTexture_5jc82")
 text = "Quit"
-
-[node name="TouchScreenButton" type="TouchScreenButton" parent="VBoxContainer2/VBoxContainer/Quit"]
 
 [connection signal="pressed" from="VBoxContainer2/VBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="VBoxContainer2/VBoxContainer/Join" to="." method="_on_join_pressed"]
