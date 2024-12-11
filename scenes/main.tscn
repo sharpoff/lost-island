@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://b306kv5gp1g1d"]
+
+[ext_resource type="PackedScene" uid="uid://qhvm71rgocqy" path="res://scenes/Player.tscn" id="1_c5ii6"]
+[ext_resource type="Texture2D" uid="uid://djf0k5td062o4" path="res://assets/stardew_bg.jpg" id="1_laigv"]
+[ext_resource type="PackedScene" uid="uid://kh2acv2jodjg" path="res://scenes/touch_controls.tscn" id="3_j665c"]
+
+[node name="Main" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -613.0
+offset_top = -445.0
+offset_right = 1836.0
+offset_bottom = 933.0
+texture = ExtResource("1_laigv")
+
+[node name="Player" parent="." instance=ExtResource("1_c5ii6")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TouchControls" parent="Control" instance=ExtResource("3_j665c")]

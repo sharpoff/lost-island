@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://kh2acv2jodjg"]
+
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="1_yr5yy"]
+
+[node name="TouchControls" type="CanvasLayer"]
+
+[node name="Virtual Joystick" parent="." instance=ExtResource("1_yr5yy")]
+offset_top = -301.0
+offset_bottom = -1.0
+joystick_mode = 1
+visibility_mode = 2
+action_left = "left"
+action_right = "right"
+action_up = "up"
+action_down = "down"
