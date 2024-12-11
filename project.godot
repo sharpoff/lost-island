@@ -11,13 +11,15 @@ config_version=5
 [application]
 
 config/name="Lost Island"
-run/main_scene="res://scenes/main_menu.tscn"
+run/main_scene="res://scenes/world.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://assets/icon.svg"
 
 [display]
 
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/stretch/scale_mode="integer"
 window/handheld/orientation=4
 
 [input]
