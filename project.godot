@@ -17,9 +17,10 @@ config/icon="res://assets/icon.svg"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
-window/stretch/scale_mode="integer"
+window/stretch/aspect="keep_height"
 window/handheld/orientation=4
 
 [input]
@@ -48,7 +49,11 @@ down={
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
-pointing/emulate_mouse_from_touch=false
+
+[layer_names]
+
+2d_physics/layer_1="environment"
+2d_physics/layer_2="player"
 
 [rendering]
 
