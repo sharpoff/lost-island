@@ -1,29 +1,52 @@
-[gd_scene load_steps=5 format=3 uid="uid://qhvm71rgocqy"]
+[gd_scene load_steps=8 format=3 uid="uid://qhvm71rgocqy"]
 
-[ext_resource type="Texture2D" uid="uid://b04bmi4lx56u1" path="res://assets/icon.svg" id="1_3p4r7"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_sla8p"]
+[ext_resource type="Texture2D" uid="uid://b0q7mmp3flxv1" path="res://assets/game/sprite_sheet.png" id="2_ow4d5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vocus"]
-size = Vector2(125, 127)
+size = Vector2(14, 22)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4dhnr"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mrgh"]
+atlas = ExtResource("2_ow4d5")
+region = Rect2(288, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6l1ar"]
+atlas = ExtResource("2_ow4d5")
+region = Rect2(288, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fb44y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3mrgh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6l1ar")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_sla8p")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
 position_smoothing_enabled = true
-position_smoothing_speed = 15.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -0.5)
+position = Vector2(1, 5)
 shape = SubResource("RectangleShape2D_vocus")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_3p4r7")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4dhnr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fb44y")

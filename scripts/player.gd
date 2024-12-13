@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var SPEED = 500.0
+@export var SPEED = 100.0
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())

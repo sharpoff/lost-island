@@ -13,22 +13,24 @@ func _ready() -> void:
 
 
 func create_host() -> void:
-	# hide menu, unhide environment
-	$MainMenu.hide()
-	$Environment.visible = true
-	
+	print_debug("Starting host")
 	enet_peer.create_server(PORT, MAX_PLAYERS)
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player) # for other players
 	add_player(multiplayer.get_unique_id()) # for host to player
+	
+	# hide menu, show environment
+	$MainMenu.hide()
+	$Environment.show()
 
 func create_client() -> void:
-	# hide menu, unhide environment
-	$MainMenu.hide()
-	$Environment.visible = true
-	
+	print_debug("Starting client")
 	enet_peer.create_client(IP_ADDR, PORT)
 	multiplayer.multiplayer_peer = enet_peer
+	
+	# hide menu, show environment
+	$MainMenu.hide()
+	$Environment.show()
 
 # every time player connects it adds it
 func add_player(id):
