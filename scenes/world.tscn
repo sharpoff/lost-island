@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b306kv5gp1g1d"]
 
-[ext_resource type="Script" path="res://scenes/world.gd" id="1_hcnli"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_hcnli"]
 [ext_resource type="PackedScene" uid="uid://bn0sqxi41x57p" path="res://scenes/main_menu.tscn" id="1_yrm1j"]
 [ext_resource type="PackedScene" uid="uid://qhvm71rgocqy" path="res://scenes/player.tscn" id="2_kbent"]
 [ext_resource type="PackedScene" uid="uid://bja5cekt6w7il" path="res://scenes/environment.tscn" id="2_vbr16"]
@@ -16,4 +16,4 @@ visible = false
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://scenes/player.tscn")
-spawn_path = NodePath("..")
+spawn_path = NodePath("../Environment")

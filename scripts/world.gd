@@ -4,6 +4,7 @@ extends Node
 @export var IP_ADDR = "localhost"
 @export var PORT = 8888
 @export var MAX_PLAYERS = 4
+@onready var environment: Node2D = $Environment
 
 var enet_peer = ENetMultiplayerPeer.new()
 
@@ -36,4 +37,4 @@ func create_client() -> void:
 func add_player(id):
 	var player = player_scene.instantiate()
 	player.name = str(id)
-	call_deferred("add_child", player)
+	environment.call_deferred("add_child", player)

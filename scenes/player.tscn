@@ -3,14 +3,6 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_sla8p"]
 [ext_resource type="Texture2D" uid="uid://b0q7mmp3flxv1" path="res://assets/game/sprite_sheet.png" id="2_ow4d5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vocus"]
-size = Vector2(14, 22)
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4dhnr"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_3mrgh"]
 atlas = ExtResource("2_ow4d5")
 region = Rect2(288, 96, 32, 32)
@@ -33,7 +25,16 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vocus"]
+size = Vector2(12, 13)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4dhnr"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Player" type="CharacterBody2D"]
+z_index = 2
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_sla8p")
@@ -42,13 +43,14 @@ script = ExtResource("1_sla8p")
 zoom = Vector2(4, 4)
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
+editor_draw_limits = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fb44y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 5)
+position = Vector2(1, 9.5)
 shape = SubResource("RectangleShape2D_vocus")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4dhnr")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_fb44y")
