@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dktpf0vual5w7"
-path="res://.godot/imported/tip.png-8a49fa05782073062d7b62ef62d07970.ctex"
+uid="uid://ll1bcdwuwrmx"
+path="res://.godot/imported/base.png-437d2d9ed200c2953a61f46da029bbfc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/tip.png"
-dest_files=["res://.godot/imported/tip.png-8a49fa05782073062d7b62ef62d07970.ctex"]
+source_file="res://assets/ui/joystick/base.png"
+dest_files=["res://.godot/imported/base.png-437d2d9ed200c2953a61f46da029bbfc.ctex"]
 
 [params]
 
