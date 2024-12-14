@@ -1,3 +1,4 @@
+
 [gd_scene load_steps=31 format=3 uid="uid://c274awp5cphdc"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_sla8p"]
@@ -9,30 +10,26 @@
 [ext_resource type="Texture2D" uid="uid://brbktjty6yv1t" path="res://assets/game/entities/player_1/P1_walking_up.png" id="7_nx1m7"]
 [ext_resource type="Texture2D" uid="uid://c43qslykj4i4s" path="res://assets/game/entities/player_1/P1_idle_up.png" id="8_l3vpb"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3mrgh"]
-atlas = ExtResource("2_ow4d5")
-region = Rect2(288, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6l1ar"]
-atlas = ExtResource("2_ow4d5")
-region = Rect2(288, 64, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4i8j"]
+atlas = ExtResource("2_w1jg8")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fb44y"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3mrgh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6l1ar")
+"texture": SubResource("AtlasTexture_x4i8j")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vocus"]
+
 size = Vector2(12, 12)
+
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4dhnr"]
 properties/0/path = NodePath(".:position")
@@ -683,6 +680,7 @@ editor_draw_limits = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_fb44y")
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9)
