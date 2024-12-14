@@ -1,15 +1,31 @@
 [gd_scene load_steps=5 format=3 uid="uid://b306kv5gp1g1d"]
 
-[ext_resource type="Script" path="res://scripts/world.gd" id="1_hcnli"]
 [ext_resource type="PackedScene" uid="uid://bn0sqxi41x57p" path="res://scenes/main_menu.tscn" id="1_yrm1j"]
-[ext_resource type="PackedScene" uid="uid://qhvm71rgocqy" path="res://scenes/player.tscn" id="2_kbent"]
 [ext_resource type="PackedScene" uid="uid://bja5cekt6w7il" path="res://scenes/environment.tscn" id="2_vbr16"]
+[ext_resource type="PackedScene" uid="uid://kh2acv2jodjg" path="res://scenes/touch_controls.tscn" id="5_cdhbi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_id516"]
+font_size = 71
 
 [node name="World" type="Node"]
-script = ExtResource("1_hcnli")
-player_scene = ExtResource("2_kbent")
 
 [node name="MainMenu" parent="." instance=ExtResource("1_yrm1j")]
+
+[node name="UI" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TouchControls" parent="UI" instance=ExtResource("5_cdhbi")]
+
+[node name="PlayerUI" type="CanvasLayer" parent="UI"]
+
+[node name="Coins" type="Label" parent="UI/PlayerUI"]
+offset_right = 41.0
+offset_bottom = 97.0
+text = "0"
+label_settings = SubResource("LabelSettings_id516")
+horizontal_alignment = 1
 
 [node name="Environment" parent="." instance=ExtResource("2_vbr16")]
 visible = false

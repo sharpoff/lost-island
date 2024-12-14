@@ -1,32 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://qhvm71rgocqy"]
+[gd_scene load_steps=7 format=3 uid="uid://qhvm71rgocqy"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_sla8p"]
-[ext_resource type="Texture2D" uid="uid://b0q7mmp3flxv1" path="res://assets/game/sprite_sheet.png" id="2_ow4d5"]
+[ext_resource type="Texture2D" uid="uid://bouf8m6ppscqk" path="res://assets/game/main_character.png" id="2_w1jg8"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3mrgh"]
-atlas = ExtResource("2_ow4d5")
-region = Rect2(288, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6l1ar"]
-atlas = ExtResource("2_ow4d5")
-region = Rect2(288, 64, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4i8j"]
+atlas = ExtResource("2_w1jg8")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fb44y"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3mrgh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6l1ar")
+"texture": SubResource("AtlasTexture_x4i8j")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vocus"]
-size = Vector2(12, 13)
+size = Vector2(14, 12)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4dhnr"]
 properties/0/path = NodePath(".:position")
@@ -47,9 +40,10 @@ editor_draw_limits = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fb44y")
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 9.5)
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_vocus")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
