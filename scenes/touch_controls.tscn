@@ -7,6 +7,7 @@
 [node name="Virtual Joystick" parent="." instance=ExtResource("1_yr5yy")]
 offset_top = -301.0
 offset_bottom = -1.0
+clampzone_size = 70.0
 joystick_mode = 1
 visibility_mode = 2
 action_left = "left"

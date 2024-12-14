@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var SPEED = 100.0
 @onready var tilemap: TileMapLayer = $"../Background"
+@onready var joystick: Control = $"../UI/TouchControls/Virtual Joystick"
 
 enum States {IDLE, FISHING, MOVING}
 var state: States = States.IDLE
@@ -17,11 +18,14 @@ func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
 
 func _ready() -> void:
-	astar.region = tilemap.get_used_rect()
-	astar.cell_size = Vector2(32, 32)
+	var tilemap_size = tilemap.get_used_rect().end - tilemap.get_used_rect().position
+	var tilemap_region = Rect2i(tilemap.get_used_rect().position, tilemap_size)
+	astar.region = tilemap_region
+	astar.cell_size = tilemap.tile_set.tile_size
 	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	astar.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
+	astar.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
 	astar.update()
-	print(astar.region)
 
 func _physics_process(delta: float) -> void:
 	# we can't control other characters only yours
@@ -36,9 +40,13 @@ func _physics_process(delta: float) -> void:
 		global_position = global_position.move_toward(target, SPEED * delta)
 		if global_position == target:
 			current_id_path.pop_front()
+		state = States.MOVING
+		move_and_slide()
+		
+		print(current_id_path)
+		return
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
-	move_and_slide()
+		state = States.IDLE
 	
 	## basic movement (wasd, joystick)
 	direction.x = Input.get_axis("left", "right")
@@ -48,19 +56,22 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity = direction * SPEED
 		current_id_path = []
+		state = States.MOVING
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, SPEED)
+		velocity = Vector2.ZERO
 		state = States.IDLE
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.is_pressed():
-			# create new path for a*
-			var id_path = astar.get_id_path(
-				tilemap.local_to_map(global_position),
-				tilemap.local_to_map(get_global_mouse_position())
-			).slice(1)
-			
-			if not id_path.is_empty():
-				current_id_path = id_path
+			# create new path for a* if player is not moving right now
+			var mouse_pos = get_global_mouse_position()
+			if state != States.MOVING:
+				var id_path = astar.get_id_path(
+					tilemap.local_to_map(global_position),
+					tilemap.local_to_map(mouse_pos)
+				).slice(1)
+				
+				if not id_path.is_empty():
+					current_id_path = id_path
