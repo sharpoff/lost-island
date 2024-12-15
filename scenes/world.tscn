@@ -1,18 +1,29 @@
 [gd_scene load_steps=5 format=3 uid="uid://b306kv5gp1g1d"]
 
-[ext_resource type="PackedScene" uid="uid://bn0sqxi41x57p" path="res://scenes/main_menu.tscn" id="1_yrm1j"]
 [ext_resource type="PackedScene" uid="uid://bja5cekt6w7il" path="res://scenes/environment.tscn" id="2_vbr16"]
 [ext_resource type="PackedScene" uid="uid://kh2acv2jodjg" path="res://scenes/touch_controls.tscn" id="5_cdhbi"]
+
+[sub_resource type="Environment" id="Environment_0yoma"]
+background_mode = 3
+tonemap_mode = 1
+tonemap_exposure = 0.55
+tonemap_white = 0.8
+fog_mode = 1
+fog_density = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_id516"]
 font_size = 71
 
 [node name="World" type="Node"]
 
-[node name="MainMenu" parent="." instance=ExtResource("1_yrm1j")]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0yoma")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/player.tscn")
+spawn_path = NodePath("../Environment")
 
 [node name="UI" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 
@@ -28,8 +39,3 @@ label_settings = SubResource("LabelSettings_id516")
 horizontal_alignment = 1
 
 [node name="Environment" parent="." instance=ExtResource("2_vbr16")]
-visible = false
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/player.tscn")
-spawn_path = NodePath("../Environment")

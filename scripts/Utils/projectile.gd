@@ -3,14 +3,11 @@ extends Node2D
 const g = 10 # homogeneous gravitational acceleration
 
 func draw_projectile_to(node: Node2D, src: Vector2, dst: Vector2, init_velocity: float):	
-	var rotate_angle = false
-	# limit destination y
-	if (dst.y < src.y - 20):
-		dst.y = src.y - 20
-	
 	# Angle required to hit coordinate
 	var v = init_velocity # to shorten formula
 	var angle = atan((v**2 + sqrt(v**4 - g*(g*dst.x**2 + 2 * dst.y * v**2))) / (g * dst.x))
+	
+	var rotate_angle = false
 	if not angle:
 		return
 	elif angle < 0:
@@ -38,3 +35,6 @@ func draw_projectile_to(node: Node2D, src: Vector2, dst: Vector2, init_velocity:
 	
 	if (len(coords) > 0):
 		node.draw_polyline(coords, Color.WHITE, 0.5)
+
+func draw_curve_to(node: Node2D, src: Vector2, dst: Vector2):
+	pass
