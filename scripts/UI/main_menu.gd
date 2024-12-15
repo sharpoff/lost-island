@@ -15,7 +15,7 @@ func _on_host_pressed() -> void:
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player) # for other players
 	add_player(multiplayer.get_unique_id()) # for host to player
-	
+
 	# hide menu, show environment
 	hide()
 	environment.show()
@@ -34,7 +34,7 @@ func _on_join_pressed() -> void:
 		return
 	enet_peer.create_client(IP_ADDR, PORT)
 	multiplayer.multiplayer_peer = enet_peer
-	
+
 	# hide menu, show environment
 	hide()
 	environment.show()
