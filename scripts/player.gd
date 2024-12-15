@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @export var SPEED = 100.0
 
+@export var animation_tree: AnimationTree
+
 # gameplay related
 enum States {IDLE, FISHING, MOVING}
 var state: States = States.IDLE
@@ -37,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	$Camera2D.make_current()
 	
 	_move()
-	#_animation() - animation goes here i guess
+	_animate()
 	
 
 func _input(event: InputEvent) -> void:
@@ -58,6 +60,9 @@ func _move():
 		velocity = Vector2.ZERO
 		state = States.IDLE
 	move_and_slide()
+
+func _animate():
+	animation_tree.set("parameters/blend_position", direction)
 
 func _draw() -> void:
 	# draw fishing rod
