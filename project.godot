@@ -15,6 +15,10 @@ run/main_scene="res://scenes/world.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://assets/icon.svg"
 
+[autoload]
+
+DrawProjectileUtil="*res://scripts/Utils/draw_projectile.gd"
+
 [display]
 
 window/size/viewport_width=1280
