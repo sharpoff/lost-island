@@ -28,7 +28,7 @@ texture_region_size = Vector2i(32, 32)
 0:3/0 = 0
 0:3/0/terrain_set = 1
 0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-0:3/0/custom_data_1 = true
+0:3/0/custom_data_0 = true
 0:4/0 = 0
 0:4/0/terrain_set = 1
 0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 5.33333, -16, 5.33333, -5.33333, 16, -5.33333, 16, 16, -5.33333, 16, -5.33333, 5.33333, -16, 5.33333)
@@ -315,10 +315,8 @@ terrain_set_1/terrain_0/color = Color(0.397722, 0.202911, 0.858019, 1)
 terrain_set_2/mode = 0
 terrain_set_2/terrain_0/name = "sand/grass"
 terrain_set_2/terrain_0/color = Color(0.7, 0, 0.0116665, 1)
-custom_data_layer_0/name = "not walkable"
+custom_data_layer_0/name = "water"
 custom_data_layer_0/type = 1
-custom_data_layer_1/name = "water"
-custom_data_layer_1/type = 1
 sources/0 = SubResource("TileSetAtlasSource_pux4q")
 
 [node name="Environment" type="Node2D"]

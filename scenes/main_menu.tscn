@@ -1,15 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://bn0sqxi41x57p"]
 
 [ext_resource type="Script" path="res://scripts/UI/main_menu.gd" id="1_2n36x"]
-[ext_resource type="PackedScene" uid="uid://c274awp5cphdc" path="res://scenes/player.tscn" id="2_5xasc"]
+[ext_resource type="AudioStream" uid="uid://k06u2dt6t6da" path="res://assets/music/sfx/Click_UI_1.mp3" id="3_lsv7l"]
 
-[sub_resource type="FontVariation" id="FontVariation_upiyq"]
+[sub_resource type="FontVariation" id="FontVariation_nxsf7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5gxbv"]
-font = SubResource("FontVariation_upiyq")
+font = SubResource("FontVariation_nxsf7")
 font_size = 101
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("click")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,9 +19,9 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_2n36x")
-player_scene = ExtResource("2_5xasc")
+click = NodePath("ClickAudio")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -29,16 +29,21 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -317.0
-offset_top = -271.5
+offset_top = -311.5
 offset_right = 317.0
-offset_bottom = 271.5
+offset_bottom = 311.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 25
+
+[node name="HBoxTop" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer2"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxTop"]
 texture_filter = 2
 layout_mode = 2
 text = "Lost Island"
@@ -47,32 +52,50 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2"]
+[node name="HBoxBottom" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxBottom"]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 35
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 25
+alignment = 1
 
-[node name="Host" type="Button" parent="VBoxContainer2/VBoxContainer"]
+[node name="SingleplayerButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 80
-text = "Host"
+theme_override_font_sizes/font_size = 55
+text = "Singleplayer"
 
-[node name="IPAddress" type="LineEdit" parent="VBoxContainer2/VBoxContainer"]
-layout_mode = 2
-text = "127.0.0.1"
-placeholder_text = "IP address to join"
-
-[node name="Join" type="Button" parent="VBoxContainer2/VBoxContainer"]
+[node name="MultiplayerButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 80
-text = "Join"
+theme_override_font_sizes/font_size = 55
+text = "Multiplayer"
 
-[node name="Quit" type="Button" parent="VBoxContainer2/VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 55
+text = "Options
+"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 55
 text = "Quit"
 
-[connection signal="pressed" from="VBoxContainer2/VBoxContainer/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="VBoxContainer2/VBoxContainer/Join" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="VBoxContainer2/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[node name="ClickAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_lsv7l")
+
+[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer/SingleplayerButton" to="." method="_on_singleplayer_button_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer/MultiplayerButton" to="." method="_on_multiplayer_button_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_button_up"]

@@ -11,13 +11,15 @@ config_version=5
 [application]
 
 config/name="Lost Island"
-run/main_scene="res://scenes/world.tscn"
+run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://assets/icon.svg"
 
 [autoload]
 
-DrawProjectileUtil="*res://scripts/Utils/draw_projectile.gd"
+ProjectileUtil="*res://scripts/Utils/projectile.gd"
+NetworkManager="*res://scripts/Networking/network_manager.gd"
+SettingsManager="*res://scripts/Configs/settings_manager.gd"
 
 [display]
 
@@ -26,6 +28,10 @@ window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 window/handheld/orientation=4
+
+[global_group]
+
+player="Main player group"
 
 [input]
 
