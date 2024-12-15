@@ -5,8 +5,7 @@ extends CharacterBody2D
 @export var animation_tree: AnimationTree
 
 # gameplay related
-enum States {IDLE, FISHING, MOVING}
-var state: States = States.IDLE
+var last_direction = Vector2(0, 1)
 
 # individual player would have their own coins (maybe all players, think about it)
 var coins: int = 0
@@ -34,13 +33,11 @@ func _physics_process(delta: float) -> void:
 	# we can't control other characters only yours
 	if not is_multiplayer_authority():
 		return
-	
 	# let camera follow your network player
 	$Camera2D.make_current()
 	
 	_move()
 	_animate()
-	
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -55,15 +52,19 @@ func _move():
 
 	if direction:
 		velocity = direction * SPEED
-		state = States.MOVING
 	else:
 		velocity = Vector2.ZERO
-		state = States.IDLE
 	move_and_slide()
 
 func _animate():
-	animation_tree.set("parameters/blend_position", direction)
+	var idle = !velocity
+	if !idle:
+		last_direction = velocity.normalized()
+	
+	animation_tree.set("parameters/Run/blend_position", last_direction)
+	animation_tree.set("parameters/Idle/blend_position", last_direction)
 
 func _draw() -> void:
 	# draw fishing rod
-	DrawProjectileUtil.draw_projectile_to(self, current_pos, mouse_pos, 35)
+	#DrawProjectileUtil.draw_projectile_to(self, current_pos, mouse_pos, 35)
+	pass

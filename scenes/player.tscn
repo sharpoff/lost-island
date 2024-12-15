@@ -1,8 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://qhvm71rgocqy"]
+[gd_scene load_steps=16 format=3 uid="uid://qhvm71rgocqy"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_sla8p"]
 [ext_resource type="Texture2D" uid="uid://0b7y1i2qbnaa" path="res://assets/game/entities/main_character.png" id="2_imr6s"]
-[ext_resource type="AnimationNodeBlendSpace2D" uid="uid://dx7tejtq3sh2i" path="res://animations/player_animation.tres" id="3_3k2bn"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://btn5pnrhdb5w" path="res://animations/player_animation_states.tres" id="3_h713h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vocus"]
 size = Vector2(16, 12)
@@ -279,49 +279,6 @@ _data = {
 "up": SubResource("Animation_387xp")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0nd2i"]
-animation = &"idle_left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rg6vl"]
-animation = &"idle_right"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gh08v"]
-animation = &"idle_down"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xfuot"]
-animation = &"idle_up"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_ejusl"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_0nd2i")
-blend_point_0/pos = Vector2(-1, 0)
-blend_point_1/node = SubResource("AnimationNodeAnimation_rg6vl")
-blend_point_1/pos = Vector2(1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_gh08v")
-blend_point_2/pos = Vector2(0, 1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_xfuot")
-blend_point_3/pos = Vector2(0, -1)
-blend_mode = 1
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uy2h3"]
-advance_mode = 2
-advance_condition = &"run"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6ac85"]
-advance_mode = 2
-advance_condition = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_obrlg"]
-advance_mode = 2
-advance_condition = &"run"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gflqq"]
-states/Idle/node = SubResource("AnimationNodeBlendSpace2D_ejusl")
-states/Idle/position = Vector2(416, 141)
-states/Run/node = ExtResource("3_3k2bn")
-states/Run/position = Vector2(380, 10)
-transitions = ["Start", "Run", SubResource("AnimationNodeStateMachineTransition_uy2h3"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_6ac85"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_obrlg")]
-graph_offset = Vector2(-39, -75)
-
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree")]
 z_index = 2
 collision_layer = 2
@@ -355,9 +312,8 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_gflqq")
+tree_root = ExtResource("3_h713h")
+advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/idle = false
-parameters/conditions/run = false
-parameters/Idle/blend_position = Vector2(0.00677967, -0.699386)
+parameters/Idle/blend_position = Vector2(0.0423728, -0.728459)
 parameters/Run/blend_position = Vector2(0, 0)
