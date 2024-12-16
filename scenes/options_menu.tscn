@@ -13,6 +13,9 @@ grow_vertical = 2
 script = ExtResource("1_7eoik")
 click = NodePath("ClickAudio")
 
+[node name="ClickAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_kare6")
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -106,9 +109,6 @@ theme_override_constants/margin_bottom = 25
 layout_mode = 2
 theme_override_font_sizes/font_size = 33
 text = "Back"
-
-[node name="ClickAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_kare6")
 
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxTop/HBoxMasterVolume/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxBottom/HBoxContainer/VBoxContainer/MarginContainer/BackButton" to="." method="_on_back_button_button_up"]

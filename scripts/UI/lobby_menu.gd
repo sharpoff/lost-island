@@ -8,6 +8,9 @@ func _on_back_button_button_up() -> void:
 
 
 func _on_play_button_button_up() -> void:
-	# networking goes here i guess
 	click.play()
-	get_tree().change_scene_to_file("res://scenes/world.tscn")
+	if NetworkManager.is_single_player:
+		get_tree().change_scene_to_file("res://scenes/world.tscn")
+	else:
+		# multiplayer
+		get_tree().change_scene_to_file("res://scenes/world.tscn")

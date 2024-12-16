@@ -5,11 +5,14 @@ signal player_connected(peer_id)
 signal player_disconnected(peer_id)
 signal server_disconnected
 
+@export var player_scene: PackedScene
 const PORT = 8000
 const MAX_PLAYERS = 4
 const DEFAULT_IP = "127.0.0.1"
 
 var players_loaded = 0
+
+var is_single_player = true
 
 func _ready():
 	multiplayer.peer_connected.connect(_on_player_connected) # create player for all peers
@@ -25,8 +28,8 @@ func create_host():
 	if error:
 		return error
 	multiplayer.multiplayer_peer = peer
-	_on_player_connected(multiplayer.get_unique_id()) # create player for host
-
+	player_connected.emit(multiplayer.get_unique_id())
+	
 func client_join(address: String = ""):
 	print_debug("Starting client")
 	if address.is_empty():

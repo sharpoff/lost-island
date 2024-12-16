@@ -16,9 +16,9 @@ var coins: int = 0 # individual player would have their own coins (maybe all pla
 
 
 func _enter_tree() -> void:
-	set_multiplayer_authority(name.to_int())
+	if not NetworkManager.is_single_player:
+		set_multiplayer_authority(name.to_int())
 
-	
 func _physics_process(_delta: float) -> void:
 	# we can't control other characters only yours
 	if not is_multiplayer_authority():
@@ -52,6 +52,7 @@ func _animate():
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.is_pressed():
+			# check if clicked tile name
 			mouse_pos = get_local_mouse_position()
 			var tile_pos = tilemap.local_to_map(mouse_pos)
 			var tile_data = tilemap.get_cell_tile_data(tile_pos)

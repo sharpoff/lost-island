@@ -1,5 +1,7 @@
-[gd_scene load_steps=5 format=4 uid="uid://bja5cekt6w7il"]
+[gd_scene load_steps=8 format=4 uid="uid://bja5cekt6w7il"]
 
+[ext_resource type="Script" path="res://scripts/environment.gd" id="1_vox5m"]
+[ext_resource type="PackedScene" uid="uid://qhvm71rgocqy" path="res://scenes/player.tscn" id="2_bafid"]
 [ext_resource type="Texture2D" uid="uid://b0q7mmp3flxv1" path="res://assets/game/sprite_sheet.png" id="2_m7hxp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hffml"]
@@ -319,8 +321,18 @@ custom_data_layer_0/name = "water"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_pux4q")
 
+[sub_resource type="Environment" id="Environment_2c2x3"]
+background_mode = 3
+tonemap_mode = 1
+tonemap_exposure = 0.55
+tonemap_white = 0.8
+fog_mode = 1
+fog_density = 1.0
+
 [node name="Environment" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_vox5m")
+player_scene = ExtResource("2_bafid")
 
 [node name="Background" type="TileMapLayer" parent="."]
 z_index = -1
@@ -332,3 +344,6 @@ z_index = 2
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAAAPj/AAAIAAAAAAABAPf/AAABAAAAAAAEAPn/AAAIAAAAAAAIAPT/AAAIAAAAAAAIAPb/AAADAAAAAAAJAPr/AAADAAAAAAAKAPz/AAAAAAAAAAALAPX/AAAIAAAAAAAMAPf/AAAAAAAAAAAMAPj/AAACAAAAAAAMAP3/AAABAAAAAAAPAPP/AAAAAAAAAAAQAPn/AAAGAAAAAAARAPX/AAADAAAAAAAUAPT/AAACAAAAAAAUAPn/AAACAAAAAAAUAPv/AAACAAAAAAAXAPX/AAADAAAAAAABAPP/AAAAAAAAAAACAPz/AAADAAAAAAADAPj/AAABAAAAAAAEAPv/AAAGAAAAAAAGAPP/AAACAAAAAAALAPT/AAACAAAAAAALAPr/AAAGAAAAAAALAP3/AAACAAAAAAAOAPP/AAADAAAAAAAOAPX/AAACAAAAAAAOAP3/AAACAAAAAAAPAPv/AAACAAAAAAARAPb/AAAGAAAAAAASAPf/AAAIAAAAAAAUAPb/AAACAAAAAAAUAPf/AAAGAAAAAAAUAPz/AAACAAAAAAAVAPb/AAADAAAAAAAWAPn/AAADAAAAAAAWAPr/AAAAAAAAAAAXAPb/AAAAAAAAAAD7/wYAAAAIAAAAAAD9/wcAAAADAAAAAAD+/wkAAAAAAAAAAAD//wMAAAABAAAAAAD//wkAAAADAAAAAAADAAIAAAADAAAAAAADAAYAAAAIAAAAAAAFAAgAAAACAAAAAAAHAAAAAAAGAAAAAAAJAAkAAAABAAAAAAAKAAYAAAADAAAAAAAMAAgAAAABAAAAAAAOAAAAAAABAAAAAAAOAAUAAAADAAAAAAAWAAAAAAADAAAAAAAWAAIAAAADAAAAAAAWAAgAAAABAAAAAAAOAAsAAAAIAAAAAAD8//j/AAADAAAAAAD8//3/AAACAAAAAAD9//j/AAABAAAAAAD+//n/AAAAAAAAAAD//wcAAAACAAAAAAABAAMAAAAGAAAAAAAQAAMAAAABAAAAAAACAAQAAAADAAAAAAA=")
 tile_set = SubResource("TileSet_336ut")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2c2x3")
