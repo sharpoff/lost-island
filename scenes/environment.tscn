@@ -322,10 +322,11 @@ custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_pux4q")
 
 [sub_resource type="Environment" id="Environment_2c2x3"]
-background_mode = 3
+background_mode = 2
 tonemap_mode = 1
 tonemap_exposure = 0.55
 tonemap_white = 0.8
+glow_bloom = 0.5
 fog_mode = 1
 fog_density = 1.0
 
