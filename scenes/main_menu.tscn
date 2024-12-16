@@ -21,6 +21,9 @@ size_flags_vertical = 3
 script = ExtResource("1_2n36x")
 click = NodePath("ClickAudio")
 
+[node name="ClickAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_lsv7l")
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -91,9 +94,6 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 55
 text = "Quit"
-
-[node name="ClickAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_lsv7l")
 
 [connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer/SingleplayerButton" to="." method="_on_singleplayer_button_button_up"]
 [connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer/MultiplayerButton" to="." method="_on_multiplayer_button_button_up"]

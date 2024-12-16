@@ -13,6 +13,9 @@ grow_vertical = 2
 script = ExtResource("1_y2i2o")
 click = NodePath("ClickAudio")
 
+[node name="ClickAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_1dxdd")
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -73,19 +76,41 @@ text = "Player 2"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxGameInfo"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxGameInfo"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxGameInfo/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 35
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 35
 theme_override_constants/margin_bottom = 20
 
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxGameInfo/MarginContainer"]
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxGameInfo/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 33
 selected = 0
 item_count = 1
 popup/item_0/text = "Save 1"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxGameInfo"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxGameInfo/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 20
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxGameInfo/VBoxContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+selected = 0
+item_count = 2
+popup/item_0/text = "Host"
+popup/item_1/text = "Server"
+popup/item_1/id = 1
 
 [node name="VBoxBottom" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -119,9 +144,6 @@ alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 33
 text = "Play"
-
-[node name="ClickAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_1dxdd")
 
 [connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxBottom/HBoxContainer/VBoxLeft/MarginContainer/BackButton" to="." method="_on_back_button_button_up"]
 [connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxBottom/HBoxContainer/VBoxRight/PlayButton" to="." method="_on_play_button_button_up"]
