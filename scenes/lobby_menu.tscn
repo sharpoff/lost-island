@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://2wldfpcvs7wa"]
 
-[ext_resource type="Script" path="res://scripts/UI/lobby_menu.gd" id="1_y2i2o"]
+[ext_resource type="Script" path="res://scripts/ui/lobby_menu.gd" id="1_y2i2o"]
 [ext_resource type="AudioStream" uid="uid://k06u2dt6t6da" path="res://assets/music/sfx/Click_UI_1.mp3" id="2_1dxdd"]
 
 [node name="LobbyMenu" type="Control" node_paths=PackedStringArray("click")]

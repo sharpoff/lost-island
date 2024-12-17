@@ -15,7 +15,7 @@ var players_loaded = 0
 var is_single_player = true
 
 func _ready():
-	multiplayer.peer_connected.connect(_on_player_connected) # create player for all peers
+	multiplayer.peer_connected.connect(_on_player_connected)
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)
 	multiplayer.connected_to_server.connect(_on_connection_ok)
 	multiplayer.connection_failed.connect(_on_connection_failed)
@@ -60,6 +60,7 @@ func _on_connection_failed() -> void:
 func _on_server_disconnected() -> void:
 	print_debug("Server disconnected")
 	_remove_multiplayer_peer()
+	emit_signal("server_disconnected")
 
 func _remove_multiplayer_peer() -> void:
 	multiplayer.multiplayer_peer = null

@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://wuuv03nobkau"]
+
+[ext_resource type="Script" path="res://scripts/ui/player_ui.gd" id="1_awcgk"]
+[ext_resource type="PackedScene" uid="uid://kh2acv2jodjg" path="res://scenes/touch_controls.tscn" id="1_vxi3r"]
+[ext_resource type="PackedScene" uid="uid://cryghm0n4gpw2" path="res://scenes/options_menu.tscn" id="3_n2t5v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_id516"]
+line_spacing = 0.0
+font_size = 33
+
+[node name="PlayerUI" type="CanvasLayer" node_paths=PackedStringArray("week_day_time", "hour_minute_time")]
+script = ExtResource("1_awcgk")
+week_day_time = NodePath("UI/VBoxContainer/HBoxContainer/GlobalTime")
+hour_minute_time = NodePath("UI/VBoxContainer/HBoxContainer2/LocalTime")
+
+[node name="TouchControls" parent="." instance=ExtResource("1_vxi3r")]
+
+[node name="OptionsMenu" parent="." instance=ExtResource("3_n2t5v")]
+visible = false
+back_button_func = 1
+
+[node name="UI" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GlobalTime" type="Label" parent="UI/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Week 1, Day 1"
+label_settings = SubResource("LabelSettings_id516")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="UI/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 33
+text = "Options"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LocalTime" type="Label" parent="UI/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "12:32"
+label_settings = SubResource("LabelSettings_id516")
+horizontal_alignment = 1
+
+[connection signal="closed" from="OptionsMenu" to="." method="_on_options_menu_closed"]
+[connection signal="button_up" from="UI/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_button_up"]

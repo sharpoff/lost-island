@@ -17,9 +17,9 @@ config/icon="res://assets/icon.svg"
 
 [autoload]
 
-ProjectileUtil="*res://scripts/Utils/projectile.gd"
-NetworkManager="*res://scripts/Networking/network_manager.gd"
-SettingsManager="*res://scripts/Configs/settings_manager.gd"
+ProjectileUtil="*res://scripts/utils/projectile.gd"
+NetworkManager="*res://scripts/networking/network_manager.gd"
+SettingsManager="*res://scripts/configs/settings_manager.gd"
 
 [display]
 
@@ -28,6 +28,7 @@ window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 window/handheld/orientation=4
+window/vsync/vsync_mode=2
 
 [global_group]
 

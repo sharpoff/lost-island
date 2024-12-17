@@ -26,7 +26,7 @@ func draw_projectile_to(node: Node2D, src: Vector2, dst: Vector2, init_velocity:
 		var y: float = init_velocity * t * sin(angle) - (0.5 * g * (t ** 2))
 		x = -x if rotate_angle else x
 		var end_pos = Vector2(x, -y)
-		
+
 		coords.append(first_pos)
 		coords.append(end_pos)
 		

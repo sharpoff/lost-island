@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cryghm0n4gpw2"]
 
-[ext_resource type="Script" path="res://scripts/UI/options_menu.gd" id="1_7eoik"]
+[ext_resource type="Script" path="res://scripts/ui/options_menu.gd" id="1_7eoik"]
 [ext_resource type="AudioStream" uid="uid://k06u2dt6t6da" path="res://assets/music/sfx/Click_UI_1.mp3" id="2_kare6"]
 
 [node name="OptionsMenu" type="Control" node_paths=PackedStringArray("click")]
@@ -44,7 +44,7 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 33
 text = "Language"
 
-[node name="GraphicsOptions" type="OptionButton" parent="MarginContainer/VBoxContainer/VBoxTop/HBoxLanguage"]
+[node name="LanguageOptions" type="OptionButton" parent="MarginContainer/VBoxContainer/VBoxTop/HBoxLanguage"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 33
@@ -64,7 +64,7 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 33
 text = "Master Volume"
 
-[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VBoxTop/HBoxMasterVolume"]
+[node name="MasterVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VBoxTop/HBoxMasterVolume"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -79,7 +79,7 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 33
 text = "Sound effects"
 
-[node name="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VBoxTop/HBoxSoundEffects"]
+[node name="SoundEffectsSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VBoxTop/HBoxSoundEffects"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -110,5 +110,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 33
 text = "Back"
 
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxTop/HBoxMasterVolume/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/VBoxTop/HBoxLanguage/LanguageOptions" to="." method="_on_language_options_item_selected"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxTop/HBoxMasterVolume/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxTop/HBoxSoundEffects/SoundEffectsSlider" to="." method="_on_sound_effects_slider_value_changed"]
 [connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxBottom/HBoxContainer/VBoxContainer/MarginContainer/BackButton" to="." method="_on_back_button_button_up"]
