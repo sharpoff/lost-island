@@ -1,17 +1,21 @@
 extends Node
 
+signal time_changed(week: int, day: int, hour: int, minute: int)
+
 const MINUTES_IN_WEEK = 10080
 const MINUTES_IN_DAY = 1440
 const MINUTES_IN_HOUR = 60
 const REAL_MINUTE_DURATION = (2 * PI) / MINUTES_IN_DAY # day night cycle is 2 * PI
 
 @export var gradient: GradientTexture1D
-@export var time_speed = 1.0
+@export var time_speed: float = 1.0
+@export var initial_hour: int = 12
 
 var time: float = 0.0
 var last_minute: int = -1
 
-signal time_changed(week: int, day: int, hour: int, minute: int)
+func _ready() -> void:
+	time = initial_hour * MINUTES_IN_HOUR * REAL_MINUTE_DURATION
 
 func _process(delta: float) -> void:
 	time += delta * time_speed * REAL_MINUTE_DURATION
@@ -33,5 +37,10 @@ func _calculate_time() -> void:
 	
 	var hour = int(day_minutes / MINUTES_IN_HOUR)
 	var minute = day_minutes % MINUTES_IN_HOUR
+	
+	if (hour > 17):
+		get_tree().call_group("player", "turn_on_light")
+	elif (hour > 6):
+		get_tree().call_group("player", "turn_off_light")
 	
 	time_changed.emit(week, day, hour, minute)
