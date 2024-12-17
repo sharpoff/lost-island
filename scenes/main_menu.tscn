@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bn0sqxi41x57p"]
 
-[ext_resource type="Script" path="res://scripts/UI/main_menu.gd" id="1_2n36x"]
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_2n36x"]
 [ext_resource type="AudioStream" uid="uid://k06u2dt6t6da" path="res://assets/music/sfx/Click_UI_1.mp3" id="3_lsv7l"]
 
 [sub_resource type="FontVariation" id="FontVariation_nxsf7"]

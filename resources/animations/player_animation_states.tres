@@ -1,6 +1,6 @@
 [gd_resource type="AnimationNodeStateMachine" load_steps=10 format=3 uid="uid://btn5pnrhdb5w"]
 
-[ext_resource type="AnimationNodeBlendSpace2D" uid="uid://dx7tejtq3sh2i" path="res://animations/player_animation.tres" id="1_ux140"]
+[ext_resource type="AnimationNodeBlendSpace2D" uid="uid://dx7tejtq3sh2i" path="res://resources/animations/player_animation.tres" id="1_ux140"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_57ulg"]
 animation = &"idle_left"

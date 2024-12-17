@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var SPEED = 100.0
 @export var animation_tree: AnimationTree
-@onready var tilemap: TileMapLayer = $"../Background"
+@onready var tilemap: TileMapLayer = $"../Ground"
 
 # movement related
 var direction: Vector2
@@ -49,7 +49,10 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			# check if clicked tile name
-			var tile_data = tilemap.get_cell_tile_data(tilemap.local_to_map(get_global_mouse_position()))
+			var mouse_pos = get_global_mouse_position()
+			if not mouse_pos:
+				return
+			var tile_data = tilemap.get_cell_tile_data(tilemap.local_to_map(mouse_pos))
 			var is_water = tile_data.get_custom_data("water")
 			queue_redraw()
 
