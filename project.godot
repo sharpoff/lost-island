@@ -20,6 +20,7 @@ config/icon="res://assets/icon.svg"
 ProjectileUtil="*res://scripts/utils/projectile.gd"
 NetworkManager="*res://scripts/networking/network_manager.gd"
 SettingsManager="*res://scripts/configs/settings_manager.gd"
+AudioManager="*res://scripts/utils/audio_manager.gd"
 
 [display]
 

@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var SPEED = 100.0
 @export var animation_tree: AnimationTree
 @onready var tilemap: TileMapLayer = $"../Ground"
+@export var light: PointLight2D
 
 # movement related
 var direction: Vector2
@@ -65,3 +66,9 @@ func _draw() -> void:
 	else:
 		var init_velocity = 35
 		ProjectileUtil.draw_projectile_to(self, src, dst, init_velocity)
+
+func turn_on_light() -> void:
+	light.enabled = true
+
+func turn_off_light() -> void:
+	light.enabled = false

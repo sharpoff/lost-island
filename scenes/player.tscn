@@ -1,9 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://qhvm71rgocqy"]
+[gd_scene load_steps=17 format=3 uid="uid://qhvm71rgocqy"]
 
 [ext_resource type="Script" path="res://scripts/enitites/player.gd" id="1_sla8p"]
 [ext_resource type="Texture2D" uid="uid://0b7y1i2qbnaa" path="res://assets/entities/main_character.png" id="2_imr6s"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://btn5pnrhdb5w" path="res://resources/animations/player_animation_states.tres" id="3_h713h"]
-[ext_resource type="Texture2D" uid="uid://bs6jkb6dmaxpc" path="res://assets/effects/light_effect.png" id="4_n3hse"]
+[ext_resource type="PackedScene" uid="uid://cvtaafcrt6xxd" path="res://scenes/night_light.tscn" id="4_m21tw"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4dhnr"]
 properties/0/path = NodePath(".:position")
@@ -286,14 +286,13 @@ _data = {
 "up": SubResource("Animation_387xp")
 }
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v044j"]
-
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree") groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "light") groups=["player"]]
 z_index = 2
 collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_sla8p")
 animation_tree = NodePath("AnimationTree")
+light = NodePath("NightLight")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4dhnr")
@@ -326,8 +325,6 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = Vector2(0.0423728, -0.728459)
 parameters/Run/blend_position = Vector2(0.395867, -0.0613497)
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
-material = SubResource("CanvasItemMaterial_v044j")
-energy = 0.4
-texture = ExtResource("4_n3hse")
+[node name="NightLight" parent="." instance=ExtResource("4_m21tw")]
+enabled = false
+energy = 0.1
