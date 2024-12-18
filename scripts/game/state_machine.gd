@@ -11,14 +11,17 @@ func _ready() -> void:
 			child.transition.connect(_on_child_transition)
 
 func _enter_tree() -> void:
-	pass
+	for state in states:
+		state.tsteamtstea
 
 func _process(delta: float) -> void:
-	pass
-
-func _physics_process(delta: float) -> void:
 	for state in states:
 		state.process(delta)
 
+func _physics_process(delta: float) -> void:
+	for state in states:
+		state.physics_process(delta)
+
 func _on_child_transition(state, new_state):
-	pass
+	if not current_state:
+		new_state = state

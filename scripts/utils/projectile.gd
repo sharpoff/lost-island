@@ -2,7 +2,7 @@ extends Node2D
 
 const g = 10 # homogeneous gravitational acceleration
 
-func calculate_projectle(node: Node2D, src: Vector2, dst: Vector2):
+func calculate_projectle(src: Vector2, dst: Vector2):
 	# Initial velocity
 	var v: float = sqrt(dst.y + sqrt(dst.y**2 + dst.x**2) * g)
 	
@@ -18,10 +18,6 @@ func calculate_projectle(node: Node2D, src: Vector2, dst: Vector2):
 	# Angle required to hit coordinate
 	var angle = atan((v**2 + sqrt(v**4 - g*(g*dst.x**2 + 2 * dst.y * v**2))) / (g * dst.x))
 
-	print_debug(dst)
-	print_debug(angle)
-	
-	
 	# Time of flight to the target's position
 	var time_of_flight = dst.x / (v * cos(angle))
 	var first_pos = src
@@ -38,8 +34,5 @@ func calculate_projectle(node: Node2D, src: Vector2, dst: Vector2):
 
 		first_pos = end_pos
 		t += step
-
-	if (len(coords) > 0):
-		node.draw_polyline(coords, Color.WHITE, 0.5)
 	
 	return coords
