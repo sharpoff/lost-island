@@ -4,6 +4,13 @@ extends CanvasLayer
 @export var hour_minute_time: Label
 @export var player_ui_root: MarginContainer
 @export var options_menu_root: Control
+@export var joystick: CanvasLayer
+
+func _ready() -> void:
+	# TODO: remove joystick if it's desktop
+	#if OS.get_name() != "Android" or OS.get_name() != "iOS":
+		#joystick.queue_free()
+	pass
 
 func _on_button_button_up() -> void:
 	options_menu_root.show()

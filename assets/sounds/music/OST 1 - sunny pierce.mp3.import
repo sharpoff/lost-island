@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cxbjyc40dgmgj"
+path="res://.godot/imported/OST 1 - sunny pierce.mp3-7c1f2abaa74d16498afe72e4b2c95d58.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/music/OST 1 - sunny pierce.mp3"
+dest_files=["res://.godot/imported/OST 1 - sunny pierce.mp3-7c1f2abaa74d16498afe72e4b2c95d58.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

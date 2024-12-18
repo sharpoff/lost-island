@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://daiu4ofjrvyqk"]
+
+[ext_resource type="Script" path="res://scripts/game/fishing_hook.gd" id="1_eda7n"]
+
+[node name="FishingHook" type="Marker2D"]
+script = ExtResource("1_eda7n")
+
+[node name="Hook" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -1, -1, 0, 0, 1, 1, 0)

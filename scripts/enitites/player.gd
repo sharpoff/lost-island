@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
-@export var SPEED = 100.0
 @export var animation_tree: AnimationTree
 @onready var tilemap: TileMapLayer = $"../Ground"
 @export var light: PointLight2D
+@export var speed_component: SpeedComponent
 
 # movement related
 var direction: Vector2
@@ -33,7 +33,7 @@ func _move():
 	direction = direction.normalized()
 
 	if direction:
-		velocity = direction * SPEED
+		velocity = direction * speed_component.speed
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()
@@ -55,18 +55,14 @@ func _input(event: InputEvent) -> void:
 				return
 			var tile_data = tilemap.get_cell_tile_data(tilemap.local_to_map(mouse_pos))
 			var is_water = tile_data.get_custom_data("water")
+			
 			queue_redraw()
 
 func _draw() -> void:
-	var src = $Camera2D.position
 	var dst = get_local_mouse_position()
-
-	if (dst.y < src.y - 20) or (dst.y > src.y + 20):
-		ProjectileUtil.draw_curve_to(self, src, dst)
-	else:
-		var init_velocity = 35
-		ProjectileUtil.draw_projectile_to(self, src, dst, init_velocity)
-
+	var coords = $FishingHook._calculate_trajectory(dst)
+	draw_polyline(coords, Color.WHITE, 0.5)
+	
 func turn_on_light() -> void:
 	light.enabled = true
 

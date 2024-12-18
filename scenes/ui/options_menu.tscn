@@ -1,0 +1,113 @@
+[gd_scene load_steps=3 format=3 uid="uid://cryghm0n4gpw2"]
+
+[ext_resource type="Script" path="res://scripts/ui/options_menu.gd" id="1_7eoik"]
+[ext_resource type="PackedScene" uid="uid://bn0sqxi41x57p" path="res://scenes/ui/main_menu.tscn" id="2_x5uqg"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7eoik")
+main_menu_scene = ExtResource("2_x5uqg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxTop" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxLanguage" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxTop"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxTop/HBoxLanguage"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 33
+text = "Language"
+
+[node name="LanguageOptions" type="OptionButton" parent="MarginContainer/VBoxContainer/VBoxTop/HBoxLanguage"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 33
+flat = true
+selected = 0
+item_count = 2
+popup/item_0/text = "English"
+popup/item_1/text = "Russian"
+popup/item_1/id = 1
+
+[node name="HBoxMasterVolume" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxTop"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxTop/HBoxMasterVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 33
+text = "Master Volume"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VBoxTop/HBoxMasterVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 100.0
+
+[node name="HBoxSoundEffects" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxTop"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxTop/HBoxSoundEffects"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 33
+text = "Sound effects"
+
+[node name="SoundEffectsSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VBoxTop/HBoxSoundEffects"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+value = 100.0
+
+[node name="VBoxBottom" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxBottom"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/VBoxBottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxBottom/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 25
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxBottom/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Back"
+
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/VBoxTop/HBoxLanguage/LanguageOptions" to="." method="_on_language_options_item_selected"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxTop/HBoxMasterVolume/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxTop/HBoxSoundEffects/SoundEffectsSlider" to="." method="_on_sound_effects_slider_value_changed"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxBottom/HBoxContainer/VBoxContainer/MarginContainer/BackButton" to="." method="_on_back_button_button_up"]
