@@ -1,17 +1,18 @@
-extends Node
+extends Node2D
 
-var playback: AudioStreamPlaybackPolyphonic
-
+var master_playback: AudioStreamPlaybackPolyphonic
+var stream = AudioStreamPolyphonic.new()
+	
 func _enter_tree() -> void:
-	var player = AudioStreamPlayer.new()
-	add_child(player)
+	var master_player = AudioStreamPlayer.new()
+	add_child(master_player)
 	
-	var stream = AudioStreamPolyphonic.new()
 	stream.polyphony = 32
-	player.stream = stream
-	player.play()
 	
-	playback = player.get_stream_playback()
+	master_player.stream = stream
+	master_player.bus = "Master"
+	master_player.play()
+	master_playback = master_player.get_stream_playback()
 	
 	get_tree().node_added.connect(_on_node_added)
 
@@ -20,4 +21,4 @@ func _on_node_added(node: Node) -> void:
 		node.button_up.connect(_play_button_up)
 
 func _play_button_up() -> void:
-	playback.play_stream(preload("res://assets/sounds/sfx/Click_UI_1.mp3"))
+	master_playback.play_stream(preload("res://assets/sounds/sfx/Click_UI_1.mp3"))

@@ -7,21 +7,31 @@ var current_state : State
 func _ready() -> void:
 	for child in get_children():
 		if child is State:
-			states[child.name] = child
+			states[child.name.to_lower()] = child
 			child.transition.connect(_on_child_transition)
 
 func _enter_tree() -> void:
-	for state in states:
-		state.tsteamtstea
+	if current_state:
+		current_state.enter_tree()
 
 func _process(delta: float) -> void:
-	for state in states:
-		state.process(delta)
+	if current_state:
+		current_state.process(delta)
 
 func _physics_process(delta: float) -> void:
-	for state in states:
-		state.physics_process(delta)
+	if current_state:
+		current_state.physics_process(delta)
 
-func _on_child_transition(state, new_state):
-	if not current_state:
-		new_state = state
+func _on_child_transition(state, new_state_name):
+	if state != current_state:
+		return
+	
+	var new_state = states.get(new_state_name.to_lower())
+	if not new_state:
+		return
+	
+	if current_state:
+		current_state.exit_tree()
+	
+	new_state.enter_tree()
+	current_state = new_state

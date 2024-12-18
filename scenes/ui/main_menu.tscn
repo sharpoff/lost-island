@@ -1,0 +1,100 @@
+[gd_scene load_steps=6 format=3 uid="uid://bn0sqxi41x57p"]
+
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_2n36x"]
+[ext_resource type="PackedScene" uid="uid://2wldfpcvs7wa" path="res://scenes/ui/lobby_menu.tscn" id="2_xohpx"]
+[ext_resource type="PackedScene" uid="uid://cryghm0n4gpw2" path="res://scenes/ui/options_menu.tscn" id="3_dvlvv"]
+
+[sub_resource type="FontVariation" id="FontVariation_nxsf7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5gxbv"]
+font = SubResource("FontVariation_nxsf7")
+font_size = 101
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_2n36x")
+lobby_menu = ExtResource("2_xohpx")
+options_menu = ExtResource("3_dvlvv")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -317.0
+offset_top = -311.5
+offset_right = 317.0
+offset_bottom = 311.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxTop" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxTop"]
+texture_filter = 2
+layout_mode = 2
+text = "Lost Island"
+label_settings = SubResource("LabelSettings_5gxbv")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HBoxBottom" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxBottom"]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 35
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="SingleplayerButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 55
+text = "Singleplayer"
+
+[node name="MultiplayerButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 55
+text = "Multiplayer"
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 55
+text = "Options
+"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 55
+text = "Quit"
+
+[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer/SingleplayerButton" to="." method="_on_singleplayer_button_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer/MultiplayerButton" to="." method="_on_multiplayer_button_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_button_up"]

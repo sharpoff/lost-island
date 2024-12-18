@@ -1,0 +1,148 @@
+[gd_scene load_steps=4 format=3 uid="uid://2wldfpcvs7wa"]
+
+[ext_resource type="Script" path="res://scripts/ui/lobby_menu.gd" id="1_y2i2o"]
+[ext_resource type="PackedScene" uid="uid://bn0sqxi41x57p" path="res://scenes/ui/main_menu.tscn" id="2_hi8fi"]
+[ext_resource type="PackedScene" uid="uid://b306kv5gp1g1d" path="res://scenes/game/world.tscn" id="3_tmd4c"]
+
+[node name="LobbyMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y2i2o")
+main_menu_scene = ExtResource("2_hi8fi")
+world_scene = ExtResource("3_tmd4c")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 35
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxTop" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxPlayers" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxTop"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxPlayers"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxPlayers/MarginContainer"]
+layout_mode = 2
+
+[node name="Player" type="Label" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxPlayers/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 33
+text = "Player 1
+"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxPlayers"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxPlayers/MarginContainer2"]
+layout_mode = 2
+
+[node name="Player" type="Label" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxPlayers/MarginContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 33
+text = "Player 2"
+
+[node name="VBoxGameInfo" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxTop"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxGameInfo"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxGameInfo/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 20
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxGameInfo/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+selected = 0
+item_count = 1
+popup/item_0/text = "Save 1"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxGameInfo"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxGameInfo/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 20
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxTop/VBoxGameInfo/VBoxContainer2/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+selected = 0
+item_count = 2
+popup/item_0/text = "Host"
+popup/item_1/text = "Server"
+popup/item_1/id = 1
+
+[node name="VBoxBottom" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxBottom"]
+layout_mode = 2
+theme_override_constants/separation = 150
+alignment = 1
+
+[node name="VBoxLeft" type="VBoxContainer" parent="MarginContainer/VBoxContainer/VBoxBottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxBottom/HBoxContainer/VBoxLeft"]
+layout_mode = 2
+theme_override_constants/margin_right = 300
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxBottom/HBoxContainer/VBoxLeft/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Back"
+
+[node name="VBoxRight" type="VBoxContainer" parent="MarginContainer/VBoxContainer/VBoxBottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxBottom/HBoxContainer/VBoxRight"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Play"
+
+[connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxBottom/HBoxContainer/VBoxLeft/MarginContainer/BackButton" to="." method="_on_back_button_button_up"]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/VBoxBottom/HBoxContainer/VBoxRight/PlayButton" to="." method="_on_play_button_button_up"]

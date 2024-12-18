@@ -1,15 +1,17 @@
 extends Control
+class_name OptionsMenu
 
 enum back_button_func_type {MAIN_MENU, HIDE}
 @export var back_button_func: back_button_func_type
+@export var main_menu_scene: PackedScene
 
 signal closed
 
 func _on_back_button_button_up() -> void:
 	if back_button_func == back_button_func_type.MAIN_MENU:
-		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		get_tree().change_scene(main_menu_scene)
 	else:
-		emit_signal("closed")
+		closed.emit()
 
 func _on_language_options_item_selected(index: int) -> void:
 	SettingsManager.current_state = index
