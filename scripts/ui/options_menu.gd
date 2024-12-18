@@ -1,6 +1,5 @@
 extends Control
 
-@export var click: AudioStreamPlayer2D
 enum back_button_func_type {MAIN_MENU, HIDE}
 @export var back_button_func: back_button_func_type
 

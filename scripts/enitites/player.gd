@@ -55,17 +55,16 @@ func _input(event: InputEvent) -> void:
 				return
 			var tile_data = tilemap.get_cell_tile_data(tilemap.local_to_map(mouse_pos))
 			var is_water = tile_data.get_custom_data("water")
+			
 			queue_redraw()
 
 func _draw() -> void:
 	var src = $Camera2D.position
 	var dst = get_local_mouse_position()
-
-	if (dst.y < src.y - 20) or (dst.y > src.y + 20):
-		ProjectileUtil.draw_curve_to(self, src, dst)
-	else:
-		var init_velocity = 35
-		ProjectileUtil.draw_projectile_to(self, src, dst, init_velocity)
+	
+	print_debug(dst)
+	if dst.x > -100 and dst.x < 100 and dst.y > -50 and dst.y < 50:
+		ProjectileUtil.calculate_projectle(self, src, dst)
 
 func turn_on_light() -> void:
 	light.enabled = true

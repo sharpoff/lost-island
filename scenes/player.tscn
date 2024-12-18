@@ -327,4 +327,3 @@ parameters/Run/blend_position = Vector2(0.395867, -0.0613497)
 
 [node name="NightLight" parent="." instance=ExtResource("4_m21tw")]
 enabled = false
-energy = 0.1
