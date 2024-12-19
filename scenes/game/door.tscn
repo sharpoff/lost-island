@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfp11nfce4hdw"]
+
+[ext_resource type="Script" path="res://scripts/game/door.gd" id="1_v8s2w"]
+
+[node name="Door" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_v8s2w")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
