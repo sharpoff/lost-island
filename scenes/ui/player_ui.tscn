@@ -8,11 +8,8 @@
 line_spacing = 0.0
 font_size = 33
 
-[node name="PlayerUI" type="CanvasLayer" node_paths=PackedStringArray("week_day_time", "hour_minute_time", "player_ui_root", "options_menu_root", "joystick")]
+[node name="PlayerUI" type="CanvasLayer" node_paths=PackedStringArray("options_menu_root", "joystick")]
 script = ExtResource("1_awcgk")
-week_day_time = NodePath("UI/VBoxContainer/HBoxContainer/GlobalTime")
-hour_minute_time = NodePath("UI/VBoxContainer/HBoxContainer2/LocalTime")
-player_ui_root = NodePath("UI")
 options_menu_root = NodePath("OptionsMenu")
 joystick = NodePath("InputControls/TouchControls")
 

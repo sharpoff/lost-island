@@ -32,6 +32,7 @@ window/vsync/vsync_mode=2
 
 [global_group]
 
+interactable="Object that player can interact with"
 player="Main player group"
 
 [input]

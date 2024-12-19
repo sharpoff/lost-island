@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://qhvm71rgocqy"]
+[gd_scene load_steps=25 format=3 uid="uid://qhvm71rgocqy"]
 
 [ext_resource type="Script" path="res://scripts/enitites/player.gd" id="1_yndhw"]
 [ext_resource type="Texture2D" uid="uid://0b7y1i2qbnaa" path="res://assets/sprites/entities/main_character.png" id="2_rhfs6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bs6jkb6dmaxpc" path="res://assets/sprites/effects/light_effect.png" id="5_hao5w"]
 [ext_resource type="PackedScene" uid="uid://4tjsu662ksyc" path="res://scenes/components/speed_component.tscn" id="5_qtokq"]
 [ext_resource type="PackedScene" uid="uid://daiu4ofjrvyqk" path="res://scenes/game/fishing_hook.tscn" id="7_kvln1"]
+[ext_resource type="PackedScene" uid="uid://d1a8po4hbvdi4" path="res://scenes/ui/reaction_bar.tscn" id="8_7hxga"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4dhnr"]
 properties/0/path = NodePath(".:position")
@@ -77,6 +78,122 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_yd5oo"]
+resource_name = "fishing_down"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_52a40"]
+resource_name = "fishing_left"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_jqs3d"]
+resource_name = "fishing_right"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_sw6m7"]
+resource_name = "fishing_up"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_x3e6u"]
@@ -280,6 +397,10 @@ tracks/1/keys = {
 _data = {
 "RESET": SubResource("Animation_ltdwi"),
 "down": SubResource("Animation_wtu2c"),
+"fishing_down": SubResource("Animation_yd5oo"),
+"fishing_left": SubResource("Animation_52a40"),
+"fishing_right": SubResource("Animation_jqs3d"),
+"fishing_up": SubResource("Animation_sw6m7"),
 "idle_down": SubResource("Animation_x3e6u"),
 "idle_left": SubResource("Animation_byuo0"),
 "idle_right": SubResource("Animation_1njpl"),
@@ -289,7 +410,7 @@ _data = {
 "up": SubResource("Animation_387xp")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "light", "speed_component") groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "light", "speed_component")]
 z_index = 2
 collision_layer = 2
 motion_mode = 1
@@ -300,6 +421,9 @@ speed_component = NodePath("SpeedComponent")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4dhnr")
+
+[node name="SpeedComponent" parent="." instance=ExtResource("5_qtokq")]
+speed = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
@@ -326,6 +450,9 @@ libraries = {
 tree_root = ExtResource("3_wydrx")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/fishing = false
+parameters/conditions/idle = false
+parameters/Fishing/blend_position = Vector2(0.895072, -0.079646)
 parameters/Idle/blend_position = Vector2(0.0423728, -0.728459)
 parameters/Run/blend_position = Vector2(0.395867, -0.0613497)
 
@@ -333,8 +460,11 @@ parameters/Run/blend_position = Vector2(0.395867, -0.0613497)
 enabled = false
 texture = ExtResource("5_hao5w")
 
-[node name="SpeedComponent" parent="." instance=ExtResource("5_qtokq")]
-speed = 100.0
-
-[node name="FishingHook" parent="." instance=ExtResource("7_kvln1")]
+[node name="FishingHook" parent="." groups=["player"] instance=ExtResource("7_kvln1")]
 position = Vector2(0, -20)
+color_flying = Color(0.733002, 1.64848e-06, 3.85046e-07, 1)
+color_land = Color(1, 1, 1, 1)
+
+[node name="ReactionBar" parent="." instance=ExtResource("8_7hxga")]
+
+[connection signal="stopped_fishing" from="FishingHook" to="." method="_on_fishing_hook_stopped_fishing"]
