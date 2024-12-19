@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://qhvm71rgocqy"]
+[gd_scene load_steps=24 format=3 uid="uid://qhvm71rgocqy"]
 
 [ext_resource type="Script" path="res://scripts/enitites/player.gd" id="1_yndhw"]
 [ext_resource type="Texture2D" uid="uid://0b7y1i2qbnaa" path="res://assets/sprites/entities/main_character.png" id="2_rhfs6"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://bs6jkb6dmaxpc" path="res://assets/sprites/effects/light_effect.png" id="5_hao5w"]
 [ext_resource type="PackedScene" uid="uid://4tjsu662ksyc" path="res://scenes/components/speed_component.tscn" id="5_qtokq"]
 [ext_resource type="PackedScene" uid="uid://daiu4ofjrvyqk" path="res://scenes/game/fishing_hook.tscn" id="7_kvln1"]
-[ext_resource type="PackedScene" uid="uid://d1a8po4hbvdi4" path="res://scenes/ui/reaction_bar.tscn" id="8_7hxga"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4dhnr"]
 properties/0/path = NodePath(".:position")
@@ -410,7 +409,7 @@ _data = {
 "up": SubResource("Animation_387xp")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "light", "speed_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "light", "speed_component") groups=["player"]]
 z_index = 2
 collision_layer = 2
 motion_mode = 1
@@ -464,7 +463,5 @@ texture = ExtResource("5_hao5w")
 position = Vector2(0, -20)
 color_flying = Color(0.733002, 1.64848e-06, 3.85046e-07, 1)
 color_land = Color(1, 1, 1, 1)
-
-[node name="ReactionBar" parent="." instance=ExtResource("8_7hxga")]
 
 [connection signal="stopped_fishing" from="FishingHook" to="." method="_on_fishing_hook_stopped_fishing"]

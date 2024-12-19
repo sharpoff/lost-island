@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://scripts/components/interaction_component.gd" id="1_jcybf"]
 
-[node name="InteractionComponent" type="Area2D"]
+[node name="InteractionComponent" type="Area2D" groups=["interactable"]]
 script = ExtResource("1_jcybf")
