@@ -29,18 +29,23 @@ func _process(delta: float) -> void:
 
 func _calculate_time() -> void:
 	var in_game_minute = int(time / REAL_MINUTE_DURATION)
-
 	var day_minutes = in_game_minute % MINUTES_IN_DAY
+	@warning_ignore("integer_division")
 	var week = int(in_game_minute / MINUTES_IN_WEEK)
 
+	@warning_ignore("integer_division")
 	var day = int(in_game_minute / MINUTES_IN_DAY) % 7
-	
+	@warning_ignore("integer_division")
 	var hour = int(day_minutes / MINUTES_IN_HOUR)
 	var minute = day_minutes % MINUTES_IN_HOUR
 	
 	if (hour > 17):
-		get_tree().call_group("player", "turn_on_light")
+		var lights = get_tree().get_nodes_in_group("night_light")
+		for light in lights:
+			light.enabled = true
 	elif (hour > 6):
-		get_tree().call_group("player", "turn_off_light")
+		var lights = get_tree().get_nodes_in_group("night_light")
+		for light in lights:
+			light.enabled = false
 	
 	time_changed.emit(week, day, hour, minute)

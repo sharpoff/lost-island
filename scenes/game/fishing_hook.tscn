@@ -2,8 +2,17 @@
 
 [ext_resource type="Script" path="res://scripts/game/fishing_hook.gd" id="1_eda7n"]
 
-[node name="FishingHook" type="Marker2D"]
+[node name="FishingHook" type="Node2D"]
 script = ExtResource("1_eda7n")
 
 [node name="Hook" type="Polygon2D" parent="."]
+visible = false
+position = Vector2(-5.96046e-08, -5.96046e-08)
+scale = Vector2(2, 2)
+color = Color(1, 0, 0.321569, 1)
 polygon = PackedVector2Array(0, -1, -1, 0, 0, 1, 1, 0)
+
+[node name="FishTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="FishTimer" to="." method="_on_fish_timer_timeout"]

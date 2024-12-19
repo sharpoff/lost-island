@@ -2,7 +2,9 @@ extends Node
 # TODO: add UPnP setup for network discovery
 
 signal player_connected(peer_id)
+@warning_ignore("unused_signal")
 signal player_disconnected(peer_id)
+@warning_ignore("unused_signal")
 signal server_disconnected
 
 @export var player_scene: PackedScene

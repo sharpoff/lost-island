@@ -1,16 +1,16 @@
 extends CanvasLayer
 
-@export var week_day_time: Label
-@export var hour_minute_time: Label
-@export var player_ui_root: MarginContainer
+@onready var week_day_time: Label = $UI/VBoxContainer/HBoxContainer/GlobalTime
+@onready var hour_minute_time: Label = $UI/VBoxContainer/HBoxContainer2/LocalTime
+@onready var player_ui_root: MarginContainer = $UI
+
 @export var options_menu_root: Control
 @export var joystick: CanvasLayer
 
 func _ready() -> void:
 	# TODO: remove joystick if it's desktop
-	#if OS.get_name() != "Android" or OS.get_name() != "iOS":
-		#joystick.queue_free()
-	pass
+	if OS.get_model_name() == "GenericDevice":
+		joystick.queue_free()
 
 func _on_button_button_up() -> void:
 	options_menu_root.show()

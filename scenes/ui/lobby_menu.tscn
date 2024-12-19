@@ -1,8 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://2wldfpcvs7wa"]
+[gd_scene load_steps=2 format=3 uid="uid://2wldfpcvs7wa"]
 
 [ext_resource type="Script" path="res://scripts/ui/lobby_menu.gd" id="1_y2i2o"]
-[ext_resource type="PackedScene" uid="uid://bn0sqxi41x57p" path="res://scenes/ui/main_menu.tscn" id="2_hi8fi"]
-[ext_resource type="PackedScene" uid="uid://b306kv5gp1g1d" path="res://scenes/game/world.tscn" id="3_tmd4c"]
 
 [node name="LobbyMenu" type="Control"]
 layout_mode = 3
@@ -12,8 +10,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_y2i2o")
-main_menu_scene = ExtResource("2_hi8fi")
-world_scene = ExtResource("3_tmd4c")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
