@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b306kv5gp1g1d"]
+[gd_scene load_steps=8 format=3 uid="uid://b306kv5gp1g1d"]
 
 [ext_resource type="PackedScene" uid="uid://wuuv03nobkau" path="res://scenes/ui/player_ui.tscn" id="1_6616m"]
 [ext_resource type="Script" path="res://scripts/game/daynight_cycle.gd" id="2_f2q3c"]
-[ext_resource type="PackedScene" uid="uid://bja5cekt6w7il" path="res://scenes/game/environment.tscn" id="3_t1deb"]
+[ext_resource type="Script" path="res://scripts/game/map.gd" id="3_a5nlw"]
+[ext_resource type="PackedScene" uid="uid://bja5cekt6w7il" path="res://scenes/game/island_map.tscn" id="3_t1deb"]
 
 [sub_resource type="Gradient" id="Gradient_1r5e2"]
 interpolation_mode = 2
@@ -31,15 +32,13 @@ gradient = SubResource("Gradient_1r5e2")
 
 [node name="World" type="Node"]
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("../Environment")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ix6ey")
 
-[node name="PlayerUI" parent="." instance=ExtResource("1_6616m")]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../Map/IslandMap")
 
-[node name="Environment" parent="." instance=ExtResource("3_t1deb")]
+[node name="PlayerUI" parent="." instance=ExtResource("1_6616m")]
 
 [node name="DayNightCycle" type="CanvasModulate" parent="."]
 script = ExtResource("2_f2q3c")
@@ -49,5 +48,16 @@ initial_hour = 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ix6ey")
+
+[node name="Map" type="Node2D" parent="."]
+script = ExtResource("3_a5nlw")
+
+[node name="IslandMap" parent="Map" instance=ExtResource("3_t1deb")]
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="time_changed" from="DayNightCycle" to="PlayerUI" method="_on_day_night_cycle_time_changed"]

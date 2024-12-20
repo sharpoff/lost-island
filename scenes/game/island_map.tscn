@@ -1,7 +1,5 @@
-[gd_scene load_steps=12 format=4 uid="uid://bja5cekt6w7il"]
+[gd_scene load_steps=10 format=4 uid="uid://bja5cekt6w7il"]
 
-[ext_resource type="Script" path="res://scripts/game/environment.gd" id="1_vox5m"]
-[ext_resource type="PackedScene" uid="uid://qhvm71rgocqy" path="res://scenes/entities/player.tscn" id="2_bafid"]
 [ext_resource type="Texture2D" uid="uid://bgrkr8i8kx0tm" path="res://assets/sprites/sprite_sheet.png" id="3_trkcb"]
 [ext_resource type="PackedScene" uid="uid://bfp11nfce4hdw" path="res://scenes/game/door.tscn" id="4_03qh8"]
 
@@ -65,6 +63,7 @@ texture_region_size = Vector2i(32, 32)
 2:5/0/terrains_peering_bit/bottom_right_corner = 0
 2:5/0/terrains_peering_bit/bottom_side = 0
 2:5/0/terrains_peering_bit/bottom_left_corner = 0
+2:6/next_alternative_id = 2
 2:6/0 = 0
 2:6/0/terrain_set = 0
 2:6/0/terrains_peering_bit/bottom_left_corner = 0
@@ -72,6 +71,7 @@ texture_region_size = Vector2i(32, 32)
 2:6/0/terrains_peering_bit/top_left_corner = 0
 2:6/0/terrains_peering_bit/top_side = 0
 2:6/0/terrains_peering_bit/top_right_corner = 0
+2:6/1 = 1
 3:3/0 = 0
 3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 5.33333, -16, 5.33333, 16, -16, 16)
 3:4/0 = 0
@@ -208,12 +208,10 @@ pattern_1 = SubResource("TileMapPattern_bpdhd")
 pattern_2 = SubResource("TileMapPattern_70v1g")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_465fc"]
-size = Vector2(35, 40)
+size = Vector2(29, 38)
 
-[node name="Environment" type="Node2D"]
+[node name="IslandMap" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_vox5m")
-player_scene = ExtResource("2_bafid")
 
 [node name="Ground" type="TileMapLayer" parent="."]
 z_index = -1
@@ -237,5 +235,5 @@ position = Vector2(262, -53)
 scene_to_transit = "res://scenes/game/house_inside.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/Door"]
-position = Vector2(-0.5, 4)
+position = Vector2(-0.5, 3)
 shape = SubResource("RectangleShape2D_465fc")
