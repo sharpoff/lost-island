@@ -4,6 +4,14 @@
 [ext_resource type="Script" path="res://scripts/game/daynight_cycle.gd" id="2_f2q3c"]
 [ext_resource type="PackedScene" uid="uid://bja5cekt6w7il" path="res://scenes/game/environment.tscn" id="3_t1deb"]
 
+[sub_resource type="Gradient" id="Gradient_1r5e2"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.461039, 0.551948, 0.694805)
+colors = PackedColorArray(0.1269, 0.166928, 0.47, 1, 0.895861, 0.619385, 0.235538, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i8mnj"]
+gradient = SubResource("Gradient_1r5e2")
+
 [sub_resource type="Environment" id="Environment_ix6ey"]
 background_mode = 2
 tonemap_mode = 1
@@ -36,5 +44,10 @@ environment = SubResource("Environment_ix6ey")
 [node name="DayNightCycle" type="CanvasModulate" parent="."]
 script = ExtResource("2_f2q3c")
 gradient = SubResource("GradientTexture1D_i8mnj")
+time_speed = 10.0
+initial_hour = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ix6ey")
 
 [connection signal="time_changed" from="DayNightCycle" to="PlayerUI" method="_on_day_night_cycle_time_changed"]

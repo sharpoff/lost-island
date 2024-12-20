@@ -1,0 +1,9 @@
+﻿keys,en,ru
+SINGLE_BTN,"Singleplayer","Одиночная игра"
+MULTI_BTN,"Multiplayer","Многопользовательская игра"
+OPT_BTN,"Options","Настройки"
+QUIT_BTN,"Quit","Выйти"
+PL1,"Player 1","Игрок 1"
+PL2,"Player 2","Игрок 2"
+HOST,"Host",""
+SERVER,"Server",""

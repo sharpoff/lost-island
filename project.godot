@@ -72,6 +72,12 @@ left_click={
 
 pointing/emulate_touch_from_mouse=true
 
+[internationalization]
+
+locale/translation_remaps={}
+locale/translations=PackedStringArray("res://lang/trans.en.translation", "res://lang/trans.ru.translation")
+locale/translation_add_builtin_strings_to_pot=true
+
 [layer_names]
 
 2d_physics/layer_1="environment"
