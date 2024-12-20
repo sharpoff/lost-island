@@ -36,6 +36,10 @@ interactable="Object that player can interact with"
 player="Main player group"
 night_light=""
 
+[gui]
+
+theme/custom_font="res://assets/fonts/PublicPixel.otf"
+
 [input]
 
 left={
@@ -71,6 +75,12 @@ left_click={
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+
+[internationalization]
+
+locale/translation_remaps={}
+locale/translations=PackedStringArray("res://lang/trans.en.translation", "res://lang/trans.ru.translation")
+locale/translation_add_builtin_strings_to_pot=true
 
 [layer_names]
 

@@ -37,7 +37,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 33
-text = "Language"
+text = "LANG"
 
 [node name="LanguageOptions" type="OptionButton" parent="MarginContainer/VBoxContainer/VBoxTop/HBoxLanguage"]
 layout_mode = 2
@@ -57,7 +57,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 33
-text = "Master Volume"
+text = "VOL_MASTER"
 
 [node name="MasterVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VBoxTop/HBoxMasterVolume"]
 layout_mode = 2
@@ -72,7 +72,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 33
-text = "Sound effects"
+text = "VOL_SFX"
 
 [node name="SoundEffectsSlider" type="HSlider" parent="MarginContainer/VBoxContainer/VBoxTop/HBoxSoundEffects"]
 layout_mode = 2
@@ -103,7 +103,7 @@ theme_override_constants/margin_bottom = 25
 [node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxBottom/HBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 33
-text = "Back"
+text = "BACK_BTN"
 
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/VBoxTop/HBoxLanguage/LanguageOptions" to="." method="_on_language_options_item_selected"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxTop/HBoxMasterVolume/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]

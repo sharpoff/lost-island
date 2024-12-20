@@ -25,6 +25,7 @@ texture = ExtResource("1_awjc3")
 stretch_mode = 2
 
 [node name="Hitter" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = -29.0
 offset_top = -41.0
 offset_right = -25.0
