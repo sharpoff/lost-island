@@ -57,6 +57,7 @@ uppercase = true
 [node name="HBoxBottom" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxBottom"]
@@ -79,8 +80,9 @@ text = "SINGLE_BTN"
 [node name="MultiplayerButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 55
+theme_override_font_sizes/font_size = 40
 text = "MULTI_BTN"
+autowrap_mode = 2
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxBottom/MarginContainer/VBoxContainer"]
 layout_mode = 2

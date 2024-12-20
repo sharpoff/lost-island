@@ -36,6 +36,10 @@ interactable="Object that player can interact with"
 player="Main player group"
 night_light=""
 
+[gui]
+
+theme/custom_font="res://assets/fonts/PublicPixel.otf"
+
 [input]
 
 left={
