@@ -12,6 +12,7 @@ func _ready() -> void:
 	sfx_vol_slider.value = SettingsManager.sound_effects_volume
 
 func _on_language_options_item_selected(index: int) -> void:
+	@warning_ignore("int_as_enum_without_cast")
 	SettingsManager.language = index
 
 func _on_master_volume_slider_value_changed(value: float) -> void:

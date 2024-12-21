@@ -22,7 +22,7 @@ colors = PackedColorArray(0.00570602, 0.140674, 0.281872, 1, 0.39305, 0.187683, 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_i8mnj"]
 gradient = SubResource("Gradient_1r5e2")
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node2D"]
 
 [node name="World" type="Node2D" parent="."]
 script = ExtResource("2_rjmyj")
@@ -38,6 +38,8 @@ environment = SubResource("Environment_ix6ey")
 script = ExtResource("1_kvkoo")
 gradient = SubResource("GradientTexture1D_i8mnj")
 time_speed = 10.0
+
+[node name="Players" type="Node2D" parent="."]
 
 [node name="GUI" type="Control" parent="."]
 layout_mode = 3

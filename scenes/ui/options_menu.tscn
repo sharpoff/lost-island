@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cryghm0n4gpw2"]
 
-[ext_resource type="Script" path="res://scripts/ui/options_menu.gd" id="1_7eoik"]
+[ext_resource type="Script" path="res://scripts/ui/menu_options.gd" id="1_7eoik"]
 [ext_resource type="StyleBox" uid="uid://chvlw8pqinkx3" path="res://resources/styles/menu_panel.tres" id="2_p5gdr"]
 
 [node name="OptionsMenu" type="Control" node_paths=PackedStringArray("master_vol_slider", "sfx_vol_slider", "language_option")]

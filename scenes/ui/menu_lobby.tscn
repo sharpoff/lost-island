@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://2wldfpcvs7wa"]
 
-[ext_resource type="Script" path="res://scripts/ui/lobby_menu.gd" id="1_y2i2o"]
+[ext_resource type="Script" path="res://scripts/ui/menu_lobby.gd" id="1_y2i2o"]
 [ext_resource type="StyleBox" uid="uid://chvlw8pqinkx3" path="res://resources/styles/menu_panel.tres" id="2_is1tw"]
 
-[node name="LobbyMenu" type="Control" node_paths=PackedStringArray("player_list", "nickname", "ip_address", "error_msg")]
+[node name="LobbyMenu" type="Control" node_paths=PackedStringArray("player_list", "nickname", "ip_address", "error_msg", "host_button", "join_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,6 +15,8 @@ player_list = NodePath("Players/Margin/Vertical/Players/PlayerList")
 nickname = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/NameHost/NickName")
 ip_address = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/JoinIP/IPAddress")
 error_msg = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/ErrorMessage")
+host_button = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/NameHost/Host")
+join_button = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/JoinIP/Join")
 
 [node name="SelectMenu" type="Panel" parent="."]
 layout_mode = 1
