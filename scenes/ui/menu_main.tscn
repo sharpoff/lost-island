@@ -25,7 +25,7 @@ singleplayer_scene = ExtResource("2_u2hpe")
 lobby_scene = ExtResource("2_mv0cx")
 options_scene = ExtResource("3_6fdth")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -39,15 +39,15 @@ offset_bottom = 311.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="Vertical" type="VBoxContainer" parent="Margin"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxTop" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Top" type="HBoxContainer" parent="Margin/Vertical"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxTop"]
+[node name="GameTitle" type="Label" parent="Margin/Vertical/Top"]
 texture_filter = 2
 layout_mode = 2
 text = "Lost Island"
@@ -56,39 +56,39 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="HBoxBottom" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Bottom" type="HBoxContainer" parent="Margin/Vertical"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxBottom"]
+[node name="Vertical" type="VBoxContainer" parent="Margin/Vertical/Bottom"]
 layout_mode = 2
 theme_override_constants/separation = 25
 alignment = 1
 
-[node name="SingleplayerButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxBottom/VBoxContainer"]
+[node name="Singleplayer" type="Button" parent="Margin/Vertical/Bottom/Vertical"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 44
 text = "SINGLEPLAYER"
 
-[node name="MultiplayerButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxBottom/VBoxContainer"]
+[node name="Multiplayer" type="Button" parent="Margin/Vertical/Bottom/Vertical"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 44
 text = "MULTIPLAYER"
 autowrap_mode = 3
 
-[node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxBottom/VBoxContainer"]
+[node name="Options" type="Button" parent="Margin/Vertical/Bottom/Vertical"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 44
 text = "OPTIONS"
 
-[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxBottom/VBoxContainer"]
+[node name="Quit" type="Button" parent="Margin/Vertical/Bottom/Vertical"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 44
 text = "QUIT"
 
-[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxBottom/VBoxContainer/SingleplayerButton" to="." method="_on_singleplayer_button_button_up"]
-[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxBottom/VBoxContainer/MultiplayerButton" to="." method="_on_multiplayer_button_button_up"]
-[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxBottom/VBoxContainer/OptionsButton" to="." method="_on_options_button_button_up"]
-[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxBottom/VBoxContainer/QuitButton" to="." method="_on_quit_button_button_up"]
+[connection signal="button_up" from="Margin/Vertical/Bottom/Vertical/Singleplayer" to="." method="_on_singleplayer_button_button_up"]
+[connection signal="button_up" from="Margin/Vertical/Bottom/Vertical/Multiplayer" to="." method="_on_multiplayer_button_button_up"]
+[connection signal="button_up" from="Margin/Vertical/Bottom/Vertical/Options" to="." method="_on_options_button_button_up"]
+[connection signal="button_up" from="Margin/Vertical/Bottom/Vertical/Quit" to="." method="_on_quit_button_button_up"]
