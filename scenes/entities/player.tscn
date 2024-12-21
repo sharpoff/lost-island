@@ -1,12 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://qhvm71rgocqy"]
+[gd_scene load_steps=23 format=3 uid="uid://qhvm71rgocqy"]
 
 [ext_resource type="Script" path="res://scripts/enitites/player.gd" id="1_yndhw"]
-[ext_resource type="Texture2D" uid="uid://0b7y1i2qbnaa" path="res://assets/sprites/entities/main_character.png" id="2_rhfs6"]
+[ext_resource type="Texture2D" uid="uid://0b7y1i2qbnaa" path="res://assets/sprites/entities/character/main_character.png" id="2_rhfs6"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://btn5pnrhdb5w" path="res://resources/animations/player_animation_states.tres" id="3_wydrx"]
 [ext_resource type="PackedScene" uid="uid://cvtaafcrt6xxd" path="res://scenes/game/night_light.tscn" id="4_mtcp3"]
 [ext_resource type="Texture2D" uid="uid://bs6jkb6dmaxpc" path="res://assets/sprites/effects/light_effect.png" id="5_hao5w"]
 [ext_resource type="PackedScene" uid="uid://4tjsu662ksyc" path="res://scenes/components/speed_component.tscn" id="5_qtokq"]
-[ext_resource type="PackedScene" uid="uid://daiu4ofjrvyqk" path="res://scenes/game/fishing_hook.tscn" id="7_kvln1"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4dhnr"]
 properties/0/path = NodePath(".:position")
@@ -458,10 +457,3 @@ parameters/Run/blend_position = Vector2(0.395867, -0.0613497)
 [node name="NightLight" parent="." instance=ExtResource("4_mtcp3")]
 enabled = false
 texture = ExtResource("5_hao5w")
-
-[node name="FishingHook" parent="." groups=["player"] instance=ExtResource("7_kvln1")]
-position = Vector2(0, -20)
-color_flying = Color(0.733002, 1.64848e-06, 3.85046e-07, 1)
-color_land = Color(1, 1, 1, 1)
-
-[connection signal="stopped_fishing" from="FishingHook" to="." method="_on_fishing_hook_stopped_fishing"]

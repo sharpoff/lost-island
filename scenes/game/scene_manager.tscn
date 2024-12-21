@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4mhvshudhxep"]
-
-[ext_resource type="Script" path="res://scripts/game/scene_manager.gd" id="1_qocjx"]
-
-[node name="SceneManager" type="Node2D"]
-script = ExtResource("1_qocjx")
-world_scene = "res://scenes/game/world.tscn"

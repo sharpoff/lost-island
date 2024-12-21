@@ -2,19 +2,13 @@ extends Node
 # TODO: add UPnP setup for network discovery
 
 signal player_connected(peer_id)
-@warning_ignore("unused_signal")
 signal player_disconnected(peer_id)
-@warning_ignore("unused_signal")
 signal server_disconnected
 
 @export var player_scene: PackedScene
 const PORT = 8000
 const MAX_PLAYERS = 4
 const DEFAULT_IP = "127.0.0.1"
-
-var players_loaded = 0
-
-var is_single_player = true
 
 func _ready():
 	multiplayer.peer_connected.connect(_on_player_connected)
@@ -44,12 +38,10 @@ func client_join(address: String = ""):
 
 # every time player connects add it
 func _on_player_connected(peer_id: int) -> void:
-	print_debug("Player connected")
 	emit_signal("player_connected", peer_id)
 
 # every time player disconnects remove it
 func _on_player_disconnected(peer_id: int) -> void:
-	print_debug("Player disconnected")
 	emit_signal("player_disconnected", peer_id)
 
 func _on_connection_ok() -> void:
@@ -60,7 +52,6 @@ func _on_connection_failed() -> void:
 	_remove_multiplayer_peer()
 
 func _on_server_disconnected() -> void:
-	print_debug("Server disconnected")
 	_remove_multiplayer_peer()
 	emit_signal("server_disconnected")
 

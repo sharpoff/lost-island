@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://b306kv5gp1g1d"]
+
+[ext_resource type="Script" path="res://scripts/game/daynight_cycle.gd" id="1_kvkoo"]
+[ext_resource type="Script" path="res://scripts/game/map.gd" id="2_rjmyj"]
+[ext_resource type="PackedScene" uid="uid://qhvm71rgocqy" path="res://scenes/entities/player.tscn" id="3_ed0u7"]
+[ext_resource type="PackedScene" uid="uid://wuuv03nobkau" path="res://scenes/ui/player_ui.tscn" id="4_xon12"]
+
+[sub_resource type="Environment" id="Environment_ix6ey"]
+background_mode = 2
+tonemap_mode = 1
+tonemap_exposure = 0.55
+tonemap_white = 0.8
+glow_bloom = 0.5
+fog_mode = 1
+fog_density = 1.0
+
+[sub_resource type="Gradient" id="Gradient_1r5e2"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.0058651, 0.316716, 0.469208, 0.607038, 0.730205, 1)
+colors = PackedColorArray(0.00570602, 0.140674, 0.281872, 1, 0.39305, 0.187683, 0.798069, 1, 0.64098, 0.364093, 0.886768, 1, 0.796482, 0.505342, 0.906468, 1, 0.887181, 0.710743, 0.94486, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i8mnj"]
+gradient = SubResource("Gradient_1r5e2")
+
+[node name="Main" type="Node"]
+
+[node name="World" type="Node2D" parent="."]
+script = ExtResource("2_rjmyj")
+player_scene = ExtResource("3_ed0u7")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="World"]
+spawn_path = NodePath("..")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_ix6ey")
+
+[node name="DayNightCycle" type="CanvasModulate" parent="World"]
+script = ExtResource("1_kvkoo")
+gradient = SubResource("GradientTexture1D_i8mnj")
+time_speed = 10.0
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerUI" parent="GUI" instance=ExtResource("4_xon12")]
