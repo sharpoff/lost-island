@@ -97,6 +97,7 @@ texture_region_size = Vector2i(32, 32)
 4:9/0 = 0
 4:9/1 = 1
 4:9/1/modulate = Color(0.21, 0.21, 0.21, 1)
+4:9/1/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:9/2 = 2
 4:9/2/modulate = Color(0.63, 0.1386, 0.1386, 1)
 

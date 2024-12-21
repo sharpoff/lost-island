@@ -1,9 +1,7 @@
-[gd_scene load_steps=12 format=4 uid="uid://bja5cekt6w7il"]
+[gd_scene load_steps=10 format=4 uid="uid://bja5cekt6w7il"]
 
-[ext_resource type="Script" path="res://scripts/game/environment.gd" id="1_vox5m"]
-[ext_resource type="PackedScene" uid="uid://qhvm71rgocqy" path="res://scenes/entities/player.tscn" id="2_bafid"]
-[ext_resource type="Texture2D" uid="uid://bgrkr8i8kx0tm" path="res://assets/sprites/sprite_sheet.png" id="3_trkcb"]
-[ext_resource type="PackedScene" uid="uid://bfp11nfce4hdw" path="res://scenes/game/door.tscn" id="4_03qh8"]
+[ext_resource type="Texture2D" uid="uid://bgrkr8i8kx0tm" path="res://assets/sprites/sprite_sheet.png" id="1_grwf8"]
+[ext_resource type="PackedScene" uid="uid://bfp11nfce4hdw" path="res://scenes/game/door.tscn" id="2_53f5w"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_rwi7e"]
 tile_data = PackedInt32Array(0, 393216, 0, 65536, 393216, 1, 1, 458752, 0, 65537, 458752, 1)
@@ -17,7 +15,7 @@ tile_data = PackedInt32Array(0, 589824, 4, 65536, 589824, 5, 131072, 589824, 6, 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hffml"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pux4q"]
-texture = ExtResource("3_trkcb")
+texture = ExtResource("1_grwf8")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/z_index = -1
@@ -65,6 +63,7 @@ texture_region_size = Vector2i(32, 32)
 2:5/0/terrains_peering_bit/bottom_right_corner = 0
 2:5/0/terrains_peering_bit/bottom_side = 0
 2:5/0/terrains_peering_bit/bottom_left_corner = 0
+2:6/next_alternative_id = 2
 2:6/0 = 0
 2:6/0/terrain_set = 0
 2:6/0/terrains_peering_bit/bottom_left_corner = 0
@@ -161,10 +160,6 @@ texture_region_size = Vector2i(32, 32)
 6:8/0 = 0
 7:7/0 = 0
 8:7/0 = 0
-9:4/size_in_atlas = Vector2i(4, 3)
-9:4/0 = 0
-9:4/0/y_sort_origin = 5
-9:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-60, 8, 60, 8, 60, 32, 0, 32, 0, 44, -28, 44, -60, 44)
 6:0/size_in_atlas = Vector2i(2, 2)
 6:0/0 = 0
 6:0/0/y_sort_origin = 16
@@ -190,6 +185,8 @@ texture_region_size = Vector2i(32, 32)
 4:9/next_alternative_id = 2
 4:9/0 = 0
 4:9/0/z_index = -2
+9:4/size_in_atlas = Vector2i(4, 3)
+9:4/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_336ut"]
 tile_size = Vector2i(32, 32)
@@ -208,12 +205,10 @@ pattern_1 = SubResource("TileMapPattern_bpdhd")
 pattern_2 = SubResource("TileMapPattern_70v1g")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_465fc"]
-size = Vector2(35, 40)
+size = Vector2(29, 38)
 
-[node name="Environment" type="Node2D"]
+[node name="IslandMap" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_vox5m")
-player_scene = ExtResource("2_bafid")
 
 [node name="Ground" type="TileMapLayer" parent="."]
 z_index = -1
@@ -232,10 +227,10 @@ y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAJAP3/AAAJAAQAAADq//v/AAAEAAkAAADq//z/AAAEAAkAAADq//3/AAAEAAkAAADq//7/AAAEAAkAAADq////AAABAAkAAADr//v/AAAEAAkAAADr//z/AAAEAAkAAADr//3/AAAEAAkAAADr//7/AAAEAAkAAADr////AAAAAAkAAADs//v/AAAEAAkAAADs//z/AAAEAAkAAADs//3/AAAEAAkAAADs//7/AAAEAAkAAADs////AAAAAAkAAADt//v/AAAEAAkAAADt//z/AAADAAkAAADt//3/AAAEAAkAAADt//7/AAAEAAkAAADt////AAAAAAkAAADu//v/AAAEAAkAAADu//z/AAAEAAkAAADu//3/AAADAAkAAADu//7/AAADAAkAAADu////AAAAAAkAAADv//v/AAAEAAkAAADv//z/AAAEAAkAAADv//3/AAAEAAkAAADv//7/AAAEAAkAAADv////AAAAAAkAAADw//v/AAADAAkAAADw//z/AAAEAAkAAADw//3/AAADAAkAAADw//7/AAAEAAkAAADw////AAAAAAkAAADx//v/AAAEAAkAAADx//z/AAAEAAkAAADx//3/AAADAAkAAADx//7/AAAEAAkAAADx////AAACAAkAAAA=")
 tile_set = SubResource("TileSet_336ut")
 
-[node name="Door" parent="Buildings" instance=ExtResource("4_03qh8")]
+[node name="Door" parent="Buildings" instance=ExtResource("2_53f5w")]
 position = Vector2(262, -53)
 scene_to_transit = "res://scenes/game/house_inside.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/Door"]
-position = Vector2(-0.5, 4)
+position = Vector2(-0.5, 3)
 shape = SubResource("RectangleShape2D_465fc")

@@ -1,18 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://wuuv03nobkau"]
+[gd_scene load_steps=5 format=3 uid="uid://wuuv03nobkau"]
 
 [ext_resource type="Script" path="res://scripts/ui/player_ui.gd" id="1_awcgk"]
-[ext_resource type="PackedScene" uid="uid://kh2acv2jodjg" path="res://scenes/touch_controls.tscn" id="1_vxi3r"]
+[ext_resource type="PackedScene" uid="uid://kh2acv2jodjg" path="res://scenes/game/touch_controls.tscn" id="1_vxi3r"]
 [ext_resource type="FontFile" uid="uid://dyv5mly5gsnvl" path="res://assets/fonts/PublicPixel.otf" id="3_8dhdj"]
-[ext_resource type="PackedScene" uid="uid://cryghm0n4gpw2" path="res://scenes/ui/options_menu.tscn" id="3_n2t5v"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_id516"]
 line_spacing = 0.0
 font = ExtResource("3_8dhdj")
 font_size = 33
 
-[node name="PlayerUI" type="CanvasLayer" node_paths=PackedStringArray("options_menu_root", "joystick")]
+[node name="PlayerUI" type="CanvasLayer" node_paths=PackedStringArray("joystick")]
 script = ExtResource("1_awcgk")
-options_menu_root = NodePath("OptionsMenu")
 joystick = NodePath("InputControls/TouchControls")
 
 [node name="InputControls" type="Control" parent="."]
@@ -50,12 +48,6 @@ text = "Week 1, Day 1"
 label_settings = SubResource("LabelSettings_id516")
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="UI/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_font_sizes/font_size = 33
-text = "OPT_BTN"
-
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/VBoxContainer"]
 layout_mode = 2
 alignment = 1
@@ -66,10 +58,3 @@ size_flags_horizontal = 2
 text = "12:32"
 label_settings = SubResource("LabelSettings_id516")
 horizontal_alignment = 1
-
-[node name="OptionsMenu" parent="." instance=ExtResource("3_n2t5v")]
-visible = false
-back_button_func = 1
-
-[connection signal="button_up" from="UI/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_button_up"]
-[connection signal="closed" from="OptionsMenu" to="." method="_on_options_menu_closed"]

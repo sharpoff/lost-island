@@ -1,0 +1,213 @@
+[gd_scene load_steps=3 format=3 uid="uid://2wldfpcvs7wa"]
+
+[ext_resource type="Script" path="res://scripts/ui/lobby_menu.gd" id="1_y2i2o"]
+[ext_resource type="StyleBox" uid="uid://chvlw8pqinkx3" path="res://resources/styles/menu_panel.tres" id="2_is1tw"]
+
+[node name="LobbyMenu" type="Control" node_paths=PackedStringArray("player_list", "Nickname", "IPAddress")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y2i2o")
+player_list = NodePath("Players/MarginContainer/HBoxTop/VBoxPlayers/PlayerList")
+Nickname = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/NameHost/PlayerName")
+IPAddress = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/JoinIP/IPAddress")
+
+[node name="SelectMenu" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 267.0
+offset_top = 183.0
+offset_right = -267.0
+offset_bottom = -183.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_is1tw")
+
+[node name="Margin" type="MarginContainer" parent="SelectMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="Vertical" type="VBoxContainer" parent="SelectMenu/Margin"]
+layout_mode = 2
+
+[node name="Top" type="VBoxContainer" parent="SelectMenu/Margin/Vertical"]
+layout_mode = 2
+theme_override_constants/separation = 25
+metadata/_edit_use_anchors_ = true
+
+[node name="Title" type="Label" parent="SelectMenu/Margin/Vertical/Top"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "MULTIPLAYER"
+horizontal_alignment = 1
+
+[node name="Vertical" type="VBoxContainer" parent="SelectMenu/Margin/Vertical/Top"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="NameHost" type="HBoxContainer" parent="SelectMenu/Margin/Vertical/Top/Vertical"]
+layout_mode = 2
+
+[node name="PlayerName" type="LineEdit" parent="SelectMenu/Margin/Vertical/Top/Vertical/NameHost"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+placeholder_text = "YOUR_NAME"
+max_length = 20
+
+[node name="Host" type="Button" parent="SelectMenu/Margin/Vertical/Top/Vertical/NameHost"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "HOST"
+
+[node name="JoinIP" type="HBoxContainer" parent="SelectMenu/Margin/Vertical/Top/Vertical"]
+layout_mode = 2
+
+[node name="IPAddress" type="LineEdit" parent="SelectMenu/Margin/Vertical/Top/Vertical/JoinIP"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "127.0.0.1"
+placeholder_text = "HOST_ADDRESS"
+max_length = 15
+
+[node name="Join" type="Button" parent="SelectMenu/Margin/Vertical/Top/Vertical/JoinIP"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "JOIN"
+
+[node name="HideAddress" type="CheckButton" parent="SelectMenu/Margin/Vertical/Top/Vertical"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 22
+text = "HIDE_ADDRESS"
+alignment = 1
+
+[node name="Bottom" type="VBoxContainer" parent="SelectMenu/Margin/Vertical"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SelectMenu/Margin/Vertical/Bottom"]
+layout_mode = 2
+theme_override_constants/separation = 150
+alignment = 1
+
+[node name="BackButton" type="Button" parent="SelectMenu/Margin/Vertical/Bottom/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 33
+text = "BACK"
+
+[node name="Players" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 89.0
+offset_top = 44.0
+offset_right = -89.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_is1tw")
+
+[node name="MarginContainer" type="MarginContainer" parent="Players"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 35
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxTop" type="HBoxContainer" parent="Players/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxPlayers" type="VBoxContainer" parent="Players/MarginContainer/HBoxTop"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="Players/MarginContainer/HBoxTop/VBoxPlayers"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "PLAYERS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerList" type="ItemList" parent="Players/MarginContainer/HBoxTop/VBoxPlayers"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+auto_height = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Players/MarginContainer/HBoxTop/VBoxPlayers"]
+layout_mode = 2
+size_flags_vertical = 10
+alignment = 2
+
+[node name="BackButton" type="Button" parent="Players/MarginContainer/HBoxTop/VBoxPlayers/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 33
+text = "BACK"
+
+[node name="VBoxGameInfo" type="VBoxContainer" parent="Players/MarginContainer/HBoxTop"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Players/MarginContainer/HBoxTop/VBoxGameInfo"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Players/MarginContainer/HBoxTop/VBoxGameInfo/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 20
+
+[node name="OptionButton" type="OptionButton" parent="Players/MarginContainer/HBoxTop/VBoxGameInfo/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+selected = 0
+allow_reselect = true
+item_count = 1
+popup/item_0/text = "Save 1"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Players/MarginContainer/HBoxTop/VBoxGameInfo"]
+layout_mode = 2
+size_flags_vertical = 10
+alignment = 2
+
+[node name="PlayButton" type="Button" parent="Players/MarginContainer/HBoxTop/VBoxGameInfo/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 33
+text = "PLAY"
+
+[connection signal="button_up" from="SelectMenu/Margin/Vertical/Top/Vertical/NameHost/Host" to="." method="_on_host_button_up"]
+[connection signal="button_up" from="SelectMenu/Margin/Vertical/Top/Vertical/JoinIP/Join" to="." method="_on_join_button_up"]
+[connection signal="toggled" from="SelectMenu/Margin/Vertical/Top/Vertical/HideAddress" to="." method="_on_hide_address_toggled"]
+[connection signal="tree_exited" from="SelectMenu/Margin/Vertical/Top/Vertical/HideAddress" to="SelectMenu/Margin/Vertical/Top/Vertical/HideAddress" method="_on_tree_exited"]
+[connection signal="button_up" from="SelectMenu/Margin/Vertical/Bottom/HBoxContainer/BackButton" to="." method="_on_back_button_button_up"]
+[connection signal="button_up" from="Players/MarginContainer/HBoxTop/VBoxPlayers/VBoxContainer/BackButton" to="." method="_on_back_button_button_up"]
+[connection signal="button_up" from="Players/MarginContainer/HBoxTop/VBoxGameInfo/VBoxContainer2/PlayButton" to="." method="_on_play_button_button_up"]

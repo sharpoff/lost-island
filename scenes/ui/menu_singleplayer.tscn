@@ -1,0 +1,91 @@
+[gd_scene load_steps=3 format=3 uid="uid://cswb8bilfttaf"]
+
+[ext_resource type="StyleBox" uid="uid://chvlw8pqinkx3" path="res://resources/styles/menu_panel.tres" id="1_vqruc"]
+[ext_resource type="Script" path="res://scripts/ui/menu_singleplayer.gd" id="1_ymg1g"]
+
+[node name="SingleplayerMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ymg1g")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 261.0
+offset_top = 86.0
+offset_right = -261.0
+offset_bottom = -86.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_vqruc")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 35
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 35
+metadata/_edit_use_anchors_ = true
+
+[node name="Vertical" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 35
+
+[node name="Top" type="HBoxContainer" parent="Panel/MarginContainer/Vertical"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/Vertical/Top"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "SINGLEPLAYER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Middle" type="VBoxContainer" parent="Panel/MarginContainer/Vertical"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="OptionButton" type="OptionButton" parent="Panel/MarginContainer/Vertical/Middle"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+selected = 0
+allow_reselect = true
+item_count = 1
+popup/item_0/text = "Save 1"
+
+[node name="Bottom" type="HBoxContainer" parent="Panel/MarginContainer/Vertical"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 50
+
+[node name="Back" type="Button" parent="Panel/MarginContainer/Vertical/Bottom"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 33
+text = "BACK
+"
+
+[node name="Play" type="Button" parent="Panel/MarginContainer/Vertical/Bottom"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 33
+text = "PLAY"
+
+[connection signal="button_up" from="Panel/MarginContainer/Vertical/Bottom/Back" to="." method="_on_back_button_up"]
+[connection signal="button_up" from="Panel/MarginContainer/Vertical/Bottom/Play" to="." method="_on_play_button_up"]
