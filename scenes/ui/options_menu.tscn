@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://cryghm0n4gpw2"]
 
-[ext_resource type="Script" path="res://scripts/ui/options_menu.gd" id="1_7eoik"]
+[ext_resource type="Script" path="res://scripts/ui/menu_options.gd" id="1_7eoik"]
 [ext_resource type="StyleBox" uid="uid://chvlw8pqinkx3" path="res://resources/styles/menu_panel.tres" id="2_p5gdr"]
 
-[node name="OptionsMenu" type="Control"]
+[node name="OptionsMenu" type="Control" node_paths=PackedStringArray("master_vol_slider", "sfx_vol_slider", "language_option")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +11,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7eoik")
+master_vol_slider = NodePath("Panel/MarginContainer/Vertical/Middle/MasterVolume/MasterVolumeSlider")
+sfx_vol_slider = NodePath("Panel/MarginContainer/Vertical/Middle/SoundEffects/SoundEffectsSlider")
+language_option = NodePath("Panel/MarginContainer/Vertical/Middle/Language/LanguageOptions")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -117,8 +120,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 33
-text = "BACK
-"
+text = "BACK"
 
 [node name="Save" type="Button" parent="Panel/MarginContainer/Vertical/Bottom"]
 layout_mode = 2

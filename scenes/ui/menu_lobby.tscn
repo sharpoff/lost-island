@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://2wldfpcvs7wa"]
 
-[ext_resource type="Script" path="res://scripts/ui/lobby_menu.gd" id="1_y2i2o"]
+[ext_resource type="Script" path="res://scripts/ui/menu_lobby.gd" id="1_y2i2o"]
 [ext_resource type="StyleBox" uid="uid://chvlw8pqinkx3" path="res://resources/styles/menu_panel.tres" id="2_is1tw"]
 
-[node name="LobbyMenu" type="Control" node_paths=PackedStringArray("player_list", "Nickname", "IPAddress")]
+[node name="LobbyMenu" type="Control" node_paths=PackedStringArray("player_list", "nickname", "ip_address", "error_msg", "host_button", "join_button", "play_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,9 +11,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_y2i2o")
-player_list = NodePath("Players/MarginContainer/HBoxTop/VBoxPlayers/PlayerList")
-Nickname = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/NameHost/PlayerName")
-IPAddress = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/JoinIP/IPAddress")
+player_list = NodePath("Players/Margin/Vertical/Players/PlayerList")
+nickname = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/NameHost/NickName")
+ip_address = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/JoinIP/IPAddress")
+error_msg = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/ErrorMessage")
+host_button = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/NameHost/Host")
+join_button = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/JoinIP/Join")
+play_button = NodePath("Players/Margin/Vertical/GameInfo/VBoxContainer2/PlayButton")
 
 [node name="SelectMenu" type="Panel" parent="."]
 layout_mode = 1
@@ -61,7 +65,7 @@ theme_override_constants/separation = 20
 [node name="NameHost" type="HBoxContainer" parent="SelectMenu/Margin/Vertical/Top/Vertical"]
 layout_mode = 2
 
-[node name="PlayerName" type="LineEdit" parent="SelectMenu/Margin/Vertical/Top/Vertical/NameHost"]
+[node name="NickName" type="LineEdit" parent="SelectMenu/Margin/Vertical/Top/Vertical/NameHost"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 22
@@ -96,6 +100,13 @@ theme_override_font_sizes/font_size = 22
 text = "HIDE_ADDRESS"
 alignment = 1
 
+[node name="ErrorMessage" type="Label" parent="SelectMenu/Margin/Vertical/Top/Vertical"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.97, 0.0776, 0.0776, 1)
+theme_override_font_sizes/font_size = 22
+text = "WRONG_NAME"
+
 [node name="Bottom" type="VBoxContainer" parent="SelectMenu/Margin/Vertical"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -106,7 +117,7 @@ layout_mode = 2
 theme_override_constants/separation = 150
 alignment = 1
 
-[node name="BackButton" type="Button" parent="SelectMenu/Margin/Vertical/Bottom/HBoxContainer"]
+[node name="BackToMenu" type="Button" parent="SelectMenu/Margin/Vertical/Bottom/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 33
@@ -126,7 +137,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("2_is1tw")
 
-[node name="MarginContainer" type="MarginContainer" parent="Players"]
+[node name="Margin" type="MarginContainer" parent="Players"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,53 +150,53 @@ theme_override_constants/margin_right = 35
 theme_override_constants/margin_bottom = 35
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxTop" type="HBoxContainer" parent="Players/MarginContainer"]
+[node name="Vertical" type="HBoxContainer" parent="Players/Margin"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxPlayers" type="VBoxContainer" parent="Players/MarginContainer/HBoxTop"]
+[node name="Players" type="VBoxContainer" parent="Players/Margin/Vertical"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 25
 
-[node name="Label" type="Label" parent="Players/MarginContainer/HBoxTop/VBoxPlayers"]
+[node name="Label" type="Label" parent="Players/Margin/Vertical/Players"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 33
 text = "PLAYERS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayerList" type="ItemList" parent="Players/MarginContainer/HBoxTop/VBoxPlayers"]
+[node name="PlayerList" type="ItemList" parent="Players/Margin/Vertical/Players"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 33
 auto_height = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Players/MarginContainer/HBoxTop/VBoxPlayers"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Players/Margin/Vertical/Players"]
 layout_mode = 2
 size_flags_vertical = 10
 alignment = 2
 
-[node name="BackButton" type="Button" parent="Players/MarginContainer/HBoxTop/VBoxPlayers/VBoxContainer"]
+[node name="BackToSelect" type="Button" parent="Players/Margin/Vertical/Players/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 33
 text = "BACK"
 
-[node name="VBoxGameInfo" type="VBoxContainer" parent="Players/MarginContainer/HBoxTop"]
+[node name="GameInfo" type="VBoxContainer" parent="Players/Margin/Vertical"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Players/MarginContainer/HBoxTop/VBoxGameInfo"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Players/Margin/Vertical/GameInfo"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Players/MarginContainer/HBoxTop/VBoxGameInfo/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Players/Margin/Vertical/GameInfo/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 35
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 35
 theme_override_constants/margin_bottom = 20
 
-[node name="OptionButton" type="OptionButton" parent="Players/MarginContainer/HBoxTop/VBoxGameInfo/VBoxContainer/MarginContainer"]
+[node name="OptionButton" type="OptionButton" parent="Players/Margin/Vertical/GameInfo/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 33
 selected = 0
@@ -193,12 +204,12 @@ allow_reselect = true
 item_count = 1
 popup/item_0/text = "Save 1"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Players/MarginContainer/HBoxTop/VBoxGameInfo"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Players/Margin/Vertical/GameInfo"]
 layout_mode = 2
 size_flags_vertical = 10
 alignment = 2
 
-[node name="PlayButton" type="Button" parent="Players/MarginContainer/HBoxTop/VBoxGameInfo/VBoxContainer2"]
+[node name="PlayButton" type="Button" parent="Players/Margin/Vertical/GameInfo/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 33
@@ -208,6 +219,6 @@ text = "PLAY"
 [connection signal="button_up" from="SelectMenu/Margin/Vertical/Top/Vertical/JoinIP/Join" to="." method="_on_join_button_up"]
 [connection signal="toggled" from="SelectMenu/Margin/Vertical/Top/Vertical/HideAddress" to="." method="_on_hide_address_toggled"]
 [connection signal="tree_exited" from="SelectMenu/Margin/Vertical/Top/Vertical/HideAddress" to="SelectMenu/Margin/Vertical/Top/Vertical/HideAddress" method="_on_tree_exited"]
-[connection signal="button_up" from="SelectMenu/Margin/Vertical/Bottom/HBoxContainer/BackButton" to="." method="_on_back_button_button_up"]
-[connection signal="button_up" from="Players/MarginContainer/HBoxTop/VBoxPlayers/VBoxContainer/BackButton" to="." method="_on_back_button_button_up"]
-[connection signal="button_up" from="Players/MarginContainer/HBoxTop/VBoxGameInfo/VBoxContainer2/PlayButton" to="." method="_on_play_button_button_up"]
+[connection signal="button_up" from="SelectMenu/Margin/Vertical/Bottom/HBoxContainer/BackToMenu" to="." method="_on_back_to_menu_button_up"]
+[connection signal="button_up" from="Players/Margin/Vertical/Players/VBoxContainer/BackToSelect" to="." method="_on_back_to_select_button_up"]
+[connection signal="button_up" from="Players/Margin/Vertical/GameInfo/VBoxContainer2/PlayButton" to="." method="_on_play_button_button_up"]

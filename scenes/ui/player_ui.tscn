@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://wuuv03nobkau"]
 
 [ext_resource type="Script" path="res://scripts/ui/player_ui.gd" id="1_awcgk"]
-[ext_resource type="PackedScene" uid="uid://kh2acv2jodjg" path="res://scenes/game/touch_controls.tscn" id="1_vxi3r"]
+[ext_resource type="PackedScene" path="res://scenes/game/touch_controls.tscn" id="1_vxi3r"]
 [ext_resource type="FontFile" uid="uid://dyv5mly5gsnvl" path="res://assets/fonts/PublicPixel.otf" id="3_8dhdj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_id516"]
@@ -9,8 +9,11 @@ line_spacing = 0.0
 font = ExtResource("3_8dhdj")
 font_size = 33
 
-[node name="PlayerUI" type="CanvasLayer" node_paths=PackedStringArray("joystick")]
+[node name="PlayerUI" type="CanvasLayer" node_paths=PackedStringArray("week_day_time", "hour_minute_time", "player_ui_root", "joystick")]
 script = ExtResource("1_awcgk")
+week_day_time = NodePath("UI/VBoxContainer/HBoxContainer/GlobalTime")
+hour_minute_time = NodePath("UI/VBoxContainer/HBoxContainer2/LocalTime")
+player_ui_root = NodePath("UI")
 joystick = NodePath("InputControls/TouchControls")
 
 [node name="InputControls" type="Control" parent="."]

@@ -1,11 +1,6 @@
-[gd_scene load_steps=7 format=4 uid="uid://dww85h45rx612"]
+[gd_scene load_steps=4 format=4 uid="uid://dww85h45rx612"]
 
-[ext_resource type="PackedScene" uid="uid://bfp11nfce4hdw" path="res://scenes/game/door.tscn" id="1_f0qng"]
 [ext_resource type="Texture2D" uid="uid://bgrkr8i8kx0tm" path="res://assets/sprites/sprite_sheet.png" id="1_j0ucd"]
-[ext_resource type="PackedScene" uid="uid://qhvm71rgocqy" path="res://scenes/entities/player.tscn" id="5_hglga"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fqdt"]
-size = Vector2(64, 30)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a11p3"]
 texture = ExtResource("1_j0ucd")
@@ -109,16 +104,6 @@ sources/1 = SubResource("TileSetAtlasSource_a11p3")
 
 [node name="HouseInside" type="Node2D"]
 
-[node name="Door" parent="." instance=ExtResource("1_f0qng")]
-scene_to_transit = "res://scenes/game/world.tscn"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
-position = Vector2(-64, 80)
-shape = SubResource("RectangleShape2D_0fqdt")
-
 [node name="Ground" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD+//7/AQAEAAkAAAD+////AQAEAAkAAAD+/wAAAQAEAAkAAAD+/wEAAQAEAAkAAAD///7/AQAEAAkAAAD/////AQAEAAkAAAD//wAAAQAEAAkAAAD//wEAAQAEAAkAAAAAAP7/AQAEAAkAAAAAAP//AQAEAAkAAAAAAAAAAQAEAAkAAAAAAAEAAQAEAAkAAAABAP7/AQAEAAkAAAABAP//AQAEAAkAAAABAAAAAQAEAAkAAAABAAEAAQAEAAkAAAD9//3/AQAEAAkAAAD9//7/AQAEAAkAAAD9////AQAEAAkAAAD9/wAAAQAEAAkAAAD9/wEAAQAEAAkAAAD9/wIAAQAEAAkAAgD+//3/AQAEAAkAAAD+/wIAAQAEAAkAAgD///3/AQAEAAkAAAD//wIAAQAEAAkAAAAAAP3/AQAEAAkAAAAAAAIAAQAEAAkAAAABAP3/AQAEAAkAAAABAAIAAQAEAAkAAAACAP3/AQAEAAkAAAACAP7/AQAEAAkAAAACAP//AQAEAAkAAAACAAAAAQAEAAkAAAACAAEAAQAEAAkAAAACAAIAAQAEAAkAAAADAP//AQAEAAkAAQADAAAAAQAEAAkAAQADAAEAAQAEAAkAAQADAAIAAQAEAAkAAQADAAMAAQAEAAkAAQACAAMAAQAEAAkAAQABAAMAAQAEAAkAAQAAAAMAAQAEAAkAAQD//wMAAQAEAAkAAQD+/wMAAQAEAAkAAQD9/wMAAQAEAAkAAQD8/wMAAQAEAAkAAQD8/wIAAQAEAAkAAQD8/wEAAQAEAAkAAQD8/wAAAQAEAAkAAQD8////AQAEAAkAAQD8//7/AQAEAAkAAQD8//3/AQAEAAkAAQD8//z/AQAEAAkAAQD9//z/AQAEAAkAAQD+//z/AQAEAAkAAQD///z/AQAEAAkAAQAAAPz/AQAEAAkAAQABAPz/AQAEAAkAAQACAPz/AQAEAAkAAQADAPz/AQAEAAkAAQADAP3/AQAEAAkAAQADAP7/AQAEAAkAAQA=")
 tile_set = SubResource("TileSet_rh880")
-
-[node name="Player" parent="." instance=ExtResource("5_hglga")]
-position = Vector2(-63, 40)

@@ -1,14 +1,14 @@
 extends CanvasLayer
 
-@onready var week_day_time: Label = $UI/VBoxContainer/HBoxContainer/GlobalTime
-@onready var hour_minute_time: Label = $UI/VBoxContainer/HBoxContainer2/LocalTime
-@onready var player_ui_root: MarginContainer = $UI
+@export var week_day_time: Label
+@export var hour_minute_time: Label
+@export var player_ui_root: MarginContainer
 
 @export var joystick: CanvasLayer
 
 func _ready() -> void:
 	# TODO: remove joystick if it's desktop
-	if OS.get_model_name() == "GenericDevice":
+	if OS.get_model_name() == "GenericDevice" and not OS.is_debug_build():
 		joystick.queue_free()
 
 func _on_day_night_cycle_time_changed(week: int, day: int, hour: int, minute: int) -> void:
