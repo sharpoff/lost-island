@@ -10,6 +10,7 @@ var main_menu_scene = "res://scenes/ui/menu_main.tscn"
 
 @export var host_button: Button
 @export var join_button: Button
+@export var play_button: Button
 
 func _ready() -> void:
 	GameManager.player_connected.connect(_on_player_connected)
@@ -18,8 +19,9 @@ func _ready() -> void:
 	GameManager.net_error.connect(_on_network_error)
 
 func _on_play_button_button_up() -> void:
-	#GameManager.change_scene(main_scene)
-	pass
+	host_button.disabled = true
+	join_button.disabled = true
+	GameManager.change_scene.rpc(main_scene)
 
 func _on_host_button_up() -> void:
 	if nickname.text.is_empty():
@@ -32,6 +34,7 @@ func _on_host_button_up() -> void:
 	GameManager.create_game()
 
 	_show_players()
+	play_button.disabled = false
 
 func _on_join_button_up() -> void:
 	if nickname.text.is_empty():
@@ -49,6 +52,7 @@ func _on_join_button_up() -> void:
 	GameManager.join_game(ip_address.text)
 	host_button.disabled = true
 	join_button.disabled = true
+	play_button.disabled = true
 
 func _on_hide_address_toggled(toggled_on: bool) -> void:
 	ip_address.secret = toggled_on

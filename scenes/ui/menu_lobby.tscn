@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/ui/menu_lobby.gd" id="1_y2i2o"]
 [ext_resource type="StyleBox" uid="uid://chvlw8pqinkx3" path="res://resources/styles/menu_panel.tres" id="2_is1tw"]
 
-[node name="LobbyMenu" type="Control" node_paths=PackedStringArray("player_list", "nickname", "ip_address", "error_msg", "host_button", "join_button")]
+[node name="LobbyMenu" type="Control" node_paths=PackedStringArray("player_list", "nickname", "ip_address", "error_msg", "host_button", "join_button", "play_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +17,7 @@ ip_address = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/JoinIP/IPAddress"
 error_msg = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/ErrorMessage")
 host_button = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/NameHost/Host")
 join_button = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/JoinIP/Join")
+play_button = NodePath("Players/Margin/Vertical/GameInfo/VBoxContainer2/PlayButton")
 
 [node name="SelectMenu" type="Panel" parent="."]
 layout_mode = 1

@@ -7,7 +7,6 @@ signal server_disconnected
 signal game_started
 signal net_error(what)
 
-@export var player_scene: PackedScene
 const PORT = 8000
 const MAX_PLAYERS = 4
 const DEFAULT_IP = "127.0.0.1"
@@ -91,13 +90,15 @@ func _on_connection_ok() -> void:
 
 func _on_connection_fail() -> void:
 	print_debug("Connection failed")
-	_disconnect()
+	multiplayer.multiplayer_peer = null
+	players.clear()
 
 func _on_server_disconnected() -> void:
 	print_debug("Server disconnected")
-	_disconnect()
+	multiplayer.multiplayer_peer = null
+	players.clear()
 	server_disconnected.emit()
 
-func _disconnect() -> void:
+func _disconnect():
 	multiplayer.multiplayer_peer = null
 	players.clear()
