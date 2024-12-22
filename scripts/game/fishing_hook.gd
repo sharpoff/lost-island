@@ -55,7 +55,7 @@ func _calculate_trajectory(dst: Vector2, reverse_y: bool = false, increase_vel: 
 	#print_debug(v)
 	#print_debug(angle)
 	#print_debug(time_of_flight)
-	
+
 	coords = []
 	current_drawn = []
 	var first_pos = Vector2()

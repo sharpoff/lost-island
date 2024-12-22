@@ -6,13 +6,12 @@ var sound_effects_volume: float = 100.0
 enum Languages {ENGLISH, RUSSIAN}
 var language = Languages.ENGLISH
 
-var config = ConfigFile.new()
-
 func _ready() -> void:
 	if !load_config(): # if can't load config, save defaults
 		save_config()
 
 func save_config() -> void:
+	var config = ConfigFile.new()
 	config.set_value("Settings", "language", language)
 	change_language()
 	config.set_value("Settings", "master_volume", master_volume)
@@ -21,6 +20,7 @@ func save_config() -> void:
 	config.save("user://Settings.cfg")
 
 func load_config() -> bool:
+	var config = ConfigFile.new()
 	var err = config.load("user://Settings.cfg")
 	
 	if err != OK:

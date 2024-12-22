@@ -69,7 +69,7 @@ func _input(event: InputEvent) -> void:
 				current_state = States.IDLE
 				$FishingHook.stop_fishing()
 				return
-			
+
 			# TODO: remove tilemap from here
 			tilemap = get_tree().root.get_node("Main/World/IslandMap/Ground")
 

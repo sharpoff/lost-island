@@ -2,6 +2,8 @@ extends Node2D
 
 var master_playback: AudioStreamPlaybackPolyphonic
 var stream = AudioStreamPolyphonic.new()
+
+@export var button_click_sound: AudioStream
 	
 func _enter_tree() -> void:
 	var master_player = AudioStreamPlayer.new()

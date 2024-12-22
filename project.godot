@@ -18,8 +18,8 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 GameManager="*res://scripts/game/game_manager.gd"
-SettingsManager="*res://scripts/configs/settings_manager.gd"
-AudioManager="*res://scripts/utils/audio_manager.gd"
+SettingsManager="*res://scripts/utils/settings_manager.gd"
+AudioManager="*res://scenes/utils/audio_manager.tscn"
 
 [display]
 

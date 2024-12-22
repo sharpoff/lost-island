@@ -9,11 +9,12 @@ line_spacing = 0.0
 font = ExtResource("3_8dhdj")
 font_size = 33
 
-[node name="PlayerUI" type="CanvasLayer" node_paths=PackedStringArray("week_day_time", "hour_minute_time", "player_ui_root", "joystick")]
+[node name="PlayerUI" type="CanvasLayer" node_paths=PackedStringArray("week_day_time", "hour_minute_time", "player_ui_root", "fish_count_label", "joystick")]
 script = ExtResource("1_awcgk")
 week_day_time = NodePath("UI/VBoxContainer/HBoxContainer/GlobalTime")
 hour_minute_time = NodePath("UI/VBoxContainer/HBoxContainer2/LocalTime")
 player_ui_root = NodePath("UI")
+fish_count_label = NodePath("UI/VBoxContainer/HBoxContainer3/Line/Fish")
 joystick = NodePath("InputControls/TouchControls")
 
 [node name="InputControls" type="Control" parent="."]
@@ -59,5 +60,19 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 2
 text = "12:32"
+label_settings = SubResource("LabelSettings_id516")
+horizontal_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="UI/VBoxContainer"]
+layout_mode = 2
+
+[node name="Line" type="HBoxContainer" parent="UI/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="Fish" type="Label" parent="UI/VBoxContainer/HBoxContainer3/Line"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Fish: 0
+"
 label_settings = SubResource("LabelSettings_id516")
 horizontal_alignment = 1

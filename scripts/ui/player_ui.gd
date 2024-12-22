@@ -3,11 +3,12 @@ extends CanvasLayer
 @export var week_day_time: Label
 @export var hour_minute_time: Label
 @export var player_ui_root: MarginContainer
+@export var fish_count_label: Label
 
 @export var joystick: CanvasLayer
 
 func _ready() -> void:
-	# TODO: remove joystick if it's desktop
+	# remove joystick if it's desktop
 	if OS.get_model_name() == "GenericDevice" and not OS.is_debug_build():
 		joystick.queue_free()
 
