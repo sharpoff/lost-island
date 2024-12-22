@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://c15cfttjmmroe"]
+
+[ext_resource type="Script" path="res://scripts/ui/volume_slider.gd" id="1_4uaw2"]
+
+[node name="MasterVolumeSlider" type="HSlider"]
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.001
+value = 1.0
+script = ExtResource("1_4uaw2")
+bus_name = "Master"
+
+[connection signal="value_changed" from="." to="." method="_on_value_changed"]

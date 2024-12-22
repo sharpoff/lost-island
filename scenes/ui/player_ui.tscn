@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://wuuv03nobkau"]
 
 [ext_resource type="Script" path="res://scripts/ui/player_ui.gd" id="1_awcgk"]
-[ext_resource type="PackedScene" path="res://scenes/game/touch_controls.tscn" id="1_vxi3r"]
+[ext_resource type="PackedScene" uid="uid://kh2acv2jodjg" path="res://scenes/game/touch_controls.tscn" id="1_vxi3r"]
 [ext_resource type="FontFile" uid="uid://dyv5mly5gsnvl" path="res://assets/fonts/PublicPixel.otf" id="3_8dhdj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_id516"]

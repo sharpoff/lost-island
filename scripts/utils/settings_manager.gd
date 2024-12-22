@@ -13,11 +13,12 @@ func _ready() -> void:
 func save_config() -> void:
 	var config = ConfigFile.new()
 	config.set_value("Settings", "language", language)
-	change_language()
 	config.set_value("Settings", "master_volume", master_volume)
 	config.set_value("Settings", "sound_effects_volume", sound_effects_volume)
-	
+
 	config.save("user://Settings.cfg")
+
+	load_config()
 
 func load_config() -> bool:
 	var config = ConfigFile.new()
@@ -39,7 +40,7 @@ func load_config() -> bool:
 	var new_sound_effects_volume = config.get_value("Settings", "sound_effects_volume")
 	if new_sound_effects_volume != null:
 		sound_effects_volume = new_sound_effects_volume
-	
+
 	return true
 
 func change_language():

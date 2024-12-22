@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cryghm0n4gpw2"]
+[gd_scene load_steps=4 format=3 uid="uid://cryghm0n4gpw2"]
 
 [ext_resource type="Script" path="res://scripts/ui/menu_options.gd" id="1_7eoik"]
 [ext_resource type="StyleBox" uid="uid://chvlw8pqinkx3" path="res://resources/styles/menu_panel.tres" id="2_p5gdr"]
+[ext_resource type="PackedScene" uid="uid://c15cfttjmmroe" path="res://scenes/ui/volume_slider.tscn" id="3_s0jia"]
 
 [node name="OptionsMenu" type="Control" node_paths=PackedStringArray("master_vol_slider", "sfx_vol_slider", "language_option")]
 layout_mode = 3
@@ -11,8 +12,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7eoik")
-master_vol_slider = NodePath("Panel/MarginContainer/Vertical/Middle/MasterVolume/MasterVolumeSlider")
-sfx_vol_slider = NodePath("Panel/MarginContainer/Vertical/Middle/SoundEffects/SoundEffectsSlider")
+master_vol_slider = NodePath("Panel/MarginContainer/Vertical/Middle/MasterVolume/MasterVolume")
+sfx_vol_slider = NodePath("Panel/MarginContainer/Vertical/Middle/SoundEffects/SoundEffects")
 language_option = NodePath("Panel/MarginContainer/Vertical/Middle/Language/LanguageOptions")
 
 [node name="Panel" type="Panel" parent="."]
@@ -88,11 +89,21 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "VOLUME_MASTER"
 
-[node name="MasterVolumeSlider" type="HSlider" parent="Panel/MarginContainer/Vertical/Middle/MasterVolume"]
+[node name="MasterVolume" parent="Panel/MarginContainer/Vertical/Middle/MasterVolume" instance=ExtResource("3_s0jia")]
+layout_mode = 2
+
+[node name="Music" type="HBoxContainer" parent="Panel/MarginContainer/Vertical/Middle"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/Vertical/Middle/Music"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 1
-value = 100.0
+theme_override_font_sizes/font_size = 25
+text = "MUSIC"
+
+[node name="Music" parent="Panel/MarginContainer/Vertical/Middle/Music" instance=ExtResource("3_s0jia")]
+layout_mode = 2
+bus_name = "Music"
 
 [node name="SoundEffects" type="HBoxContainer" parent="Panel/MarginContainer/Vertical/Middle"]
 layout_mode = 2
@@ -103,11 +114,9 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 25
 text = "VOLUME_SFX"
 
-[node name="SoundEffectsSlider" type="HSlider" parent="Panel/MarginContainer/Vertical/Middle/SoundEffects"]
+[node name="SoundEffects" parent="Panel/MarginContainer/Vertical/Middle/SoundEffects" instance=ExtResource("3_s0jia")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-value = 100.0
+bus_name = "Sound effects"
 
 [node name="Bottom" type="HBoxContainer" parent="Panel/MarginContainer/Vertical"]
 layout_mode = 2
@@ -130,7 +139,5 @@ theme_override_font_sizes/font_size = 33
 text = "SAVE"
 
 [connection signal="item_selected" from="Panel/MarginContainer/Vertical/Middle/Language/LanguageOptions" to="." method="_on_language_options_item_selected"]
-[connection signal="value_changed" from="Panel/MarginContainer/Vertical/Middle/MasterVolume/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
-[connection signal="value_changed" from="Panel/MarginContainer/Vertical/Middle/SoundEffects/SoundEffectsSlider" to="." method="_on_sound_effects_slider_value_changed"]
 [connection signal="button_up" from="Panel/MarginContainer/Vertical/Bottom/Back" to="." method="_on_back_button_up"]
 [connection signal="button_up" from="Panel/MarginContainer/Vertical/Bottom/Save" to="." method="_on_save_button_up"]
