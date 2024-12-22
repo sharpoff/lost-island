@@ -27,7 +27,11 @@ func load_world():
 		player.name = str(peer)
 		$Players.add_child(player)
 
-	$World.add_child(island_map.instantiate())
+	var map = island_map.instantiate()
+	$World.add_child(map)
+
+	# TODO: move it somewhere
+	GameManager.current_map = map.get_node("AboveGround")
 
 func server_disconnected():
-	GameManager.change_scene("res://scenes/ui/menu_main.tscn")
+	GameManager.change_scene.rpc("res://scenes/ui/menu_main.tscn")

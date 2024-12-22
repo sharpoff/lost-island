@@ -11,6 +11,7 @@ func _ready() -> void:
 	if OS.get_model_name() == "GenericDevice" and not OS.is_debug_build():
 		joystick.queue_free()
 
+@rpc("call_local")
 func _on_day_night_cycle_time_changed(week: int, day: int, hour: int, minute: int) -> void:
 	var week_str = "%d" % week
 	var day_str = "%d" % day

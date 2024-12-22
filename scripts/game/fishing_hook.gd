@@ -38,8 +38,6 @@ func _ready() -> void:
 	stopped_fishing.connect(stop_fishing)
 
 func _calculate_trajectory(dst: Vector2, reverse_y: bool = false, increase_vel: float = 0.0):
-	is_fishing = true
-
 	dst -= position # remove offsets between mouse position and hook position
 	var reverse_x = dst.x < 0
 	if reverse_x: # if throwing to the left reverse it
@@ -77,6 +75,7 @@ func _calculate_trajectory(dst: Vector2, reverse_y: bool = false, increase_vel: 
 	
 	if coords:
 		is_moving = true
+		is_fishing = true
 		return true
 	
 	return false
