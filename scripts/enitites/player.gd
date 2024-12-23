@@ -1,10 +1,7 @@
 extends CharacterBody2D
 
-signal caught_fish
-
 @export var animation_tree: AnimationTree
 # TODO: make this more abstract, so it can use other maps
-@onready var tilemap: TileMapLayer
 @export var light: PointLight2D
 @export var speed_component: SpeedComponent
 
@@ -28,17 +25,17 @@ func _enter_tree() -> void:
 	$AnimationTree.active = true
 	set_multiplayer_authority(str(name).to_int())
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# we can't control other characters only yours
 	if not is_multiplayer_authority():
 		return
 	# let camera follow your network player
 	$Camera2D.make_current()
 
-	_move(delta)
+	_move()
 	_animate()
 
-func _move(delta: float):
+func _move():
 	# basic movement (wasd, joystick)
 	direction.x = Input.get_axis("left", "right")
 	direction.y = Input.get_axis("up", "down")
@@ -76,12 +73,36 @@ func _input(event: InputEvent) -> void:
 				current_state = States.IDLE
 				return
 
-			# TODO: remove tilemap from here
-			tilemap = get_tree().root.get_node("Main/World/IslandMap/Ground")
+			var mouse_pos = get_local_mouse_position()
+			if !mouse_pos:
+				print_debug("mouse position is null")
+				return
 
-			var tile_data = tilemap.get_cell_tile_data(tilemap.local_to_map(get_global_mouse_position()))
-			if tile_data && tile_data.get_custom_data("water"):
-				var dst = get_local_mouse_position()
+			# TODO: remove tilemaps from here
+			var tilemap_ground = get_tree().root.get_node("Main/World/IslandMap/Ground")
+			var tilmap_above_ground = get_tree().root.get_node("Main/World/IslandMap/AboveGround")
+			if !tilemap_ground or !tilmap_above_ground:
+				print_debug("Tilemaps not found")
+				return
+
+			var ground_pos = tilemap_ground.local_to_map(mouse_pos)
+			var above_ground_pos = tilmap_above_ground.local_to_map(mouse_pos)
+			if !ground_pos or !above_ground_pos:
+				print_debug("tilemap position out of bounds")
+				return
+
+			var ground_data = tilemap_ground.get_cell_tile_data(ground_pos)
+			var above_ground_data = tilmap_above_ground.get_cell_tile_data(above_ground_pos)
+			if !ground_data or !above_ground_data:
+				print_debug("Data of tilemaps not found")
+				return
+			
+			var is_water = ground_data.get_custom_data("water")
+			var is_elevate = above_ground_data.get_custom_data("elevate")
+
+			print_debug(is_water, is_elevate)
+			if is_water and !is_elevate:
+				var dst = mouse_pos
 				if $FishingHook._calculate_trajectory(dst):
 					current_state = States.FISHING
 					if dst.x > 0: # rotate right
@@ -92,6 +113,7 @@ func _input(event: InputEvent) -> void:
 func _on_reaction_bar_ended(is_win: Variant) -> void:
 	current_state = States.IDLE
 	if is_win:
+		# TODO: make it abstract and better
 		get_tree().root.get_node("Main/GUI/PlayerUI")._increase_fish()
 	else:
 		print_debug("Didn't catch a fish")

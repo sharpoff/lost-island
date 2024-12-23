@@ -113,6 +113,7 @@ func _on_fish_timer_timeout() -> void:
 	timeout.emit()
 
 func stop_fishing():
+	fish_timer.stop()
 	_randomize_fish_time()
 	is_moving = false
 	is_fishing = false

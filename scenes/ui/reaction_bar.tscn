@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cq8genv1g6a7i" path="res://assets/sprites/ui/reaction_hitter.png" id="3_x618d"]
 
 [node name="ReactionBar" type="Control"]
+visible = false
 z_index = 2
 layout_mode = 3
 anchors_preset = 0
