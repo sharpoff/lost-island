@@ -18,8 +18,8 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 GameManager="*res://scripts/game/game_manager.gd"
-SettingsManager="*res://scripts/configs/settings_manager.gd"
-AudioManager="*res://scripts/utils/audio_manager.gd"
+SettingsManager="*res://scripts/utils/settings_manager.gd"
+AudioManager="*res://scenes/utils/audio_manager.tscn"
 
 [display]
 
@@ -38,7 +38,7 @@ night_light=""
 
 [gui]
 
-theme/custom_font="res://assets/fonts/PublicPixel.otf"
+theme/custom_font="res://assets/fonts/HomeVideo-Regular.otf"
 
 [input]
 
@@ -71,6 +71,11 @@ left_click={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
+interact={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"location":0,"echo":false,"script":null)
+]
+}
 
 [input_devices]
 
@@ -84,9 +89,10 @@ locale/translation_add_builtin_strings_to_pot=true
 
 [layer_names]
 
-2d_physics/layer_1="environment"
-2d_physics/layer_2="player"
-2d_physics/layer_3="door"
+2d_physics/layer_1="Ground"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Door"
+2d_physics/layer_4="AboveGround"
 
 [rendering]
 

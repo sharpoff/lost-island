@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dyv5mly5gsnvl"
-path="res://.godot/imported/PublicPixel.otf-305725758d267dbaabfa4678a391aae8.fontdata"
+uid="uid://ir1tccvqesg0"
+path="res://.godot/imported/HomeVideo-Regular.otf-f0f165f69812e148011e616ad96373ec.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/PublicPixel.otf"
-dest_files=["res://.godot/imported/PublicPixel.otf-305725758d267dbaabfa4678a391aae8.fontdata"]
+source_file="res://assets/fonts/HomeVideo-Regular.otf"
+dest_files=["res://.godot/imported/HomeVideo-Regular.otf-f0f165f69812e148011e616ad96373ec.fontdata"]
 
 [params]
 

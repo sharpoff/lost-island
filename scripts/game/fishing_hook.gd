@@ -1,6 +1,6 @@
 extends Node2D
 
-signal stopped_fishing
+signal timeout
 
 @onready var hook: Polygon2D = $Hook
 @onready var fish_timer: Timer = $FishTimer
@@ -27,19 +27,30 @@ var is_fishing = false:
 	set(value):
 		is_fishing = value
 		if !is_fishing :
-			hook.hide()
+			hide()
 		else:
-			hook.show()
+			show()
 		queue_redraw()
 
 func _ready() -> void:
 	hook.color = hook_color
 	_randomize_fish_time()
-	stopped_fishing.connect(stop_fishing)
+
+func _process(_delta: float) -> void:
+	if is_moving or is_fishing:
+		queue_redraw()
+
+func _draw() -> void:
+	if !is_fishing:
+		return
+
+	if is_moving:
+		update_hook_position()
+	elif current_drawn.size() >= 2:
+		draw_polyline(current_drawn, color_land, 0.5)
+
 
 func _calculate_trajectory(dst: Vector2, reverse_y: bool = false, increase_vel: float = 0.0):
-	is_fishing = true
-
 	dst -= position # remove offsets between mouse position and hook position
 	var reverse_x = dst.x < 0
 	if reverse_x: # if throwing to the left reverse it
@@ -57,7 +68,7 @@ func _calculate_trajectory(dst: Vector2, reverse_y: bool = false, increase_vel: 
 	#print_debug(v)
 	#print_debug(angle)
 	#print_debug(time_of_flight)
-	
+
 	coords = []
 	current_drawn = []
 	var first_pos = Vector2()
@@ -77,6 +88,7 @@ func _calculate_trajectory(dst: Vector2, reverse_y: bool = false, increase_vel: 
 	
 	if coords:
 		is_moving = true
+		is_fishing = true
 		return true
 	
 	return false
@@ -94,25 +106,14 @@ func update_hook_position() -> void:
 	hook.position = end
 	draw_polyline(current_drawn, color_flying, 0.5)
 
-func _process(_delta: float) -> void:
-	if is_moving or !current_drawn.is_empty() or is_fishing:
-		queue_redraw()
-
-func _draw() -> void:
-	if !is_fishing:
-		return
-
-	if is_moving:
-		update_hook_position()
-	elif current_drawn.size() >= 2:
-		draw_polyline(current_drawn, color_land, 0.5)
-
 func _randomize_fish_time():
 	fish_time = randf_range(6.0, 10.0) # reset time
 
 func _on_fish_timer_timeout() -> void:
-	stopped_fishing.emit()
+	timeout.emit()
 
 func stop_fishing():
+	fish_timer.stop()
 	_randomize_fish_time()
+	is_moving = false
 	is_fishing = false

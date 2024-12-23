@@ -18,6 +18,9 @@ func _ready() -> void:
 	time = initial_hour * MINUTES_IN_HOUR * REAL_MINUTE_DURATION
 
 func _process(delta: float) -> void:
+	if !multiplayer.is_server():
+		return
+	
 	time += delta * time_speed * REAL_MINUTE_DURATION
 	var value = (sin(time - PI / 2) + 1.0) / 2.0
 	self.color = gradient.gradient.sample(value)
@@ -28,6 +31,9 @@ func _process(delta: float) -> void:
 		_calculate_time()
 
 func _calculate_time() -> void:
+	if !multiplayer.is_server():
+		return
+	
 	var in_game_minute = int(time / REAL_MINUTE_DURATION)
 	var day_minutes = in_game_minute % MINUTES_IN_DAY
 	@warning_ignore("integer_division")

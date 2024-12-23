@@ -1,0 +1,90 @@
+[gd_scene load_steps=4 format=3 uid="uid://brjhehgl0gxvs"]
+
+[ext_resource type="PackedScene" uid="uid://fsr4f6ublbtd" path="res://scenes/ui/item_slot.tscn" id="1_kront"]
+[ext_resource type="Script" path="res://scripts/ui/hotbar.gd" id="1_va5vw"]
+[ext_resource type="PackedScene" uid="uid://vgplr0r3lh0c" path="res://scenes/ui/item_slot_backpack.tscn" id="2_2l3nt"]
+
+[node name="Hotbar" type="HBoxContainer"]
+offset_right = 140.0
+offset_bottom = 24.0
+size_flags_vertical = 8
+theme_override_constants/separation = 5
+script = ExtResource("1_va5vw")
+
+[node name="Slot1" parent="." instance=ExtResource("1_kront")]
+layout_mode = 2
+
+[node name="Slot1" type="Button" parent="Slot1"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(67, 67)
+layout_mode = 0
+offset_right = 67.0
+offset_bottom = 67.0
+
+[node name="Slot2" parent="." instance=ExtResource("1_kront")]
+layout_mode = 2
+
+[node name="Slot2" type="Button" parent="Slot2"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(67, 67)
+layout_mode = 0
+offset_right = 67.0
+offset_bottom = 67.0
+
+[node name="Slot3" parent="." instance=ExtResource("1_kront")]
+layout_mode = 2
+
+[node name="Slot3" type="Button" parent="Slot3"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(67, 67)
+layout_mode = 0
+offset_right = 67.0
+offset_bottom = 67.0
+
+[node name="Slot4" parent="." instance=ExtResource("1_kront")]
+layout_mode = 2
+
+[node name="Slot4" type="Button" parent="Slot4"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(67, 67)
+layout_mode = 0
+offset_right = 67.0
+offset_bottom = 67.0
+
+[node name="Slot5" parent="." instance=ExtResource("1_kront")]
+layout_mode = 2
+
+[node name="Slot5" type="Button" parent="Slot5"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(67, 67)
+layout_mode = 0
+offset_right = 67.0
+offset_bottom = 67.0
+
+[node name="Slot6" parent="." instance=ExtResource("1_kront")]
+layout_mode = 2
+
+[node name="Slot6" type="Button" parent="Slot6"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(67, 67)
+layout_mode = 0
+offset_right = 67.0
+offset_bottom = 67.0
+
+[node name="Slot7" parent="." instance=ExtResource("2_2l3nt")]
+layout_mode = 2
+
+[node name="SlotInventory" type="Button" parent="Slot7"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(67, 67)
+layout_mode = 0
+offset_right = 67.0
+offset_bottom = 67.0
+
+[connection signal="button_up" from="Slot1/Slot1" to="." method="_on_slot_1_button_up"]
+[connection signal="button_up" from="Slot2/Slot2" to="." method="_on_slot_2_button_up"]
+[connection signal="button_up" from="Slot3/Slot3" to="." method="_on_slot_3_button_up"]
+[connection signal="button_up" from="Slot4/Slot4" to="." method="_on_slot_4_button_up"]
+[connection signal="button_up" from="Slot5/Slot5" to="." method="_on_slot_5_button_up"]
+[connection signal="button_up" from="Slot6/Slot6" to="." method="_on_slot_6_button_up"]
+[connection signal="button_up" from="Slot7/SlotInventory" to="." method="_on_slot_inventory_button_up"]

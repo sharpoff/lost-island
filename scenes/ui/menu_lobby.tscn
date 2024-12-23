@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://2wldfpcvs7wa"]
+[gd_scene load_steps=4 format=3 uid="uid://2wldfpcvs7wa"]
 
 [ext_resource type="Script" path="res://scripts/ui/menu_lobby.gd" id="1_y2i2o"]
 [ext_resource type="StyleBox" uid="uid://chvlw8pqinkx3" path="res://resources/styles/menu_panel.tres" id="2_is1tw"]
+[ext_resource type="Theme" uid="uid://bycwepbj8cxa4" path="res://resources/styles/theme.tres" id="3_rcyc5"]
 
 [node name="LobbyMenu" type="Control" node_paths=PackedStringArray("player_list", "nickname", "ip_address", "error_msg", "host_button", "join_button", "play_button")]
 layout_mode = 3
@@ -74,6 +75,7 @@ max_length = 20
 
 [node name="Host" type="Button" parent="SelectMenu/Margin/Vertical/Top/Vertical/NameHost"]
 layout_mode = 2
+theme = ExtResource("3_rcyc5")
 theme_override_font_sizes/font_size = 33
 text = "HOST"
 
@@ -90,7 +92,9 @@ max_length = 15
 
 [node name="Join" type="Button" parent="SelectMenu/Margin/Vertical/Top/Vertical/JoinIP"]
 layout_mode = 2
+theme = ExtResource("3_rcyc5")
 theme_override_font_sizes/font_size = 33
+button_mask = 3
 text = "JOIN"
 
 [node name="HideAddress" type="CheckButton" parent="SelectMenu/Margin/Vertical/Top/Vertical"]
@@ -120,6 +124,7 @@ alignment = 1
 [node name="BackToMenu" type="Button" parent="SelectMenu/Margin/Vertical/Bottom/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
+theme = ExtResource("3_rcyc5")
 theme_override_font_sizes/font_size = 33
 text = "BACK"
 

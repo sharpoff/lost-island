@@ -18,6 +18,8 @@ var players_loaded = 0
 # local player info
 var player_info = {"name": "Chill guy"}
 
+var current_map
+
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_player_connected)
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bn0sqxi41x57p"]
+[gd_scene load_steps=8 format=3 uid="uid://bn0sqxi41x57p"]
 
 [ext_resource type="Script" path="res://scripts/ui/menu_main.gd" id="1_x8ex8"]
 [ext_resource type="PackedScene" uid="uid://2wldfpcvs7wa" path="res://scenes/ui/menu_lobby.tscn" id="2_mv0cx"]
 [ext_resource type="PackedScene" uid="uid://cswb8bilfttaf" path="res://scenes/ui/menu_singleplayer.tscn" id="2_u2hpe"]
-[ext_resource type="PackedScene" uid="uid://cryghm0n4gpw2" path="res://scenes/ui/options_menu.tscn" id="3_6fdth"]
+[ext_resource type="PackedScene" uid="uid://cryghm0n4gpw2" path="res://scenes/ui/menu_options.tscn" id="3_6fdth"]
+[ext_resource type="Theme" uid="uid://bycwepbj8cxa4" path="res://resources/styles/theme.tres" id="5_obryx"]
 
 [sub_resource type="FontVariation" id="FontVariation_nxsf7"]
 
@@ -69,22 +70,26 @@ alignment = 1
 
 [node name="Singleplayer" type="Button" parent="Margin/Vertical/Bottom/Vertical"]
 layout_mode = 2
+theme = ExtResource("5_obryx")
 theme_override_font_sizes/font_size = 44
 text = "SINGLEPLAYER"
 
 [node name="Multiplayer" type="Button" parent="Margin/Vertical/Bottom/Vertical"]
 layout_mode = 2
+theme = ExtResource("5_obryx")
 theme_override_font_sizes/font_size = 44
 text = "MULTIPLAYER"
 autowrap_mode = 3
 
 [node name="Options" type="Button" parent="Margin/Vertical/Bottom/Vertical"]
 layout_mode = 2
+theme = ExtResource("5_obryx")
 theme_override_font_sizes/font_size = 44
 text = "OPTIONS"
 
 [node name="Quit" type="Button" parent="Margin/Vertical/Bottom/Vertical"]
 layout_mode = 2
+theme = ExtResource("5_obryx")
 theme_override_font_sizes/font_size = 44
 text = "QUIT"
 
