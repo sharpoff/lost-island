@@ -6,6 +6,8 @@ extends CanvasLayer
 @export var fish_count_label: Label
 
 @export var joystick: CanvasLayer
+@export var inventory_ui: Control
+
 var fish_count = 0
 
 func _ready() -> void:
@@ -24,3 +26,6 @@ func _on_day_night_cycle_time_changed(week: int, day: int, hour: int, minute: in
 func _increase_fish() -> void:
 	fish_count += 1
 	fish_count_label.text = "Fish: " + str(fish_count)
+
+func _on_hotbar_inventory_opened() -> void:
+	inventory_ui.visible = !inventory_ui.visible

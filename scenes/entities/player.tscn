@@ -654,9 +654,6 @@ animation_tree = NodePath("AnimationTree")
 light = NodePath("NightLight")
 speed_component = NodePath("Components/SpeedComponent")
 
-[node name="Legs" type="Node2D" parent="."]
-position = Vector2(0, 12)
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4dhnr")
 

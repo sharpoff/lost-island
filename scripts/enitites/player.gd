@@ -67,23 +67,15 @@ func _animate():
 	animation_tree.set("parameters/Run/blend_position", last_direction)
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
 			if current_state == States.FISHING:
 				current_state = States.IDLE
 				return
 
-			var mouse_pos = get_global_mouse_position()
-			if !mouse_pos:
-				print_debug("mouse position is null")
-				return
-			
-			var is_elevate = true
-			var is_water = true
-
 			# TODO: remove tilemaps from here
-			var tilemap_ground = get_tree().root.get_node("Main/World/IslandMap/Ground")
-			var tilmap_above_ground = get_tree().root.get_node("Main/World/IslandMap/AboveGround")
+			var tilemap_ground: TileMapLayer = get_tree().root.get_node("Main/World/IslandMap/Ground")
+			var tilmap_above_ground: TileMapLayer = get_tree().root.get_node("Main/World/IslandMap/AboveGround")
 			if !tilemap_ground:
 				print_debug("tilemap ground not found")
 				pass
@@ -91,23 +83,20 @@ func _input(event: InputEvent) -> void:
 				print_debug("Tilemaps not found")
 				return
 
-			var ground_pos = tilemap_ground.local_to_map(mouse_pos)
-			var above_ground_pos = tilmap_above_ground.local_to_map(mouse_pos)
+			var ground_pos = tilemap_ground.local_to_map(tilemap_ground.get_local_mouse_position())
+			var above_ground_pos = tilmap_above_ground.local_to_map(tilmap_above_ground.get_local_mouse_position())
 			if !ground_pos or !above_ground_pos:
 				print_debug("tilemap position out of bounds")
 				return
 
 			var ground_data = tilemap_ground.get_cell_tile_data(ground_pos)
 			var above_ground_data = tilmap_above_ground.get_cell_tile_data(above_ground_pos)
-			if !ground_data or !above_ground_data:
-				print_debug("Data of tilemaps not found")
-				return
 
-			is_water = is_water and ground_data.get_custom_data("water")
-			is_elevate = is_elevate and above_ground_data.get_custom_data("elevate")
+			var is_water = ground_data and ground_data.get_custom_data("water")
+			var is_elevate = above_ground_data and above_ground_data.get_custom_data("elevate")
 
 			if is_water and !is_elevate:
-				var dst = mouse_pos
+				var dst = get_local_mouse_position()
 				if $FishingHook._calculate_trajectory(dst):
 					current_state = States.FISHING
 					if dst.x > 0: # rotate right
@@ -119,7 +108,7 @@ func _on_reaction_bar_ended(is_win: Variant) -> void:
 	current_state = States.IDLE
 	if is_win:
 		# TODO: make it abstract and better
-		get_tree().root.get_node("Main/GUI/PlayerUI")._increase_fish()
+		get_tree().root.get_node("Main/PlayerUI")._increase_fish()
 	else:
 		print_debug("Didn't catch a fish")
 

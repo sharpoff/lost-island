@@ -50,12 +50,6 @@ initial_hour = 18
 z_index = 2
 y_sort_enabled = true
 
-[node name="GUI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PlayerUI" parent="." instance=ExtResource("4_xon12")]
 
-[node name="PlayerUI" parent="GUI" instance=ExtResource("4_xon12")]
-
-[connection signal="time_changed" from="World/DayNightCycle" to="GUI/PlayerUI" method="_on_day_night_cycle_time_changed"]
+[connection signal="time_changed" from="World/DayNightCycle" to="PlayerUI" method="_on_day_night_cycle_time_changed"]

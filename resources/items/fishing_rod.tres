@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://di6etry8b3ern"]
+
+[ext_resource type="Script" path="res://scripts/game/item.gd" id="1_elnkf"]
+[ext_resource type="Texture2D" uid="uid://diggvbwuqjbpe" path="res://assets/sprites/items/fishing_rod.png" id="2_rbl28"]
+
+[resource]
+script = ExtResource("1_elnkf")
+name = "Fishing rod"
+texture = ExtResource("2_rbl28")
