@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal caught_fish
+
 @export var animation_tree: AnimationTree
 # TODO: make this more abstract, so it can use other maps
 @onready var tilemap: TileMapLayer
@@ -12,27 +14,31 @@ enum States {
 	FISHING,
 }
 
-var current_state = States.IDLE
+var current_state = States.IDLE:
+	set(value):
+		current_state = value
+		_check_current_state(current_state)
 
 # movement related
 var direction: Vector2
 var last_direction = Vector2(0, 1)
+var is_on_stairs = false
 
 func _enter_tree() -> void:
 	$AnimationTree.active = true
 	set_multiplayer_authority(str(name).to_int())
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# we can't control other characters only yours
 	if not is_multiplayer_authority():
 		return
 	# let camera follow your network player
 	$Camera2D.make_current()
 
-	_move()
+	_move(delta)
 	_animate()
 
-func _move():
+func _move(delta: float):
 	# basic movement (wasd, joystick)
 	direction.x = Input.get_axis("left", "right")
 	direction.y = Input.get_axis("up", "down")
@@ -40,8 +46,9 @@ func _move():
 
 	if direction:
 		velocity = direction * speed_component.speed
+		if is_on_stairs:
+			velocity.y += direction.x * speed_component.speed / 2
 		current_state = States.MOVING
-		$FishingHook.stop_fishing()
 	else:
 		velocity = Vector2.ZERO
 		if current_state != States.FISHING:
@@ -67,7 +74,6 @@ func _input(event: InputEvent) -> void:
 		if event.is_pressed():
 			if current_state == States.FISHING:
 				current_state = States.IDLE
-				$FishingHook.stop_fishing()
 				return
 
 			# TODO: remove tilemap from here
@@ -83,6 +89,20 @@ func _input(event: InputEvent) -> void:
 					elif dst.x < 0: # rotate left
 						last_direction = Vector2(-1, 0)
 
-func _on_fishing_hook_stopped_fishing() -> void:
+func _on_reaction_bar_ended(is_win: Variant) -> void:
 	current_state = States.IDLE
-	print_debug("Fish is done")
+	if is_win:
+		get_tree().root.get_node("Main/GUI/PlayerUI")._increase_fish()
+	else:
+		print_debug("Didn't catch a fish")
+
+func _check_current_state(state) -> void:
+	match state:
+		States.IDLE:
+			$FishingHook.stop_fishing()
+			$ReactionBar._end()
+		States.FISHING:
+			pass
+		States.MOVING:
+			$FishingHook.stop_fishing()
+			$ReactionBar._end()

@@ -12,3 +12,7 @@ func _on_node_added(node: Node) -> void:
 
 func _play_button_up() -> void:
 	button_click_sound.play()
+
+func change_bus_db(bus_name: String, db: float) -> void:
+	var bus_index = AudioServer.get_bus_index(bus_name)
+	AudioServer.set_bus_volume_db(bus_index, db)

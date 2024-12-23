@@ -11,7 +11,7 @@ anchors_preset = 0
 script = ExtResource("1_12djb")
 metadata/_edit_use_anchors_ = true
 
-[node name="Bar" type="TextureRect" parent="."]
+[node name="Bar" type="NinePatchRect" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -22,7 +22,11 @@ offset_right = 30.0
 offset_bottom = -29.0
 grow_horizontal = 2
 texture = ExtResource("1_awjc3")
-stretch_mode = 2
+region_rect = Rect2(0, 0, 60, 9)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
 
 [node name="Hitter" type="TextureRect" parent="."]
 layout_mode = 0

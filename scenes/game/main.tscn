@@ -33,16 +33,18 @@ island_map = ExtResource("3_kaw51")
 spawn_path = NodePath("../Players")
 spawn_limit = 4
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_ix6ey")
-
-[node name="DayNightCycle" type="CanvasModulate" parent="."]
-script = ExtResource("1_kvkoo")
-gradient = SubResource("GradientTexture1D_i8mnj")
-
 [node name="World" type="Node2D" parent="."]
 z_index = 2
 y_sort_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_ix6ey")
+
+[node name="DayNightCycle" type="CanvasModulate" parent="World"]
+script = ExtResource("1_kvkoo")
+gradient = SubResource("GradientTexture1D_i8mnj")
+time_speed = 2.0
+initial_hour = 18
 
 [node name="Players" type="Node2D" parent="."]
 z_index = 2
@@ -56,4 +58,4 @@ offset_bottom = 40.0
 
 [node name="PlayerUI" parent="GUI" instance=ExtResource("4_xon12")]
 
-[connection signal="time_changed" from="DayNightCycle" to="GUI/PlayerUI" method="_on_day_night_cycle_time_changed"]
+[connection signal="time_changed" from="World/DayNightCycle" to="GUI/PlayerUI" method="_on_day_night_cycle_time_changed"]

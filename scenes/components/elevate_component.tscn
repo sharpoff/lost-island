@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgsht6j10h426"]
+
+[ext_resource type="Script" path="res://scripts/components/elevate_component.gd" id="1_au3u8"]
+
+[node name="ElevateComponent" type="Area2D"]
+script = ExtResource("1_au3u8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

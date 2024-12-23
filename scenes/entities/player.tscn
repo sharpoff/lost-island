@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://qhvm71rgocqy"]
+[gd_scene load_steps=29 format=3 uid="uid://qhvm71rgocqy"]
 
 [ext_resource type="Script" path="res://scripts/enitites/player.gd" id="1_yndhw"]
 [ext_resource type="Texture2D" uid="uid://0b7y1i2qbnaa" path="res://assets/sprites/entities/character/main_character.png" id="2_rhfs6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bs6jkb6dmaxpc" path="res://assets/sprites/effects/light_effect.png" id="5_hao5w"]
 [ext_resource type="PackedScene" uid="uid://4tjsu662ksyc" path="res://scenes/components/speed_component.tscn" id="5_qtokq"]
 [ext_resource type="PackedScene" uid="uid://daiu4ofjrvyqk" path="res://scenes/game/fishing_hook.tscn" id="7_527hn"]
+[ext_resource type="PackedScene" uid="uid://d1a8po4hbvdi4" path="res://scenes/ui/reaction_bar.tscn" id="8_mrjga"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4dhnr"]
 properties/0/path = NodePath(".:position")
@@ -705,3 +706,8 @@ position = Vector2(0, -3)
 color_flying = Color(1, 1, 1, 1)
 color_land = Color(1, 1, 1, 1)
 hook_color = Color(1, 1, 1, 1)
+
+[node name="ReactionBar" parent="." node_paths=PackedStringArray("fishing_hook") instance=ExtResource("8_mrjga")]
+fishing_hook = NodePath("../FishingHook")
+
+[connection signal="ended" from="ReactionBar" to="." method="_on_reaction_bar_ended"]

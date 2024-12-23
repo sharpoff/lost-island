@@ -11,11 +11,11 @@ background_music = NodePath("BackgroundMusic")
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_6yhfv")
-volume_db = -40.0
 autoplay = true
 bus = &"Music"
+parameters/looping = true
 
 [node name="ButtonClick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_oy0vq")
-volume_db = -60.0
+volume_db = 5.0
 bus = &"Sound effects"
