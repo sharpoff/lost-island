@@ -31,6 +31,8 @@ func save_config() -> void:
 
 	config.save("user://Settings.cfg")
 
+	load_config()
+
 func load_config() -> bool:
 	var config = ConfigFile.new()
 	var err = config.load("user://Settings.cfg")

@@ -38,7 +38,7 @@ night_light=""
 
 [gui]
 
-theme/custom_font="res://assets/fonts/PublicPixel.otf"
+theme/custom_font="res://assets/fonts/HomeVideo-Regular.otf"
 
 [input]
 

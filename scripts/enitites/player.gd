@@ -73,15 +73,21 @@ func _input(event: InputEvent) -> void:
 				current_state = States.IDLE
 				return
 
-			var mouse_pos = get_local_mouse_position()
+			var mouse_pos = get_global_mouse_position()
 			if !mouse_pos:
 				print_debug("mouse position is null")
 				return
+			
+			var is_elevate = true
+			var is_water = true
 
 			# TODO: remove tilemaps from here
 			var tilemap_ground = get_tree().root.get_node("Main/World/IslandMap/Ground")
 			var tilmap_above_ground = get_tree().root.get_node("Main/World/IslandMap/AboveGround")
-			if !tilemap_ground or !tilmap_above_ground:
+			if !tilemap_ground:
+				print_debug("tilemap ground not found")
+				pass
+			elif !tilmap_above_ground:
 				print_debug("Tilemaps not found")
 				return
 
@@ -96,11 +102,10 @@ func _input(event: InputEvent) -> void:
 			if !ground_data or !above_ground_data:
 				print_debug("Data of tilemaps not found")
 				return
-			
-			var is_water = ground_data.get_custom_data("water")
-			var is_elevate = above_ground_data.get_custom_data("elevate")
 
-			print_debug(is_water, is_elevate)
+			is_water = is_water and ground_data.get_custom_data("water")
+			is_elevate = is_elevate and above_ground_data.get_custom_data("elevate")
+
 			if is_water and !is_elevate:
 				var dst = mouse_pos
 				if $FishingHook._calculate_trajectory(dst):
