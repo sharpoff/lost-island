@@ -1,28 +1,29 @@
-extends Panel
+extends Control
 class_name ItemSlot
 
-signal dragged
-signal released
+signal item_pressed(item_data: ItemData, item_index: int, button_index: int)
 
-var is_dragging = false
-var delay = 0.5
-var offset = 0
+@export var quantity_label: Label
+@export var texture_rect: TextureRect
 
-var item: Item:
-	set(value):
-		item = value
-		$ItemTexture.texture = item.texture
+var item: ItemData: set = set_item
 
-#func _physics_process(delta: float) -> void:
-	#if is_dragging:
-		#var tween = get_tree().create_tween()
-		#tween.tween_property($ItemTexture, "position", get_local_mouse_position() - offset, delay * delta)
+func set_item(new_item):
+	item = new_item
+	if !item:
+		texture_rect.hide()
+		quantity_label.hide()
+		return
 
-func _on_item_texture_gui_input(event: InputEvent) -> void:
+	if item.texture:
+		texture_rect.set_texture(item.texture)
+		texture_rect.show()
+	
+	if item.stackable:
+		quantity_label.show()
+		quantity_label.text = str(item.quantity)
+
+func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
-			if item and item.texture:
-				dragged.emit(self)
-		else:
-			if item and item.texture:
-				released.emit(self)
+			item_pressed.emit(item, get_index(), event.button_index)

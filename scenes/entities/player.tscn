@@ -1,13 +1,24 @@
-[gd_scene load_steps=29 format=3 uid="uid://qhvm71rgocqy"]
+[gd_scene load_steps=34 format=3 uid="uid://qhvm71rgocqy"]
 
 [ext_resource type="Script" path="res://scripts/enitites/player.gd" id="1_yndhw"]
+[ext_resource type="Script" path="res://scripts/game/item_data.gd" id="2_hdyfj"]
 [ext_resource type="Texture2D" uid="uid://0b7y1i2qbnaa" path="res://assets/sprites/entities/character/main_character.png" id="2_rhfs6"]
+[ext_resource type="Resource" uid="uid://dpsgsypibbrye" path="res://resources/items/fishing_rod.tres" id="3_323o8"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://btn5pnrhdb5w" path="res://resources/animations/player_animation_states.tres" id="3_wydrx"]
 [ext_resource type="PackedScene" uid="uid://cvtaafcrt6xxd" path="res://scenes/game/night_light.tscn" id="4_mtcp3"]
+[ext_resource type="Script" path="res://scripts/game/inventory_data.gd" id="4_ty10l"]
 [ext_resource type="Texture2D" uid="uid://bs6jkb6dmaxpc" path="res://assets/sprites/effects/light_effect.png" id="5_hao5w"]
 [ext_resource type="PackedScene" uid="uid://4tjsu662ksyc" path="res://scenes/components/speed_component.tscn" id="5_qtokq"]
 [ext_resource type="PackedScene" uid="uid://daiu4ofjrvyqk" path="res://scenes/game/fishing_hook.tscn" id="7_527hn"]
 [ext_resource type="PackedScene" uid="uid://d1a8po4hbvdi4" path="res://scenes/ui/reaction_bar.tscn" id="8_mrjga"]
+
+[sub_resource type="Resource" id="Resource_fwk85"]
+script = ExtResource("4_ty10l")
+items = Array[ExtResource("2_hdyfj")]([null, null, ExtResource("3_323o8"), null, null, null, null, null, null, ExtResource("3_323o8"), null, null, null, null, null, null, null, null])
+
+[sub_resource type="Resource" id="Resource_0iyed"]
+script = ExtResource("4_ty10l")
+items = Array[ExtResource("2_hdyfj")]([null, ExtResource("3_323o8"), null, null, null, null])
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4dhnr"]
 properties/0/path = NodePath(".:position")
@@ -653,6 +664,8 @@ script = ExtResource("1_yndhw")
 animation_tree = NodePath("AnimationTree")
 light = NodePath("NightLight")
 speed_component = NodePath("Components/SpeedComponent")
+inventory = SubResource("Resource_fwk85")
+hotbar = SubResource("Resource_0iyed")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4dhnr")
@@ -708,3 +721,4 @@ hook_color = Color(1, 1, 1, 1)
 fishing_hook = NodePath("../FishingHook")
 
 [connection signal="ended" from="ReactionBar" to="." method="_on_reaction_bar_ended"]
+[connection signal="started" from="ReactionBar" to="." method="_on_reaction_bar_started"]

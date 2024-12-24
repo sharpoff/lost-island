@@ -1,5 +1,6 @@
 extends Control
 
+signal started
 signal ended(is_win)
 
 @onready var bar: NinePatchRect = $Bar
@@ -41,6 +42,7 @@ func _process(_delta: float) -> void:
 
 func _start() -> void:
 	is_running = true
+	started.emit()
 	show()
 
 func _end() -> void:
