@@ -2,6 +2,7 @@ extends Node2D
 
 @export var player_scene: PackedScene
 @export var island_map: PackedScene
+@onready var inventory_interface: Control = $UI/InventoryInterface
 
 func _ready() -> void:
 	GameManager.game_started.connect(start_game)
@@ -26,6 +27,11 @@ func load_world():
 		var player = player_scene.instantiate()
 		player.name = str(peer)
 		$Players.add_child(player)
+		
+		if player.inventory:
+			inventory_interface.set_inventory_data(player.inventory)
+		if player.hotbar:
+			inventory_interface.set_hotbar_data(player.hotbar)
 
 	var map = island_map.instantiate()
 	$World.add_child(map)

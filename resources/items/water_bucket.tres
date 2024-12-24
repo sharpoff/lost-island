@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://b3d5mstvb2cim"]
+
+[ext_resource type="Script" path="res://scripts/game/item_data.gd" id="1_qtc3v"]
+[ext_resource type="Texture2D" uid="uid://vpfcahuonfw" path="res://assets/sprites/items/bucket_water.png" id="2_sfkbg"]
+
+[resource]
+script = ExtResource("1_qtc3v")
+name = "Water bucket"
+description = ""
+texture = ExtResource("2_sfkbg")
+stackable = false
+quantity = 1

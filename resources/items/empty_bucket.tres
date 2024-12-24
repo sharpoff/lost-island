@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://dqsky24y1s6f4"]
+
+[ext_resource type="Script" path="res://scripts/game/item_data.gd" id="1_etreg"]
+[ext_resource type="Texture2D" uid="uid://b13y1wieivva6" path="res://assets/sprites/items/bucket_empty.png" id="2_8rxaa"]
+
+[resource]
+script = ExtResource("1_etreg")
+name = "Empty bucket"
+description = ""
+texture = ExtResource("2_8rxaa")
+stackable = false
+quantity = 1

@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Inventory" load_steps=4 format=3 uid="uid://de7kuilopdd7q"]
-
-[ext_resource type="Script" path="res://scripts/game/item.gd" id="1_wxfej"]
-[ext_resource type="Script" path="res://scripts/game/inventory.gd" id="2_62ldc"]
-[ext_resource type="Resource" uid="uid://di6etry8b3ern" path="res://resources/items/fishing_rod.tres" id="2_g7lff"]
-
-[resource]
-script = ExtResource("2_62ldc")
-items = Array[ExtResource("1_wxfej")]([ExtResource("2_g7lff"), null, null, null, null, null, null, ExtResource("2_g7lff"), null, null, null, null, null, null, null, null, null, null])

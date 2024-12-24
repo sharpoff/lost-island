@@ -1,9 +1,14 @@
 extends CharacterBody2D
+class_name Player
 
 @export var animation_tree: AnimationTree
 # TODO: make this more abstract, so it can use other maps
 @export var light: PointLight2D
 @export var speed_component: SpeedComponent
+@export var inventory: InventoryData
+@export var hotbar: InventoryData
+
+var selected_item: ItemData
 
 enum States {
 	IDLE,
@@ -17,6 +22,8 @@ var current_state = States.IDLE:
 		_check_current_state(current_state)
 
 # movement related
+var can_move = true
+var can_click = true
 var direction: Vector2
 var last_direction = Vector2(0, 1)
 var is_on_stairs = false
@@ -36,6 +43,9 @@ func _physics_process(_delta: float) -> void:
 	_animate()
 
 func _move():
+	if !can_move:
+		return
+	
 	# basic movement (wasd, joystick)
 	direction.x = Input.get_axis("left", "right")
 	direction.y = Input.get_axis("up", "down")
@@ -67,13 +77,16 @@ func _animate():
 	animation_tree.set("parameters/Run/blend_position", last_direction)
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+	if can_click and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
 			if current_state == States.FISHING:
 				current_state = States.IDLE
 				return
 
-			# TODO: remove tilemaps from here
+			# TODO: remove tilemaps from here and remove boilerplate code to a function
+			if selected_item and selected_item.name != "Fishing rod":
+				return
+			
 			var tilemap_ground: TileMapLayer = get_tree().root.get_node("Main/World/IslandMap/Ground")
 			var tilmap_above_ground: TileMapLayer = get_tree().root.get_node("Main/World/IslandMap/AboveGround")
 			if !tilemap_ground:
@@ -104,11 +117,18 @@ func _input(event: InputEvent) -> void:
 					elif dst.x < 0: # rotate left
 						last_direction = Vector2(-1, 0)
 
+func _on_reaction_bar_started() -> void:
+	can_move = false
+	can_click = false
+
 func _on_reaction_bar_ended(is_win: Variant) -> void:
 	current_state = States.IDLE
+	can_move = true
+	can_click = true
+
 	if is_win:
 		# TODO: make it abstract and better
-		get_tree().root.get_node("Main/PlayerUI")._increase_fish()
+		get_tree().root.get_node("Main/UI")._increase_fish()
 	else:
 		print_debug("Didn't catch a fish")
 

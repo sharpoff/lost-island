@@ -17,7 +17,6 @@ var players_loaded = 0
 
 # local player info
 var player_info = {"name": "Chill guy"}
-
 var current_map
 
 func _ready() -> void:

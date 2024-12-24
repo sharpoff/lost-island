@@ -2,4 +2,5 @@ extends HBoxContainer
 
 signal inventory_opened
 
-var selected_item_index = 1
+func _on_button_button_up() -> void:
+	inventory_opened.emit()

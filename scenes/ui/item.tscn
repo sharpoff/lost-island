@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://fsr4f6ublbtd"]
+
+[ext_resource type="Script" path="res://scripts/ui/item_slot.gd" id="1_bb8xe"]
+[ext_resource type="Texture2D" uid="uid://dysfqwr5dbhkb" path="res://assets/sprites/ui/item_slot.png" id="2_8s1pq"]
+
+[node name="Item" type="Control" node_paths=PackedStringArray("quantity_label", "texture_rect")]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(68, 68)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1212.0
+offset_bottom = -652.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bb8xe")
+quantity_label = NodePath("MarginContainer/QuantityLabel")
+texture_rect = NodePath("MarginContainer/TextureRect")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+scale = Vector2(2.79167, 2.79167)
+texture = ExtResource("2_8s1pq")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(67, 67)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="QuantityLabel" type="Label" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+horizontal_alignment = 2
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
