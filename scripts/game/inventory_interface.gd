@@ -1,10 +1,10 @@
 extends Control
 
 @onready var inventory: Control = $Inventory
-@onready var hotbar: HBoxContainer = $Hotbar
+@onready var hotbar: HBoxContainer = $"VBoxContainer/Hotbar"
 
 @onready var inventory_slots: GridContainer = $Inventory/NinePatchRect/GridContainer
-@onready var hotbar_slots: GridContainer = $Hotbar/GridContainer
+@onready var hotbar_slots: GridContainer = hotbar.get_node("GridContainer")
 
 const item_scene = preload("res://scenes/ui/item.tscn")
 
@@ -37,20 +37,38 @@ func set_hotbar_data(hotbar: InventoryData) -> void:
 
 func on_inventory_item_pressed(item_data: ItemData, item_index: int, button_index: int):
 	print_debug("%s %s %s" % [item_data, item_index, button_index])
-
-	inventory_slots.get_children()[item_index].item = grabbed_item.item
+	
+	# TODO: check if item has equal type, quantity and if it's true decrease grabbed item quantity
+	# and increase slot quantity
+	var inv_item = inventory_slots.get_children()[item_index]
+	inv_item.item = grabbed_item.item
 	grabbed_item.item = item_data
+
 	if grabbed_item.item:
 		grabbed_item.show()
 	else:
 		grabbed_item.hide()
 
 func on_hotbar_item_pressed(item_data: ItemData, item_index: int, button_index: int):
+	if !inventory.visible: # can't move hotbar items if inventory is closed
+		var player = get_tree().root.get_node("Main/Players/" + str(multiplayer.get_unique_id())) as Player
+		player.selected_item = hotbar_slots.get_children()[item_index].item
+		return
+
 	print_debug("%s %s %s" % [item_data, item_index, button_index])
 	
-	hotbar_slots.get_children()[item_index].item = grabbed_item.item
+	var hotbar_item = hotbar_slots.get_children()[item_index]
+	hotbar_item.item = grabbed_item.item
 	grabbed_item.item = item_data
 	if grabbed_item.item:
 		grabbed_item.show()
 	else:
 		grabbed_item.hide()
+
+
+func _on_hotbar_inventory_opened() -> void:
+	inventory.visible = !inventory.visible
+	
+	var player = get_tree().root.get_node("Main/Players/" + str(multiplayer.get_unique_id()))
+	player.can_move = !player.can_move
+	player.can_click = !player.can_click

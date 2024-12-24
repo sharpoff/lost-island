@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @export var animation_tree: AnimationTree
 # TODO: make this more abstract, so it can use other maps
@@ -6,6 +7,8 @@ extends CharacterBody2D
 @export var speed_component: SpeedComponent
 @export var inventory: InventoryData
 @export var hotbar: InventoryData
+
+var selected_item: ItemData
 
 enum States {
 	IDLE,
@@ -80,7 +83,10 @@ func _input(event: InputEvent) -> void:
 				current_state = States.IDLE
 				return
 
-			# TODO: remove tilemaps from here
+			# TODO: remove tilemaps from here and remove boilerplate code to a function
+			if selected_item and selected_item.name != "Fishing rod":
+				return
+			
 			var tilemap_ground: TileMapLayer = get_tree().root.get_node("Main/World/IslandMap/Ground")
 			var tilmap_above_ground: TileMapLayer = get_tree().root.get_node("Main/World/IslandMap/AboveGround")
 			if !tilemap_ground:

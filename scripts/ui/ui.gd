@@ -5,8 +5,6 @@ extends CanvasLayer
 @onready var hour_minute_time: Label = $Info/Margin/Top/Line2/LocalTime
 @onready var fish_count_label: Label = $Info/Margin/Top/Line3/Fish
 
-@onready var inventory: Control = $InventoryInterface/Inventory
-
 var fish_count = 0
 
 func _ready() -> void:
@@ -25,6 +23,3 @@ func _on_day_night_cycle_time_changed(week: int, day: int, hour: int, minute: in
 func _increase_fish() -> void:
 	fish_count += 1
 	fish_count_label.text = "Fish: " + str(fish_count)
-
-func _on_hotbar_inventory_opened() -> void:
-	inventory.visible = !inventory.visible

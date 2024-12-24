@@ -134,19 +134,25 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("8_ljdau")
 
-[node name="Hotbar" parent="UI/InventoryInterface" instance=ExtResource("9_18rsb")]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/InventoryInterface"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -254.0
-offset_top = -101.0
-offset_right = 252.0
-offset_bottom = -33.0
+offset_left = -36.5
+offset_top = -110.0
+offset_right = 36.5
+offset_bottom = -23.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="Label" type="Label" parent="UI/InventoryInterface/VBoxContainer"]
+layout_mode = 2
+
+[node name="Hotbar" parent="UI/InventoryInterface/VBoxContainer" instance=ExtResource("9_18rsb")]
+layout_mode = 2
 
 [node name="Inventory" parent="UI/InventoryInterface" instance=ExtResource("8_8j8ts")]
 visible = false
@@ -174,4 +180,4 @@ offset_right = 34.0
 offset_bottom = 34.0
 
 [connection signal="time_changed" from="World/DayNightCycle" to="UI" method="_on_day_night_cycle_time_changed"]
-[connection signal="inventory_opened" from="UI/InventoryInterface/Hotbar" to="UI" method="_on_hotbar_inventory_opened"]
+[connection signal="inventory_opened" from="UI/InventoryInterface/VBoxContainer/Hotbar" to="UI/InventoryInterface" method="_on_hotbar_inventory_opened"]

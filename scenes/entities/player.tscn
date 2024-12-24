@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://qhvm71rgocqy"]
+[gd_scene load_steps=39 format=3 uid="uid://qhvm71rgocqy"]
 
 [ext_resource type="Script" path="res://scripts/enitites/player.gd" id="1_yndhw"]
 [ext_resource type="Script" path="res://scripts/game/item_data.gd" id="2_hdyfj"]
@@ -7,18 +7,23 @@
 [ext_resource type="AnimationNodeStateMachine" uid="uid://btn5pnrhdb5w" path="res://resources/animations/player_animation_states.tres" id="3_wydrx"]
 [ext_resource type="PackedScene" uid="uid://cvtaafcrt6xxd" path="res://scenes/game/night_light.tscn" id="4_mtcp3"]
 [ext_resource type="Script" path="res://scripts/game/inventory_data.gd" id="4_ty10l"]
+[ext_resource type="Resource" uid="uid://dqsky24y1s6f4" path="res://resources/items/empty_bucket.tres" id="4_v04gl"]
+[ext_resource type="Resource" uid="uid://b4k77coirge3g" path="res://resources/items/milk_bucket.tres" id="5_euohm"]
 [ext_resource type="Texture2D" uid="uid://bs6jkb6dmaxpc" path="res://assets/sprites/effects/light_effect.png" id="5_hao5w"]
 [ext_resource type="PackedScene" uid="uid://4tjsu662ksyc" path="res://scenes/components/speed_component.tscn" id="5_qtokq"]
+[ext_resource type="Resource" uid="uid://b3d5mstvb2cim" path="res://resources/items/water_bucket.tres" id="6_5uu3g"]
+[ext_resource type="Resource" uid="uid://cghhowfa1vfq0" path="res://resources/items/hoe.tres" id="6_e2n6o"]
+[ext_resource type="Resource" uid="uid://b0vvedkxaiwgi" path="res://resources/items/hammer.tres" id="7_0f7b3"]
 [ext_resource type="PackedScene" uid="uid://daiu4ofjrvyqk" path="res://scenes/game/fishing_hook.tscn" id="7_527hn"]
 [ext_resource type="PackedScene" uid="uid://d1a8po4hbvdi4" path="res://scenes/ui/reaction_bar.tscn" id="8_mrjga"]
 
 [sub_resource type="Resource" id="Resource_fwk85"]
 script = ExtResource("4_ty10l")
-items = Array[ExtResource("2_hdyfj")]([null, null, ExtResource("3_323o8"), null, null, null, null, null, null, ExtResource("3_323o8"), null, null, null, null, null, null, null, null])
+items = Array[ExtResource("2_hdyfj")]([null, null, ExtResource("3_323o8"), null, null, ExtResource("4_v04gl"), ExtResource("4_v04gl"), ExtResource("5_euohm"), null, ExtResource("3_323o8"), ExtResource("6_5uu3g"), null, null, null, null, null, null, null])
 
 [sub_resource type="Resource" id="Resource_0iyed"]
 script = ExtResource("4_ty10l")
-items = Array[ExtResource("2_hdyfj")]([null, ExtResource("3_323o8"), null, null, null, null])
+items = Array[ExtResource("2_hdyfj")]([ExtResource("6_e2n6o"), ExtResource("3_323o8"), null, ExtResource("7_0f7b3"), null, null])
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4dhnr"]
 properties/0/path = NodePath(".:position")

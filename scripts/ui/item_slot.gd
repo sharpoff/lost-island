@@ -21,9 +21,21 @@ func set_item(new_item):
 	
 	if item.stackable:
 		quantity_label.show()
-		quantity_label.text = str(item.quantity)
+		refresh_quantity()
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
 			item_pressed.emit(item, get_index(), event.button_index)
+
+func is_max_quantity():
+	if !item.stackable:
+		return false
+	
+	if item.quantity >= item.MAX_STACK:
+		return true
+	
+	return false
+
+func refresh_quantity():
+	quantity_label.text = str(item.quantity)
