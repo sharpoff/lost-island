@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bibfu6jnc8408"]
+
+[ext_resource type="Script" path="res://scripts/game/item_data.gd" id="1_linjb"]
+[ext_resource type="Texture2D" uid="uid://bkkehrj8rsf52" path="res://assets/sprites/items/fish/Fish_5.png" id="2_s2pk4"]
+
+[resource]
+script = ExtResource("1_linjb")
+name = "Fast fish"
+description = ""
+texture = ExtResource("2_s2pk4")
+sellable = true
+stackable = false
+quantity = 1

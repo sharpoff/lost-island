@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://1i4pu0x024dm"]
+
+[ext_resource type="Script" path="res://scripts/game/item_data.gd" id="1_6ydvl"]
+[ext_resource type="Texture2D" uid="uid://oknkaw3ruaxt" path="res://assets/sprites/items/fish/Fish_6.png" id="2_6kuqk"]
+
+[resource]
+script = ExtResource("1_6ydvl")
+name = "Scary fish"
+description = ""
+texture = ExtResource("2_6kuqk")
+sellable = true
+stackable = false
+quantity = 1

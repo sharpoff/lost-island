@@ -22,8 +22,8 @@ size_flags_horizontal = 3
 [node name="TextureRect" type="TextureRect" parent="SlotInventoy"]
 custom_minimum_size = Vector2(68, 68)
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 68.0
+offset_bottom = 68.0
 texture = ExtResource("3_b5wdo")
 
 [node name="Button" type="Button" parent="SlotInventoy"]

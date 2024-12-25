@@ -1,0 +1,124 @@
+[gd_scene load_steps=9 format=3 uid="uid://bfw584m7iroxv"]
+
+[ext_resource type="Theme" uid="uid://bycwepbj8cxa4" path="res://resources/styles/theme.tres" id="1_25vld"]
+[ext_resource type="Texture2D" uid="uid://cxhqaydt7xgt2" path="res://assets/sprites/entities/character/character_idle_frame1.png" id="2_eiiuf"]
+[ext_resource type="Texture2D" uid="uid://bp6wqa0on6jyd" path="res://assets/sprites/entities/trader_idle_frame1.png" id="2_j1a7g"]
+[ext_resource type="Texture2D" uid="uid://bknkfdpxd38hl" path="res://assets/sprites/entities/trader_idle_frame2.png" id="3_26phi"]
+[ext_resource type="Texture2D" uid="uid://cwb3do6al2048" path="res://assets/sprites/entities/character/character_idle_frame2.png" id="3_to1lh"]
+[ext_resource type="Texture2D" uid="uid://ccj1ps7pwyhu8" path="res://assets/sprites/entities/character/character_idle_frame3.png" id="4_3tbi5"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_mkj5e"]
+frames = 3
+frame_0/texture = ExtResource("2_eiiuf")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("3_to1lh")
+frame_1/duration = 0.2
+frame_2/texture = ExtResource("4_3tbi5")
+frame_2/duration = 0.2
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_cyxi4"]
+frames = 2
+frame_0/texture = ExtResource("2_j1a7g")
+frame_0/duration = 0.5
+frame_1/texture = ExtResource("3_26phi")
+frame_1/duration = 0.5
+
+[node name="DealerUI" type="PanelContainer"]
+self_modulate = Color(0, 0, 0, 1)
+anchors_preset = -1
+anchor_left = 0.185
+anchor_top = 0.156
+anchor_right = 0.814
+anchor_bottom = 0.844
+offset_left = 0.199997
+offset_top = -0.32
+offset_right = 0.0799561
+offset_bottom = 0.319946
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TabBar" type="TabBar" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("1_25vld")
+current_tab = 0
+tab_count = 2
+tab_0/title = "SELL"
+tab_1/title = "BUY"
+
+[node name="Margin" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_25vld")
+
+[node name="Interface" type="HBoxContainer" parent="VBoxContainer/Margin"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Margin/Interface"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="VBoxContainer" parent="VBoxContainer/Margin/Interface/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Margin/Interface/VBoxContainer/Title"]
+layout_mode = 2
+theme = ExtResource("1_25vld")
+text = "YOUR_ITEMS_FOR_SELL"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Margin/Interface/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Margin/Interface/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("AnimatedTexture_mkj5e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Margin/Interface/VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Margin/Interface/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Margin/Interface"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="VBoxContainer" parent="VBoxContainer/Margin/Interface/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Margin/Interface/VBoxContainer2/Title"]
+layout_mode = 2
+theme = ExtResource("1_25vld")
+text = "WHAT_YOU_GET"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Margin/Interface/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Margin/Interface/VBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("AnimatedTexture_cyxi4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/Margin/Interface/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Margin/Interface/VBoxContainer2/VBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("1_25vld")

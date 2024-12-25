@@ -34,8 +34,8 @@ func _enter_tree() -> void:
 
 func _physics_process(_delta: float) -> void:
 	# we can't control other characters only yours
-	if not is_multiplayer_authority():
-		return
+	#if not is_multiplayer_authority():
+	#	return
 	# let camera follow your network player
 	$Camera2D.make_current()
 
@@ -86,7 +86,7 @@ func _input(event: InputEvent) -> void:
 			# TODO: remove tilemaps from here and remove boilerplate code to a function
 			if selected_item and selected_item.name != "Fishing rod":
 				return
-			
+
 			var tilemap_ground: TileMapLayer = get_tree().root.get_node("Main/World/IslandMap/Ground")
 			var tilmap_above_ground: TileMapLayer = get_tree().root.get_node("Main/World/IslandMap/AboveGround")
 			if !tilemap_ground:
