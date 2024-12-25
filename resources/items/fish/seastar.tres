@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bdci3mmtr4sjk"]
+
+[ext_resource type="Script" path="res://scripts/game/item_data.gd" id="1_opyuj"]
+[ext_resource type="Texture2D" uid="uid://5k7fdgrsgce8" path="res://assets/sprites/items/fish/Seastar.png" id="2_30jac"]
+
+[resource]
+script = ExtResource("1_opyuj")
+name = "Seastar"
+description = ""
+texture = ExtResource("2_30jac")
+sellable = true
+stackable = false
+quantity = 1

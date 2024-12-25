@@ -20,6 +20,8 @@ texture_rect = NodePath("MarginContainer/TextureRect")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
 scale = Vector2(2.79167, 2.79167)
 texture = ExtResource("2_8s1pq")
 

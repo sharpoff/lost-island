@@ -662,8 +662,10 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "light", "speed_component") groups=["player"]]
+z_index = 1
 y_sort_enabled = true
 collision_layer = 2
+collision_mask = 24
 motion_mode = 1
 script = ExtResource("1_yndhw")
 animation_tree = NodePath("AnimationTree")

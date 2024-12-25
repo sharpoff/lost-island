@@ -4,6 +4,8 @@ extends Node2D
 @export var island_map: PackedScene
 @onready var inventory_interface: Control = $UI/InventoryInterface
 
+var spawn_position = Vector2(-720, -59)
+
 func _ready() -> void:
 	GameManager.game_started.connect(start_game)
 	GameManager.player_disconnected.connect(player_disconnected)
@@ -24,8 +26,9 @@ func player_disconnected(peer_id):
 @rpc("call_local")
 func load_world():
 	for peer in GameManager.players:
-		var player = player_scene.instantiate()
+		var player = player_scene.instantiate() as Player
 		player.name = str(peer)
+		player.global_position = spawn_position
 		$Players.add_child(player)
 		
 		if player.inventory:

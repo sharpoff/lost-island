@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bsaqtiahdhfgh"]
+
+[ext_resource type="Script" path="res://scripts/game/item_data.gd" id="1_o0hlr"]
+[ext_resource type="Texture2D" uid="uid://c6wlvrgcvy0hq" path="res://assets/sprites/items/fish/Fish_3.png" id="2_gjfr0"]
+
+[resource]
+script = ExtResource("1_o0hlr")
+name = "Tetraodon fish"
+description = ""
+texture = ExtResource("2_gjfr0")
+sellable = true
+stackable = false
+quantity = 1

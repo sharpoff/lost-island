@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b306kv5gp1g1d"]
+[gd_scene load_steps=19 format=3 uid="uid://b306kv5gp1g1d"]
 
 [ext_resource type="Script" path="res://scripts/game/main.gd" id="1_b07es"]
 [ext_resource type="Script" path="res://scripts/game/daynight_cycle.gd" id="1_kvkoo"]
@@ -7,9 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://kh2acv2jodjg" path="res://scenes/game/touch_controls.tscn" id="6_8ksbt"]
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="6_650bn"]
 [ext_resource type="FontFile" uid="uid://ir1tccvqesg0" path="res://assets/fonts/HomeVideo-Regular.otf" id="7_hfc3i"]
+[ext_resource type="Texture2D" uid="uid://dktpf0vual5w7" path="res://assets/sprites/ui/joystick/tip.png" id="7_l68r5"]
 [ext_resource type="PackedScene" uid="uid://bp4ok7uw3t2pc" path="res://scenes/ui/inventory_ui.tscn" id="8_8j8ts"]
 [ext_resource type="Script" path="res://scripts/game/inventory_interface.gd" id="8_ljdau"]
+[ext_resource type="Theme" uid="uid://bycwepbj8cxa4" path="res://resources/styles/theme.tres" id="8_uphgm"]
 [ext_resource type="PackedScene" uid="uid://brjhehgl0gxvs" path="res://scenes/ui/hotbar.tscn" id="9_18rsb"]
+[ext_resource type="PackedScene" uid="uid://bfw584m7iroxv" path="res://scenes/ui/dealer_ui.tscn" id="10_8mvnd"]
 [ext_resource type="PackedScene" uid="uid://fsr4f6ublbtd" path="res://scenes/ui/item.tscn" id="11_e2075"]
 
 [sub_resource type="Environment" id="Environment_ix6ey"]
@@ -55,7 +58,6 @@ environment = SubResource("Environment_ix6ey")
 script = ExtResource("1_kvkoo")
 gradient = SubResource("GradientTexture1D_i8mnj")
 time_speed = 2.0
-initial_hour = 18
 
 [node name="Players" type="Node2D" parent="."]
 z_index = 2
@@ -67,15 +69,38 @@ joystick = NodePath("InputControls/TouchControls")
 
 [node name="InputControls" type="Control" parent="UI"]
 layout_mode = 3
-anchors_preset = 0
-offset_left = 15.0
-offset_top = 15.0
-offset_right = 272.0
-offset_bottom = 116.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TouchControls" parent="UI/InputControls" instance=ExtResource("6_8ksbt")]
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="UI/InputControls"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/InputControls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 150
+
+[node name="Control" type="Control" parent="UI/InputControls/MarginContainer"]
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="UI/InputControls/MarginContainer/Control"]
+modulate = Color(0, 0, 0, 0.466667)
+scale = Vector2(3, 3)
+texture_normal = ExtResource("7_l68r5")
+texture_pressed = ExtResource("7_l68r5")
+action = "interact"
 
 [node name="Info" type="PanelContainer" parent="UI"]
 offset_right = 287.0
@@ -99,6 +124,7 @@ alignment = 1
 [node name="GlobalTime" type="Label" parent="UI/Info/Margin/Top/Line1"]
 layout_mode = 2
 size_flags_horizontal = 2
+theme = ExtResource("8_uphgm")
 text = "Week 1, Day 1"
 label_settings = SubResource("LabelSettings_rpwmi")
 horizontal_alignment = 1
@@ -110,6 +136,7 @@ alignment = 1
 [node name="LocalTime" type="Label" parent="UI/Info/Margin/Top/Line2"]
 layout_mode = 2
 size_flags_horizontal = 2
+theme = ExtResource("8_uphgm")
 text = "12:32"
 label_settings = SubResource("LabelSettings_rpwmi")
 horizontal_alignment = 1
@@ -120,6 +147,7 @@ layout_mode = 2
 [node name="Fish" type="Label" parent="UI/Info/Margin/Top/Line3"]
 layout_mode = 2
 size_flags_horizontal = 2
+theme = ExtResource("8_uphgm")
 text = "Fish: 0
 "
 label_settings = SubResource("LabelSettings_rpwmi")
@@ -133,6 +161,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("8_ljdau")
+
+[node name="DealerUI" parent="UI/InventoryInterface" instance=ExtResource("10_8mvnd")]
+visible = false
+layout_mode = 1
+offset_right = 474.04
+offset_bottom = 368.16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/InventoryInterface"]
 layout_mode = 1

@@ -17,16 +17,17 @@ config/icon="res://assets/icon.svg"
 
 [autoload]
 
-GameManager="*res://scripts/game/game_manager.gd"
+GameManager="*res://scripts/autoloads/game_manager.gd"
 SettingsManager="*res://scripts/utils/settings_manager.gd"
-AudioManager="*res://scenes/utils/audio_manager.tscn"
+AudioManager="*res://scenes/autoloads/audio_manager.tscn"
+SignalBus="*res://scripts/autoloads/signal_bus.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
-window/stretch/aspect="keep_height"
+window/stretch/aspect="expand"
 window/handheld/orientation=4
 window/vsync/vsync_mode=2
 
@@ -93,6 +94,7 @@ locale/translation_add_builtin_strings_to_pot=true
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Door"
 2d_physics/layer_4="AboveGround"
+2d_physics/layer_5="NPC"
 
 [rendering]
 

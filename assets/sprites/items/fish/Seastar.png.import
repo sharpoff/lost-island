@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbb1sbtenkui5"
-path="res://.godot/imported/computer.png-afb68cccae46044f625b4024a2853d6f.ctex"
+uid="uid://5k7fdgrsgce8"
+path="res://.godot/imported/Seastar.png-8a9bedd7ca7f9c3a38d0e447e948fdd6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/computer.png"
-dest_files=["res://.godot/imported/computer.png-afb68cccae46044f625b4024a2853d6f.ctex"]
+source_file="res://assets/sprites/items/fish/Seastar.png"
+dest_files=["res://.godot/imported/Seastar.png-8a9bedd7ca7f9c3a38d0e447e948fdd6.ctex"]
 
 [params]
 

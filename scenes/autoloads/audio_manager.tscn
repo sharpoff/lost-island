@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://djcaippawqik4"]
 
-[ext_resource type="Script" path="res://scripts/utils/audio_manager.gd" id="1_mqt18"]
+[ext_resource type="Script" path="res://scripts/autoloads/audio_manager.gd" id="1_mqt18"]
 [ext_resource type="AudioStream" uid="uid://cxbjyc40dgmgj" path="res://assets/sounds/music/OST 1 - sunny pierce.mp3" id="2_6yhfv"]
 [ext_resource type="AudioStream" uid="uid://k06u2dt6t6da" path="res://assets/sounds/sfx/Click_UI_1.mp3" id="3_oy0vq"]
 

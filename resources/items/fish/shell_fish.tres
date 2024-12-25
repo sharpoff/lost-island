@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://ba75dtfvag3f3"]
+
+[ext_resource type="Script" path="res://scripts/game/item_data.gd" id="1_mvf2w"]
+[ext_resource type="Texture2D" uid="uid://b7rqncrbyfjbl" path="res://assets/sprites/items/fish/Fish_4.png" id="2_ihpvl"]
+
+[resource]
+script = ExtResource("1_mvf2w")
+name = "Shell fish"
+description = ""
+texture = ExtResource("2_ihpvl")
+sellable = true
+stackable = false
+quantity = 1

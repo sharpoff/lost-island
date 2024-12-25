@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bm8iadaf3et7g"]
+
+[ext_resource type="Script" path="res://scripts/game/item_data.gd" id="1_v3qqr"]
+[ext_resource type="Texture2D" uid="uid://6s7ua4hamknc" path="res://assets/sprites/items/fish/Fish_2.png" id="2_3ylqo"]
+
+[resource]
+script = ExtResource("1_v3qqr")
+name = "Clown fish"
+description = ""
+texture = ExtResource("2_3ylqo")
+sellable = true
+stackable = false
+quantity = 1
