@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://b306kv5gp1g1d"]
+[gd_scene load_steps=20 format=3 uid="uid://b306kv5gp1g1d"]
 
 [ext_resource type="Script" path="res://scripts/game/main.gd" id="1_b07es"]
 [ext_resource type="Script" path="res://scripts/game/daynight_cycle.gd" id="1_kvkoo"]
 [ext_resource type="PackedScene" uid="uid://qhvm71rgocqy" path="res://scenes/entities/player.tscn" id="3_ed0u7"]
 [ext_resource type="PackedScene" uid="uid://bja5cekt6w7il" path="res://scenes/game/maps/island_map.tscn" id="3_kaw51"]
+[ext_resource type="Texture2D" uid="uid://d33kw7jflx3kd" path="res://resources/styles/day_night_cycle_gradient.tres" id="5_plrb7"]
 [ext_resource type="PackedScene" uid="uid://kh2acv2jodjg" path="res://scenes/game/touch_controls.tscn" id="6_8ksbt"]
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="6_650bn"]
 [ext_resource type="FontFile" uid="uid://ir1tccvqesg0" path="res://assets/fonts/HomeVideo-Regular.otf" id="7_hfc3i"]
@@ -24,18 +25,17 @@ glow_bloom = 0.5
 fog_mode = 1
 fog_density = 1.0
 
-[sub_resource type="Gradient" id="Gradient_1r5e2"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0.0058651, 0.316716, 0.469208, 0.607038, 0.730205, 1)
-colors = PackedColorArray(0.00570602, 0.140674, 0.281872, 1, 0.39305, 0.187683, 0.798069, 1, 0.64098, 0.364093, 0.886768, 1, 0.796482, 0.505342, 0.906468, 1, 0.887181, 0.710743, 0.94486, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_i8mnj"]
-gradient = SubResource("Gradient_1r5e2")
-
 [sub_resource type="LabelSettings" id="LabelSettings_rpwmi"]
 line_spacing = 0.0
 font = ExtResource("7_hfc3i")
 font_size = 33
+
+[sub_resource type="Gradient" id="Gradient_r6sre"]
+offsets = PackedFloat32Array(0.985294)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qxtpw"]
+gradient = SubResource("Gradient_r6sre")
 
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
@@ -56,8 +56,9 @@ environment = SubResource("Environment_ix6ey")
 
 [node name="DayNightCycle" type="CanvasModulate" parent="World"]
 script = ExtResource("1_kvkoo")
-gradient = SubResource("GradientTexture1D_i8mnj")
+gradient = ExtResource("5_plrb7")
 time_speed = 2.0
+current_hour = 9
 
 [node name="Players" type="Node2D" parent="."]
 z_index = 2
@@ -103,8 +104,11 @@ texture_pressed = ExtResource("7_l68r5")
 action = "interact"
 
 [node name="Info" type="PanelContainer" parent="UI"]
-offset_right = 287.0
-offset_bottom = 131.0
+anchors_preset = -1
+anchor_right = 0.224
+anchor_bottom = 0.182
+offset_right = 0.279999
+offset_bottom = -0.0400085
 
 [node name="Margin" type="MarginContainer" parent="UI/Info"]
 layout_mode = 2
@@ -165,8 +169,7 @@ script = ExtResource("8_ljdau")
 [node name="DealerUI" parent="UI/InventoryInterface" instance=ExtResource("10_8mvnd")]
 visible = false
 layout_mode = 1
-offset_right = 474.04
-offset_bottom = 368.16
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/InventoryInterface"]
 layout_mode = 1
@@ -212,6 +215,16 @@ offset_left = -34.0
 offset_top = -34.0
 offset_right = 34.0
 offset_bottom = 34.0
+
+[node name="Fade" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Fade"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_qxtpw")
 
 [connection signal="time_changed" from="World/DayNightCycle" to="UI" method="_on_day_night_cycle_time_changed"]
 [connection signal="inventory_opened" from="UI/InventoryInterface/VBoxContainer/Hotbar" to="UI/InventoryInterface" method="_on_hotbar_inventory_opened"]

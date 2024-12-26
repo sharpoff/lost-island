@@ -1,0 +1,58 @@
+[gd_scene load_steps=11 format=3 uid="uid://di4wajeblyj58"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8i5lr"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_7mhlo"]
+max_value = 0.3
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.290735, 0.3), 0.0, 0.0, 0, 0, Vector2(0.738019, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ub8an"]
+curve = SubResource("Curve_7mhlo")
+
+[sub_resource type="Gradient" id="Gradient_ptqlr"]
+offsets = PackedFloat32Array(0, 0.473684)
+colors = PackedColorArray(1, 1, 1, 0.152941, 1, 1, 1, 0.803922)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pfeo0"]
+gradient = SubResource("Gradient_ptqlr")
+
+[sub_resource type="Curve" id="Curve_jjfrl"]
+max_value = 3.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_u3df7"]
+max_value = 30.0
+_data = [Vector2(0, 11.6178), 0.0, 256.58, 0, 0, Vector2(0.102236, 24.535), 31.1006, 31.1006, 0, 0, Vector2(0.964856, 30), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_rw7jk"]
+max_value = 3.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_udqsj"]
+curve_x = SubResource("Curve_jjfrl")
+curve_y = SubResource("Curve_u3df7")
+curve_z = SubResource("Curve_rw7jk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_omyyx"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -200, 0)
+emission_shape = 3
+emission_box_extents = Vector3(350, 1, 1)
+gravity = Vector3(0, 1000, 0)
+scale_min = 0.2
+scale_max = 1.5
+scale_over_velocity_curve = SubResource("CurveXYZTexture_udqsj")
+color_initial_ramp = SubResource("GradientTexture1D_pfeo0")
+alpha_curve = SubResource("CurveTexture_ub8an")
+
+[node name="RainParticle" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_8i5lr")
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_omyyx")
+preprocess = 1.0
+visibility_rect = Rect2(-350, -200, 700, 400)

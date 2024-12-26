@@ -1,17 +1,24 @@
 extends Control
 
-@onready var inventory: Control = $Inventory
-@onready var hotbar: HBoxContainer = $"VBoxContainer/Hotbar"
+@onready var inventory_ui: Control = $Inventory
+@onready var hotbar_ui: HBoxContainer = $VBoxContainer/Hotbar
 
 @onready var inventory_slots: GridContainer = $Inventory/NinePatchRect/GridContainer
-@onready var hotbar_slots: GridContainer = hotbar.get_node("GridContainer")
+@onready var hotbar_slots: GridContainer = hotbar_ui.get_node("GridContainer")
+
+@onready var trader_sell_slots: VBoxContainer = $DealerUI/VBoxContainer/Margin/Interface/ScrollContainer/SellItems
 
 const item_scene = preload("res://scenes/ui/item.tscn")
+const sell_item_scene = preload("res://scenes/ui/sell_item_ui.tscn")
 
 var is_grabbing = false
 @onready var grabbed_item: ItemSlot = $GrabbedItem
 
-func _physics_process(delta: float) -> void:
+func _ready() -> void:
+	SignalBus.connect("show_dealer_ui", show_dealer_ui)
+	SignalBus.connect("close_dealer_ui", close_dealer_ui)
+
+func _physics_process(_delta: float) -> void:
 	if grabbed_item.visible:
 		grabbed_item.position = get_local_mouse_position() + Vector2(5, 5)
 
@@ -50,9 +57,8 @@ func on_inventory_item_pressed(item_data: ItemData, item_index: int, button_inde
 		grabbed_item.hide()
 
 func on_hotbar_item_pressed(item_data: ItemData, item_index: int, button_index: int):
-	if !inventory.visible: # can't move hotbar items if inventory is closed
-		var player = get_tree().root.get_node("Main/Players/" + str(multiplayer.get_unique_id())) as Player
-		player.selected_item = hotbar_slots.get_children()[item_index].item
+	if !inventory_ui.visible: # can't move hotbar items if inventory is closed
+		GameManager.current_player.selected_item = hotbar_slots.get_children()[item_index].item
 		return
 
 	print_debug("%s %s %s" % [item_data, item_index, button_index])
@@ -67,8 +73,29 @@ func on_hotbar_item_pressed(item_data: ItemData, item_index: int, button_index: 
 
 
 func _on_hotbar_inventory_opened() -> void:
-	inventory.visible = !inventory.visible
+	inventory_ui.visible = !inventory_ui.visible
 	
-	var player = get_tree().root.get_node("Main/Players/" + str(multiplayer.get_unique_id()))
-	player.can_move = !player.can_move
-	player.can_click = !player.can_click
+	GameManager.current_player.can_move = !GameManager.current_player.can_move
+	GameManager.current_player.can_click = !GameManager.current_player.can_click
+
+func show_dealer_ui() -> void:
+	set_sell_slots()
+	$DealerUI.show()
+
+func close_dealer_ui() -> void:
+	$DealerUI.hide()
+
+func set_sell_slots() -> void:
+	var inventory = GameManager.current_player.inventory
+
+	for child in trader_sell_slots.get_children():
+		child.queue_free()
+	
+	for item in inventory.items:
+		var sell_item = sell_item_scene.instantiate() as SellItem
+		sell_item.pressed.connect(_on_sell_item)
+		sell_item.item = item
+		trader_sell_slots.add_child(sell_item)
+
+func _on_sell_item() -> void:
+	pass

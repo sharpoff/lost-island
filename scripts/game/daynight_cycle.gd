@@ -9,16 +9,16 @@ const REAL_MINUTE_DURATION = (2 * PI) / MINUTES_IN_DAY # day night cycle is 2 * 
 
 @export var gradient: GradientTexture1D
 @export var time_speed: float = 1.0
-@export var initial_hour: int = 12
+@export var current_hour: int = 12: set = set_current_hour
 
 var time: float = 0.0
 var last_minute: int = -1
 
 func _ready() -> void:
-	time = initial_hour * MINUTES_IN_HOUR * REAL_MINUTE_DURATION
+	time = current_hour * MINUTES_IN_HOUR * REAL_MINUTE_DURATION
 
 func _process(delta: float) -> void:
-	if !multiplayer.is_server():
+	if !is_multiplayer_authority():
 		return
 	
 	time += delta * time_speed * REAL_MINUTE_DURATION
@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 		_calculate_time()
 
 func _calculate_time() -> void:
-	if !multiplayer.is_server():
+	if !is_multiplayer_authority():
 		return
 	
 	var in_game_minute = int(time / REAL_MINUTE_DURATION)
@@ -55,3 +55,7 @@ func _calculate_time() -> void:
 			light.enabled = false
 	
 	time_changed.emit(week, day, hour, minute)
+
+func set_current_hour(hour):
+	current_hour = hour
+	time = current_hour * MINUTES_IN_HOUR * REAL_MINUTE_DURATION

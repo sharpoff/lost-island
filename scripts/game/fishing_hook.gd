@@ -1,119 +1,72 @@
 extends Node2D
-
-signal timeout
+class_name FishingHook
 
 @onready var hook: Polygon2D = $Hook
-@onready var fish_timer: Timer = $FishTimer
-@export_color_no_alpha var color_flying: Color
-@export_color_no_alpha var color_land: Color
-@export var hook_color: Color
+@export var speed_multiplier: float = 10
 
 const GRAVITY = 10
-var coords: Array[Vector2] = []
-var current_drawn: Array[Vector2] = []
 
-var fish_time = 0.0:
+var initial_pos: Vector2
+var destination_pos: Vector2
+var initial_velocity: float
+var required_angle: float
+var time_of_flight: float
+
+enum Direction {
+	RIGHT,
+	LEFT
+}
+
+var throw_direction: Direction = Direction.LEFT
+var elapsed_time: float = 0.0
+var draw_list: Array[Vector2]
+
+var is_thrown = false:
 	set(value):
-		fish_time = value
-		fish_timer.wait_time = fish_time
+		is_thrown = value
+		if is_thrown == false:
+			draw_list = []
+			queue_redraw()
 
-var is_moving = false:
-	set(value):
-		is_moving = value
-		if is_moving:
-			fish_timer.start()
-
-var is_fishing = false:
-	set(value):
-		is_fishing = value
-		if !is_fishing :
-			hide()
-		else:
-			show()
-		queue_redraw()
-
-func _ready() -> void:
-	hook.color = hook_color
-	_randomize_fish_time()
-
-func _process(_delta: float) -> void:
-	if is_moving or is_fishing:
+func _physics_process(delta: float) -> void:
+	if is_thrown:
+		update_hook_position(delta)
 		queue_redraw()
 
 func _draw() -> void:
-	if !is_fishing:
-		return
+	if draw_list.size() > 2:
+		draw_polyline(draw_list, Color.WHITE, 0.5)
 
-	if is_moving:
-		update_hook_position()
-	elif current_drawn.size() >= 2:
-		draw_polyline(current_drawn, color_land, 0.5)
+func throw_hook(target: Vector2):
+	draw_list = []
+	initial_pos = position
+	destination_pos = initial_pos - target # normalize
+	destination_pos.x = abs(destination_pos.x)
+	throw_direction = Direction.LEFT if destination_pos.x < initial_pos.x else Direction.RIGHT
+	# if you do not want to draw upside down
+	destination_pos.y *= -1
 
-
-func _calculate_trajectory(dst: Vector2, reverse_y: bool = false, increase_vel: float = 0.0):
-	dst -= position # remove offsets between mouse position and hook position
-	var reverse_x = dst.x < 0
-	if reverse_x: # if throwing to the left reverse it
-		dst.x = abs(dst.x)
-	if !reverse_y: # if you do not want to draw upside down
-		dst.y = -dst.y
+	print_debug("initial_pos: %s, destination_pos: %s" % [initial_pos, destination_pos])
 
 	# Initial velocity
-	var v: float = sqrt(dst.y + sqrt(dst.y**2 + dst.x**2) * GRAVITY) + increase_vel
+	initial_velocity = sqrt(destination_pos.y + sqrt(destination_pos.y**2 + destination_pos.x**2) * GRAVITY)
 	# Angle required to hit coordinate
-	var angle = atan((v**2 + sqrt(v**4 - GRAVITY * (GRAVITY * dst.x**2 + 2 * dst.y * v**2))) / (GRAVITY * dst.x))
+	required_angle = atan((initial_velocity**2 + sqrt(initial_velocity**4 - GRAVITY * (GRAVITY * destination_pos.x**2 + 2 * destination_pos.y * initial_velocity**2))) / (GRAVITY * destination_pos.x))
 	# Time of flight to the target's position
-	var time_of_flight = dst.x / (v * cos(angle))
+	time_of_flight = destination_pos.x / (initial_velocity * cos(required_angle))
 
-	#print_debug(v)
-	#print_debug(angle)
-	#print_debug(time_of_flight)
-
-	coords = []
-	current_drawn = []
-	var first_pos = Vector2()
-	var t = 0
-	var step = 0.1
+	print_debug("initial velocty: %s" % initial_velocity)
+	print_debug("required angle: %s" % required_angle)
+	print_debug("time of flight: %s" % time_of_flight)
 	
-	while t <= time_of_flight:
-		var x: float = v * t * cos(angle)
-		var y: float = v * t * sin(angle) - (0.5 * GRAVITY * (t ** 2))
-		var end_pos = Vector2(-x if reverse_x else x, y if reverse_y else -y)
+	elapsed_time = 0.0
+	is_thrown = true
 
-		coords.append(first_pos)
-		coords.append(end_pos)
+func update_hook_position(delta: float) -> void:
+	elapsed_time += delta * speed_multiplier
+	var x: float = initial_velocity * elapsed_time * cos(required_angle)
+	x *= -1 if throw_direction == Direction.LEFT else 1
+	var y: float = initial_velocity * elapsed_time * sin(required_angle) - (0.5 * GRAVITY * (elapsed_time ** 2))
+	draw_list.append(Vector2(x, -y))
 
-		first_pos = end_pos
-		t += step
-	
-	if coords:
-		is_moving = true
-		is_fishing = true
-		return true
-	
-	return false
-
-func update_hook_position() -> void:
-	if len(coords) < 2:
-		is_moving = false
-		return
-	
-	var start = coords.pop_front()
-	var end = coords.pop_front()
-	current_drawn.append(start)
-	current_drawn.append(end)
-	
-	hook.position = end
-	draw_polyline(current_drawn, color_flying, 0.5)
-
-func _randomize_fish_time():
-	fish_time = randf_range(6.0, 10.0) # reset time
-
-func _on_fish_timer_timeout() -> void:
-	timeout.emit()
-
-func stop_fishing():
-	fish_timer.stop()
-	_randomize_fish_time()
-	is_moving = false
-	is_fishing = false
+	hook.position = Vector2(x, -y)

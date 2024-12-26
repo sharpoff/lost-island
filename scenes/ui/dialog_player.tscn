@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbma8uuwqvc3q"]
+
+[ext_resource type="Texture2D" uid="uid://gtkmrlrh3m3e" path="res://assets/sprites/ui/btn.png" id="1_lhke5"]
+[ext_resource type="Script" path="res://scripts/ui/dialog_player.gd" id="1_lrt7l"]
+[ext_resource type="Theme" uid="uid://bycwepbj8cxa4" path="res://resources/styles/theme.tres" id="2_vulng"]
+
+[node name="DialogPlayer" type="CanvasLayer"]
+script = ExtResource("1_lrt7l")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.229
+anchor_top = 0.308
+anchor_right = 0.771
+anchor_bottom = 0.692
+offset_left = -0.120026
+offset_top = 0.239975
+offset_right = 0.119995
+offset_bottom = -0.240021
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_lhke5")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/NinePatchRect"]
+custom_minimum_size = Vector2(678, 200)
+layout_mode = 2
+anchor_left = 0.01
+anchor_top = 0.035
+anchor_right = 0.987
+anchor_bottom = 0.912
+offset_left = 0.0599995
+offset_top = 0.02
+offset_right = 0.0219727
+offset_bottom = 0.0639801
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/NinePatchRect/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/NinePatchRect/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(678, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = ExtResource("2_vulng")
+theme_override_font_sizes/font_size = 40
+text = "OK"
