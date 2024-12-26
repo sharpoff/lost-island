@@ -8,6 +8,8 @@ extends CanvasLayer
 var fish_count = 0
 
 func _ready() -> void:
+	SignalBus.connect("increase_fish", _increase_fish)
+	
 	# remove joystick if it's desktop
 	if OS.get_model_name() == "GenericDevice" and not OS.is_debug_build():
 		joystick.queue_free()

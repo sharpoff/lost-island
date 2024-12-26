@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cup6j8ctywo3d"]
+
+[ext_resource type="Texture2D" uid="uid://3uibwdquwguw" path="res://assets/sprites/clouds.png" id="1_fq7yb"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w4bqw"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 500, 1)
+gravity = Vector3(5, 0, 0)
+
+[node name="Clouds" type="GPUParticles2D"]
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_w4bqw")
+texture = ExtResource("1_fq7yb")
+lifetime = 20.0
+preprocess = 10.0

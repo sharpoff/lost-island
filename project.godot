@@ -31,6 +31,10 @@ window/stretch/aspect="expand"
 window/handheld/orientation=4
 window/vsync/vsync_mode=2
 
+[dotnet]
+
+project/assembly_name="Lost Island"
+
 [global_group]
 
 interactable="Object that player can interact with"

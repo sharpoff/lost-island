@@ -7,8 +7,9 @@ class_name Player
 @export var speed_component: SpeedComponent
 @export var inventory: InventoryData
 @export var hotbar: InventoryData
+@export var fishing_hook: FishingHook
 
-var selected_item: ItemData
+var selected_item: ItemData = null
 
 enum States {
 	IDLE,
@@ -34,8 +35,8 @@ func _enter_tree() -> void:
 
 func _physics_process(_delta: float) -> void:
 	# we can't control other characters only yours
-	#if not is_multiplayer_authority():
-	#	return
+	if not is_multiplayer_authority():
+		return
 	# let camera follow your network player
 	$Camera2D.make_current()
 
@@ -83,10 +84,15 @@ func _input(event: InputEvent) -> void:
 				current_state = States.IDLE
 				return
 
-			# TODO: remove tilemaps from here and remove boilerplate code to a function
 			if selected_item and selected_item.name != "Fishing rod":
 				return
+			
+			#var difference = abs(get_local_mouse_position()) - abs(position)
+			#if difference.x > 150 or difference.y > 150:
+				#print_debug("work")
+				#return
 
+			# TODO: remove tilemaps from here and remove boilerplate code to a function
 			var tilemap_ground: TileMapLayer = get_tree().root.get_node("Main/World/IslandMap/Ground")
 			var tilmap_above_ground: TileMapLayer = get_tree().root.get_node("Main/World/IslandMap/AboveGround")
 			if !tilemap_ground:
@@ -109,13 +115,11 @@ func _input(event: InputEvent) -> void:
 			var is_elevate = above_ground_data and above_ground_data.get_custom_data("elevate")
 
 			if is_water and !is_elevate:
-				var dst = get_local_mouse_position()
-				if $FishingHook._calculate_trajectory(dst):
-					current_state = States.FISHING
-					if dst.x > 0: # rotate right
-						last_direction = Vector2(1, 0)
-					elif dst.x < 0: # rotate left
-						last_direction = Vector2(-1, 0)
+				var target = get_global_mouse_position()
+				# rotate player to clicked position
+				last_direction = get_local_mouse_position().normalized()
+				fishing_hook.throw_hook(target)
+				current_state = States.FISHING
 
 func _on_reaction_bar_started() -> void:
 	can_move = false
@@ -127,18 +131,17 @@ func _on_reaction_bar_ended(is_win: Variant) -> void:
 	can_click = true
 
 	if is_win:
-		# TODO: make it abstract and better
-		get_tree().root.get_node("Main/UI")._increase_fish()
+		SignalBus.emit_signal("increase_fish")
 	else:
 		print_debug("Didn't catch a fish")
 
 func _check_current_state(state) -> void:
 	match state:
 		States.IDLE:
-			$FishingHook.stop_fishing()
+			fishing_hook.is_thrown = false
 			$ReactionBar._end()
 		States.FISHING:
 			pass
 		States.MOVING:
-			$FishingHook.stop_fishing()
+			fishing_hook.is_thrown = false
 			$ReactionBar._end()

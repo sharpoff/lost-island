@@ -17,7 +17,9 @@ var players_loaded = 0
 
 # local player info
 var player_info = {"name": "Chill guy"}
+
 var current_map
+var current_player
 
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_player_connected)
@@ -25,6 +27,8 @@ func _ready() -> void:
 	multiplayer.connected_to_server.connect(_on_connection_ok) # emitted only on clients
 	multiplayer.connection_failed.connect(_on_connection_fail)
 	multiplayer.server_disconnected.connect(_on_server_disconnected) # emitted only on clients
+	
+	SignalBus.connect("set_current_player", set_current_player)
 
 func create_game():
 	print_debug("Starting host")
@@ -103,3 +107,6 @@ func _on_server_disconnected() -> void:
 func _disconnect():
 	multiplayer.multiplayer_peer = null
 	players.clear()
+
+func set_current_player(player):
+	current_player = player

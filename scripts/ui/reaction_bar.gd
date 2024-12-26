@@ -1,14 +1,15 @@
 extends Control
+class_name ReactionBar
 
 signal started
 signal ended(is_win)
 
 @onready var bar: NinePatchRect = $Bar
 @onready var hitter: TextureRect = $Hitter
-@export var limit: int = 3
-@export var fishing_hook: Node2D
+@export var hit_limit: int = 3
 # TODO: add speed with right delta
-var speed: int = 1
+@export var speed_multiplier: int = 1
+var elapsed_time: float = 0.0
 
 var is_running: bool = false
 var hits: int = 0
@@ -20,16 +21,16 @@ var win_end: int = 14
 
 func _ready():
 	hide()
-	fishing_hook.timeout.connect(_start)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if is_running:
-		hitter.position.x += speed
+		elapsed_time += speed_multiplier * delta
+		hitter.position.x += elapsed_time
 		if hitter.position.x < bar_start or hitter.position.x > bar_end: # reverse direction
-			speed *= -1
+			speed_multiplier *= -1
 			hits += 1
 
-		if hits > limit:
+		if hits > hit_limit:
 			ended.emit(false)
 			_end()
 
@@ -41,6 +42,7 @@ func _process(_delta: float) -> void:
 			_end()
 
 func _start() -> void:
+	elapsed_time = 0.0
 	is_running = true
 	started.emit()
 	show()
