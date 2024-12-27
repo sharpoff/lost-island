@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0yopuxx56w7n"
-path="res://.godot/imported/wooden_floor.png-abd758fe3683158e788106caf4dfa988.ctex"
+uid="uid://7572jq67hx8b"
+path="res://.godot/imported/clouds.png-f69a5def381235aa99d42721212fb566.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/wooden_floor.png"
-dest_files=["res://.godot/imported/wooden_floor.png-abd758fe3683158e788106caf4dfa988.ctex"]
+source_file="res://assets/sprites/effects/clouds.png"
+dest_files=["res://.godot/imported/clouds.png-f69a5def381235aa99d42721212fb566.ctex"]
 
 [params]
 

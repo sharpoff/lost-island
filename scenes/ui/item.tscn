@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://fsr4f6ublbtd"]
 
 [ext_resource type="Script" path="res://scripts/ui/item_slot.gd" id="1_bb8xe"]
-[ext_resource type="Texture2D" uid="uid://dysfqwr5dbhkb" path="res://assets/sprites/ui/item_slot.png" id="2_8s1pq"]
+[ext_resource type="Texture2D" uid="uid://dysfqwr5dbhkb" path="res://assets/sprites/ui/item_slot.png" id="2_ush7l"]
 
-[node name="Item" type="Control" node_paths=PackedStringArray("quantity_label", "texture_rect")]
+[node name="SellItem" type="Control" node_paths=PackedStringArray("quantity_label", "texture_rect")]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(68, 68)
 layout_mode = 3
@@ -23,7 +23,7 @@ layout_mode = 0
 offset_right = 24.0
 offset_bottom = 24.0
 scale = Vector2(2.79167, 2.79167)
-texture = ExtResource("2_8s1pq")
+texture = ExtResource("2_ush7l")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(67, 67)

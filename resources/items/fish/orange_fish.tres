@@ -9,5 +9,6 @@ name = "Orange fish"
 description = ""
 texture = ExtResource("2_nbii5")
 sellable = true
+price = 17
 stackable = false
 quantity = 1

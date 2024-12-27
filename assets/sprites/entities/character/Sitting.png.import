@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp6wqa0on6jyd"
-path="res://.godot/imported/trader_idle_frame1.png-87db11a04daa4100804fbd5599aae0b8.ctex"
+uid="uid://ccwttfc57fd3w"
+path="res://.godot/imported/Sitting.png-722240f143805682459daa76fd6ce850.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/entities/trader_idle_frame1.png"
-dest_files=["res://.godot/imported/trader_idle_frame1.png-87db11a04daa4100804fbd5599aae0b8.ctex"]
+source_file="res://assets/sprites/entities/character/Sitting.png"
+dest_files=["res://.godot/imported/Sitting.png-722240f143805682459daa76fd6ce850.ctex"]
 
 [params]
 

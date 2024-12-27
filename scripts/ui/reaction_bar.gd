@@ -8,7 +8,7 @@ signal ended(is_win)
 @onready var hitter: TextureRect = $Hitter
 @export var hit_limit: int = 3
 # TODO: add speed with right delta
-@export var speed_multiplier: int = 1
+var speed_multiplier: int = 1
 var elapsed_time: float = 0.0
 
 var is_running: bool = false
@@ -24,8 +24,7 @@ func _ready():
 
 func _process(delta: float) -> void:
 	if is_running:
-		elapsed_time += speed_multiplier * delta
-		hitter.position.x += elapsed_time
+		hitter.position.x += speed_multiplier
 		if hitter.position.x < bar_start or hitter.position.x > bar_end: # reverse direction
 			speed_multiplier *= -1
 			hits += 1

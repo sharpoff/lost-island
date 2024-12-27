@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kr3d38807xp5"
-path="res://.godot/imported/house_border.png-a7641469f5e961eb153884a966dc7e10.ctex"
+uid="uid://bubleqy2x1hoo"
+path="res://.godot/imported/sign.png-b448a3c5ce4766cd236f28b550d71cf6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/house_border.png"
-dest_files=["res://.godot/imported/house_border.png-a7641469f5e961eb153884a966dc7e10.ctex"]
+source_file="res://assets/sprites/props/sign.png"
+dest_files=["res://.godot/imported/sign.png-b448a3c5ce4766cd236f28b550d71cf6.ctex"]
 
 [params]
 

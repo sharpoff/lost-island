@@ -9,5 +9,6 @@ name = "Tetraodon fish"
 description = ""
 texture = ExtResource("2_gjfr0")
 sellable = true
+price = 13
 stackable = false
 quantity = 1

@@ -33,16 +33,19 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -317.0
-offset_top = -311.5
-offset_right = 317.0
-offset_bottom = 311.5
+offset_left = -596.0
+offset_top = -311.0
+offset_right = 596.0
+offset_bottom = 312.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Vertical" type="VBoxContainer" parent="Margin"]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 3
+theme_override_constants/separation = 50
+alignment = 1
 
 [node name="Top" type="HBoxContainer" parent="Margin/Vertical"]
 layout_mode = 2
@@ -57,43 +60,39 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="Bottom" type="HBoxContainer" parent="Margin/Vertical"]
+[node name="Vertical" type="VBoxContainer" parent="Margin/Vertical"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="Vertical" type="VBoxContainer" parent="Margin/Vertical/Bottom"]
-layout_mode = 2
 theme_override_constants/separation = 25
 alignment = 1
 
-[node name="Singleplayer" type="Button" parent="Margin/Vertical/Bottom/Vertical"]
+[node name="Singleplayer" type="Button" parent="Margin/Vertical/Vertical"]
 layout_mode = 2
 theme = ExtResource("5_obryx")
 theme_override_font_sizes/font_size = 44
 text = "SINGLEPLAYER"
 
-[node name="Multiplayer" type="Button" parent="Margin/Vertical/Bottom/Vertical"]
+[node name="Multiplayer" type="Button" parent="Margin/Vertical/Vertical"]
 layout_mode = 2
 theme = ExtResource("5_obryx")
 theme_override_font_sizes/font_size = 44
 text = "MULTIPLAYER"
 autowrap_mode = 3
 
-[node name="Options" type="Button" parent="Margin/Vertical/Bottom/Vertical"]
+[node name="Options" type="Button" parent="Margin/Vertical/Vertical"]
 layout_mode = 2
 theme = ExtResource("5_obryx")
 theme_override_font_sizes/font_size = 44
 text = "OPTIONS"
 
-[node name="Quit" type="Button" parent="Margin/Vertical/Bottom/Vertical"]
+[node name="Quit" type="Button" parent="Margin/Vertical/Vertical"]
 layout_mode = 2
 theme = ExtResource("5_obryx")
 theme_override_font_sizes/font_size = 44
 text = "QUIT"
 
-[connection signal="button_up" from="Margin/Vertical/Bottom/Vertical/Singleplayer" to="." method="_on_singleplayer_button_button_up"]
-[connection signal="button_up" from="Margin/Vertical/Bottom/Vertical/Multiplayer" to="." method="_on_multiplayer_button_button_up"]
-[connection signal="button_up" from="Margin/Vertical/Bottom/Vertical/Options" to="." method="_on_options_button_button_up"]
-[connection signal="button_up" from="Margin/Vertical/Bottom/Vertical/Quit" to="." method="_on_quit_button_button_up"]
+[connection signal="button_up" from="Margin/Vertical/Vertical/Singleplayer" to="." method="_on_singleplayer_button_button_up"]
+[connection signal="button_up" from="Margin/Vertical/Vertical/Multiplayer" to="." method="_on_multiplayer_button_button_up"]
+[connection signal="button_up" from="Margin/Vertical/Vertical/Options" to="." method="_on_options_button_button_up"]
+[connection signal="button_up" from="Margin/Vertical/Vertical/Quit" to="." method="_on_quit_button_button_up"]

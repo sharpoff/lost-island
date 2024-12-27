@@ -1,17 +1,68 @@
-[gd_scene load_steps=7 format=4 uid="uid://bja5cekt6w7il"]
+[gd_scene load_steps=15 format=4 uid="uid://bja5cekt6w7il"]
 
 [ext_resource type="Script" path="res://scripts/game/maps/island_map.gd" id="1_6js2j"]
 [ext_resource type="TileSet" uid="uid://bysvp2s1jde1n" path="res://resources/tilemap.tres" id="1_10gke"]
 [ext_resource type="PackedScene" uid="uid://di4wajeblyj58" path="res://scenes/particles/rain_particle.tscn" id="2_ce7h8"]
 [ext_resource type="PackedScene" uid="uid://dgsht6j10h426" path="res://scenes/components/elevate_component.tscn" id="2_p0ycu"]
 [ext_resource type="PackedScene" uid="uid://delj3ry44fw8r" path="res://scenes/entities/dealer.tscn" id="3_wgpld"]
+[ext_resource type="PackedScene" uid="uid://ylbqm3xujbf" path="res://scenes/components/interaction_component.tscn" id="6_omynk"]
+
+[sub_resource type="Animation" id="Animation_irqji"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_nv0pt"]
+resource_name = "default"
+length = 10.0
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_k5knx"]
+resource_name = "fly"
+length = 10.0
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_hgb0m"]
+resource_name = "fly through"
+length = 10.0
+
+[sub_resource type="Animation" id="Animation_vkflb"]
+resource_name = "zoom in"
+length = 14.0
+step = 0.1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nluln"]
+_data = {
+"RESET": SubResource("Animation_irqji"),
+"default": SubResource("Animation_nv0pt"),
+"fly": SubResource("Animation_k5knx"),
+"fly through": SubResource("Animation_hgb0m"),
+"zoom in": SubResource("Animation_vkflb")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_efjlk"]
 size = Vector2(9, 136.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqahh"]
+size = Vector2(31, 33)
+
 [node name="IslandMap" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_6js2j")
+
+[node name="RainParticle" parent="." instance=ExtResource("2_ce7h8")]
+visible = false
+z_index = 5
+position = Vector2(-118, -37)
+scale = Vector2(4.32, 4.72)
+amount = 400
+lifetime = 2.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nluln")
+}
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(-592, 166)
 
 [node name="Ground" type="TileMapLayer" parent="."]
 z_index = -1
@@ -20,7 +71,7 @@ tile_set = ExtResource("1_10gke")
 
 [node name="Props" type="TileMapLayer" parent="."]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAADAAAAAAAPAAkAAAADAAYAAAABAAAAAAAFAAEAAAAPAAkAAAAFAAMAAAANAAkAAAD9/wwAAAAPAAkAAAD//wEAAAAPAAkAAAAJAPn/AAAPAAkAAAAOAPz/AAAPAAkAAAARAPr/AAANAAkAAAANAAIAAAANAAkAAAAPAAEAAAAPAAkAAAASAAgAAAABAAAAAAAWAAcAAAAPAAkAAAAGAPX/AAANAAkAAAAVAP3/AAAPAAkAAAAIAAoAAAAPAAkAAAAQAAIAAAANAAkAAAAAAAIAAAANAAkAAAACAAkAAAANAAkAAAAJAAYAAAANAAkAAAAPAAUAAAAPAAkAAAAFAPz/AAAPAAkAAAD///7/AAANAAkAAAD9/wEAAAANAAkAAAD//wYAAAANAAkAAAD9/wkAAAANAAkAAAABAAwAAAANAAkAAAAHAAgAAAANAAkAAAANAAgAAAAPAAkAAAAUAAQAAAANAAkAAAAUAAAAAAAPAAkAAAAMAPj/AAANAAkAAAARAPz/AAANAAkAAAAMAAQAAAAPAAkAAAAIAAUAAAAPAAkAAAAEAAUAAAANAAkAAAAOAAkAAAAPAAkAAAAUAAUAAAAAAAAAAAAXAAgAAAABAAAAAAAIAAkAAAADAAAAAAAKAAYAAAACAAAAAAD8/wUAAAADAAAAAAAAAAgAAAACAAAAAAABAAUAAAABAAAAAAABAAgAAAABAAAAAAABAAkAAAABAAAAAAD+/w8AAAACAAAAAAD+/wQAAAAAAAAAAAAAAP7/AAAAAAAAAAABAPz/AAADAAAAAAAFAPf/AAABAAAAAAAHAPf/AAABAAAAAAAHAPj/AAACAAAAAAAIAPr/AAACAAAAAAAJAPj/AAACAAAAAAAOAPj/AAAAAAAAAAAPAP3/AAABAAAAAAAPAPb/AAADAAAAAAASAAEAAAABAAAAAAAWAP//AAADAAAAAAAOAAUAAAADAAAAAAARAAcAAAADAAAAAAATAAcAAAABAAAAAAAUAAcAAAAAAAAAAAAVAAUAAAABAAAAAAAVAAYAAAACAAAAAAAVAAgAAAADAAAAAAA=")
+tile_map_data = PackedByteArray("AAADAAAAAAAPAAkAAAADAAYAAAABAAAAAAAFAAEAAAAPAAkAAAAFAAMAAAANAAkAAAD9/wwAAAAPAAkAAAD//wEAAAAPAAkAAAAJAPn/AAAPAAkAAAAOAPz/AAAPAAkAAAARAPr/AAANAAkAAAANAAIAAAANAAkAAAAPAAEAAAAPAAkAAAASAAgAAAABAAAAAAAWAAcAAAAPAAkAAAAGAPX/AAANAAkAAAAVAP3/AAAPAAkAAAAIAAoAAAAPAAkAAAAQAAIAAAANAAkAAAAAAAIAAAANAAkAAAACAAkAAAANAAkAAAAJAAYAAAANAAkAAAAPAAUAAAAPAAkAAAAFAPz/AAAPAAkAAAD///7/AAANAAkAAAD9/wEAAAANAAkAAAD//wYAAAANAAkAAAD9/wkAAAANAAkAAAABAAwAAAANAAkAAAAHAAgAAAANAAkAAAANAAgAAAAPAAkAAAAUAAQAAAANAAkAAAAUAAAAAAAPAAkAAAAMAPj/AAANAAkAAAARAPz/AAANAAkAAAAMAAQAAAAPAAkAAAAIAAUAAAAPAAkAAAAEAAUAAAANAAkAAAAOAAkAAAAPAAkAAAAUAAUAAAAAAAAAAAAXAAgAAAABAAAAAAAIAAkAAAADAAAAAAD8/wUAAAADAAAAAAAAAAgAAAACAAAAAAABAAUAAAABAAAAAAABAAgAAAABAAAAAAABAAkAAAABAAAAAAD+/w8AAAACAAAAAAD+/wQAAAAAAAAAAAAAAP7/AAAAAAAAAAABAPz/AAADAAAAAAAFAPf/AAABAAAAAAAHAPf/AAABAAAAAAAHAPj/AAACAAAAAAAIAPr/AAACAAAAAAAJAPj/AAACAAAAAAAOAPj/AAAAAAAAAAAPAP3/AAABAAAAAAAPAPb/AAADAAAAAAASAAEAAAABAAAAAAAWAP//AAADAAAAAAAOAAUAAAADAAAAAAARAAcAAAADAAAAAAATAAcAAAABAAAAAAAUAAcAAAAAAAAAAAAVAAUAAAABAAAAAAAVAAYAAAACAAAAAAAVAAgAAAADAAAAAAALAAYAAAACAAAAAAA=")
 tile_set = ExtResource("1_10gke")
 
 [node name="AboveGround" type="TileMapLayer" parent="."]
@@ -30,7 +81,7 @@ tile_set = ExtResource("1_10gke")
 
 [node name="Buildings" type="TileMapLayer" parent="."]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAAIAAEAAAARAAgAAAA=")
+tile_map_data = PackedByteArray("AAAIAAEAAAARAAgAAADw/wIAAAARAAYAAAA=")
 tile_set = ExtResource("1_10gke")
 
 [node name="ElevateComponent" parent="." instance=ExtResource("2_p0ycu")]
@@ -48,12 +99,14 @@ shape = SubResource("RectangleShape2D_efjlk")
 z_index = 1
 position = Vector2(-445, 112)
 
-[node name="RainParticle" parent="." instance=ExtResource("2_ce7h8")]
-visible = false
-position = Vector2(-118, -37)
-scale = Vector2(4.32, 4.72)
-amount = 400
-lifetime = 2.0
+[node name="InteractionComponent" parent="." instance=ExtResource("6_omynk")]
+position = Vector2(278, 46)
 
-[node name="SpawnPoint" type="Node2D" parent="."]
-position = Vector2(-592, 166)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionComponent"]
+position = Vector2(-0.5, 6.5)
+shape = SubResource("RectangleShape2D_wqahh")
+
+[node name="DoorPoint" type="Node2D" parent="."]
+position = Vector2(277, 73)
+
+[connection signal="interacted" from="InteractionComponent" to="." method="_on_interaction_component_interacted"]

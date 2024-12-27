@@ -9,5 +9,6 @@ name = "Seastar"
 description = ""
 texture = ExtResource("2_30jac")
 sellable = true
+price = 30
 stackable = false
 quantity = 1

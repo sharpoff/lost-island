@@ -17,6 +17,8 @@ var is_grabbing = false
 func _ready() -> void:
 	SignalBus.connect("show_dealer_ui", show_dealer_ui)
 	SignalBus.connect("close_dealer_ui", close_dealer_ui)
+	SignalBus.connect("set_inventory_data", set_inventory_data)
+	SignalBus.connect("set_hotbar_data", set_hotbar_data)
 
 func _physics_process(_delta: float) -> void:
 	if grabbed_item.visible:
@@ -79,6 +81,7 @@ func _on_hotbar_inventory_opened() -> void:
 	GameManager.current_player.can_click = !GameManager.current_player.can_click
 
 func show_dealer_ui() -> void:
+	print_debug("Dealer")
 	set_sell_slots()
 	$DealerUI.show()
 
@@ -90,12 +93,21 @@ func set_sell_slots() -> void:
 
 	for child in trader_sell_slots.get_children():
 		child.queue_free()
-	
+
 	for item in inventory.items:
+		if !item or !item.sellable:
+			continue
 		var sell_item = sell_item_scene.instantiate() as SellItem
 		sell_item.pressed.connect(_on_sell_item)
 		sell_item.item = item
 		trader_sell_slots.add_child(sell_item)
 
-func _on_sell_item() -> void:
-	pass
+func _on_sell_item(sell_item) -> void:
+	if sell_item:
+		for item in GameManager.current_player.inventory.items:
+			if item == sell_item.item:
+				item = null
+				set_inventory_data(GameManager.current_player.inventory)
+				break
+		SignalBus.emit_signal("increase_coins", sell_item.item.price)
+		set_sell_slots()
