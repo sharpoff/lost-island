@@ -21,7 +21,9 @@ func save_game() -> void:
 		var node_data = node.call("save")
 
 		var json_string = JSON.stringify(node_data)
-	
+		
+		if !json_string:
+			return
 		save_file.store_line(json_string)
 	print_debug("Saved game")
 

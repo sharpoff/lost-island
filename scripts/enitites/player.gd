@@ -101,7 +101,7 @@ func _input(event: InputEvent) -> void:
 				#return
 
 			# TODO: remove tilemaps from here and remove boilerplate code to a function
-			var tilemap_ground: TileMapLayer = get_tree().root.get_node("Main/World/IslandMap/Ground")
+			var tilemap_ground: TileMapLayer = GameManager.current_map.get_node("Ground")
 			var tilmap_above_ground: TileMapLayer = get_tree().root.get_node("Main/World/IslandMap/AboveGround")
 			if !tilemap_ground:
 				print_debug("tilemap ground not found")
