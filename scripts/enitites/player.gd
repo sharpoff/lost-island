@@ -15,12 +15,15 @@ enum States {
 	IDLE,
 	MOVING,
 	FISHING,
+	SIT,
 }
 
-var current_state = States.IDLE:
+var current_state = States.SIT:
 	set(value):
 		current_state = value
 		_check_current_state(current_state)
+
+@onready var fish_timer: Timer = $FishTimer
 
 # movement related
 var can_move = true
@@ -32,13 +35,14 @@ var is_on_stairs = false
 func _enter_tree() -> void:
 	$AnimationTree.active = true
 	set_multiplayer_authority(str(name).to_int())
+	current_state = States.SIT
 
 func _physics_process(_delta: float) -> void:
 	# we can't control other characters only yours
-	if not is_multiplayer_authority():
-		return
+	#if not is_multiplayer_authority():
+	#	return
 	# let camera follow your network player
-	$Camera2D.make_current()
+	#$Camera2D.make_current()
 
 	_move()
 	_animate()
@@ -70,9 +74,13 @@ func _animate():
 	animation_tree.set("parameters/conditions/idle", current_state == States.IDLE)
 	animation_tree.set("parameters/Idle/blend_position", last_direction)
 
+	animation_tree.set("parameters/conditions/sit", current_state == States.SIT)
+	animation_tree.set("parameters/Sit/blend_position", last_direction)
+
 	animation_tree.set("parameters/Fishing start/blend_position", last_direction)
 
 	animation_tree.set("parameters/conditions/fishing", current_state == States.FISHING)
+
 	animation_tree.set("parameters/Fishing Idle/blend_position", last_direction)
 
 	animation_tree.set("parameters/Run/blend_position", last_direction)
@@ -120,6 +128,8 @@ func _input(event: InputEvent) -> void:
 				last_direction = get_local_mouse_position().normalized()
 				fishing_hook.throw_hook(target)
 				current_state = States.FISHING
+				fish_timer.wait_time = randf_range(2, 2)
+				fish_timer.start()
 
 func _on_reaction_bar_started() -> void:
 	can_move = false
@@ -139,9 +149,28 @@ func _check_current_state(state) -> void:
 	match state:
 		States.IDLE:
 			fishing_hook.is_thrown = false
+			fish_timer.stop()
 			$ReactionBar._end()
 		States.FISHING:
 			pass
 		States.MOVING:
 			fishing_hook.is_thrown = false
+			fish_timer.stop()
 			$ReactionBar._end()
+
+func save():
+	var save_dict = {
+		"filename": get_scene_file_path(),
+		"name": str(multiplayer.get_unique_id()),
+		"parent": get_parent().get_path(),
+		"pos_x": global_position.x,
+		"pos_y": global_position.y,
+		"z_index": z_index,
+		"collision_layer": collision_layer,
+		"collision_mask": collision_mask,
+	}
+	return save_dict
+
+func _on_fish_timer_timeout() -> void:
+	fish_timer.stop()
+	$ReactionBar._start()

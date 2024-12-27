@@ -1,19 +1,19 @@
 extends PanelContainer
 class_name SellItem
 
-signal pressed
+signal pressed(sell_item)
 
+@export var texture_rect: TextureRect
+@export var label: Label
 var item: ItemData: set = set_item
-@onready var texture_rect: TextureRect = $HBoxContainer/TextureRect
-@onready var label: Label = $HBoxContainer/Label
 
 func _on_button_button_up() -> void:
-	pressed.emit()
+	pressed.emit(self)
 
 func set_item(item_data):
 	item = item_data
 	if !item:
 		return
-	
-	texture_rect.texture = item.texture
-	label.text = item.name
+
+	texture_rect.set_texture(item.texture)
+	label.text = item.name + " " + str(item.price) + "$"

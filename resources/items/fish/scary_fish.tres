@@ -9,5 +9,6 @@ name = "Scary fish"
 description = ""
 texture = ExtResource("2_6kuqk")
 sellable = true
+price = 20
 stackable = false
 quantity = 1

@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=26 format=3 uid="uid://btn5pnrhdb5w"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=32 format=3 uid="uid://btn5pnrhdb5w"]
 
 [ext_resource type="AnimationNodeBlendSpace2D" uid="uid://dx7tejtq3sh2i" path="res://resources/animations/player_animation.tres" id="1_ux140"]
 
@@ -71,6 +71,29 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_i6oiq")
 blend_point_3/pos = Vector2(1, 0)
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nwve4"]
+animation = &"sit_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8n7q8"]
+animation = &"sit_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uldpp"]
+animation = &"sit_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_otydq"]
+animation = &"sit_up"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_r2u1l"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_nwve4")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_8n7q8")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_uldpp")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_otydq")
+blend_point_3/pos = Vector2(-1, 0)
+blend_mode = 1
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6ac85"]
 advance_mode = 2
 advance_condition = &"idle"
@@ -78,9 +101,6 @@ advance_condition = &"idle"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_obrlg"]
 advance_mode = 2
 advance_expression = "velocity"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u3tcv"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iwesx"]
 advance_mode = 2
@@ -106,6 +126,13 @@ advance_condition = &"fishing"
 advance_mode = 2
 advance_expression = "velocity"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5d0pe"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bi0wf"]
+advance_mode = 2
+advance_expression = "velocity"
+
 [resource]
 "states/Fishing Idle/node" = SubResource("AnimationNodeBlendSpace2D_jqd7q")
 "states/Fishing Idle/position" = Vector2(657, 45)
@@ -115,5 +142,8 @@ states/Idle/node = SubResource("AnimationNodeBlendSpace2D_ejusl")
 states/Idle/position = Vector2(416, 141)
 states/Run/node = ExtResource("1_ux140")
 states/Run/position = Vector2(380, 10)
-transitions = ["Run", "Idle", SubResource("AnimationNodeStateMachineTransition_6ac85"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_obrlg"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_u3tcv"), "Fishing Idle", "Idle", SubResource("AnimationNodeStateMachineTransition_iwesx"), "Fishing Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ivykw"), "Fishing start", "Fishing Idle", SubResource("AnimationNodeStateMachineTransition_irfl4"), "Idle", "Fishing start", SubResource("AnimationNodeStateMachineTransition_xtu0q"), "Run", "Fishing start", SubResource("AnimationNodeStateMachineTransition_4p8jg"), "Fishing start", "Run", SubResource("AnimationNodeStateMachineTransition_cub4f")]
+states/Sit/node = SubResource("AnimationNodeBlendSpace2D_r2u1l")
+states/Sit/position = Vector2(168, 40)
+states/Start/position = Vector2(-11, 62)
+transitions = ["Run", "Idle", SubResource("AnimationNodeStateMachineTransition_6ac85"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_obrlg"), "Fishing Idle", "Idle", SubResource("AnimationNodeStateMachineTransition_iwesx"), "Fishing Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ivykw"), "Fishing start", "Fishing Idle", SubResource("AnimationNodeStateMachineTransition_irfl4"), "Idle", "Fishing start", SubResource("AnimationNodeStateMachineTransition_xtu0q"), "Run", "Fishing start", SubResource("AnimationNodeStateMachineTransition_4p8jg"), "Fishing start", "Run", SubResource("AnimationNodeStateMachineTransition_cub4f"), "Start", "Sit", SubResource("AnimationNodeStateMachineTransition_5d0pe"), "Sit", "Idle", SubResource("AnimationNodeStateMachineTransition_bi0wf")]
 graph_offset = Vector2(-96, -34)

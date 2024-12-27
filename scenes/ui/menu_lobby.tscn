@@ -4,7 +4,7 @@
 [ext_resource type="StyleBox" uid="uid://chvlw8pqinkx3" path="res://resources/styles/menu_panel.tres" id="2_is1tw"]
 [ext_resource type="Theme" uid="uid://bycwepbj8cxa4" path="res://resources/styles/theme.tres" id="3_rcyc5"]
 
-[node name="LobbyMenu" type="Control" node_paths=PackedStringArray("player_list", "nickname", "ip_address", "error_msg", "host_button", "join_button", "play_button")]
+[node name="LobbyMenu" type="Control" node_paths=PackedStringArray("player_list", "nickname", "ip_address", "error_msg", "host_button", "join_button", "play_button", "option_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,8 +19,10 @@ error_msg = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/ErrorMessage")
 host_button = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/NameHost/Host")
 join_button = NodePath("SelectMenu/Margin/Vertical/Top/Vertical/JoinIP/Join")
 play_button = NodePath("Players/Margin/Vertical/GameInfo/VBoxContainer2/PlayButton")
+option_button = NodePath("Players/Margin/Vertical/GameInfo/VBoxContainer3/VBoxContainer/OptionButton")
 
 [node name="SelectMenu" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -129,7 +131,6 @@ theme_override_font_sizes/font_size = 33
 text = "BACK"
 
 [node name="Players" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -191,23 +192,27 @@ text = "BACK"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Players/Margin/Vertical/GameInfo"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="Players/Margin/Vertical/GameInfo"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Players/Margin/Vertical/GameInfo/VBoxContainer3"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Players/Margin/Vertical/GameInfo/VBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="Players/Margin/Vertical/GameInfo/VBoxContainer3/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 35
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 35
-theme_override_constants/margin_bottom = 20
-
-[node name="OptionButton" type="OptionButton" parent="Players/Margin/Vertical/GameInfo/VBoxContainer/MarginContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 33
-selected = 0
+size_flags_vertical = 3
+theme = ExtResource("3_rcyc5")
 allow_reselect = true
-item_count = 1
-popup/item_0/text = "Save 1"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Players/Margin/Vertical/GameInfo/VBoxContainer3"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Players/Margin/Vertical/GameInfo/VBoxContainer3/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("3_rcyc5")
+text = "new_save"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Players/Margin/Vertical/GameInfo"]
 layout_mode = 2
@@ -217,6 +222,7 @@ alignment = 2
 [node name="PlayButton" type="Button" parent="Players/Margin/Vertical/GameInfo/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 8
+theme = ExtResource("3_rcyc5")
 theme_override_font_sizes/font_size = 33
 text = "PLAY"
 

@@ -11,12 +11,20 @@ var main_menu_scene = "res://scenes/ui/menu_main.tscn"
 @export var host_button: Button
 @export var join_button: Button
 @export var play_button: Button
+@export var option_button: OptionButton
 
 func _ready() -> void:
 	GameManager.player_connected.connect(_on_player_connected)
 	GameManager.player_disconnected.connect(_on_player_disconnected)
 	GameManager.server_disconnected.connect(_on_server_disconnected)
 	GameManager.net_error.connect(_on_network_error)
+
+	var saves = SaveManager.get_all_saves()
+	if saves.is_empty():
+		play_button.disabled = true
+
+	for save in saves:
+		option_button.add_item(save)
 
 func _on_play_button_button_up() -> void:
 	host_button.disabled = true
@@ -29,7 +37,7 @@ func _on_host_button_up() -> void:
 		error_msg.show()
 		return
 	error_msg.hide()
-	
+
 	GameManager.player_info["name"] = nickname.text
 	GameManager.create_game()
 
@@ -46,7 +54,7 @@ func _on_join_button_up() -> void:
 		error_msg.show()
 		return
 	error_msg.hide()
-	
+
 	GameManager.player_info["name"] = nickname.text
 	
 	GameManager.join_game(ip_address.text)

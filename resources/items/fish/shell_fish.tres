@@ -9,5 +9,6 @@ name = "Shell fish"
 description = ""
 texture = ExtResource("2_ihpvl")
 sellable = true
+price = 15
 stackable = false
 quantity = 1

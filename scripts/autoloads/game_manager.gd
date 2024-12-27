@@ -27,7 +27,7 @@ func _ready() -> void:
 	multiplayer.connected_to_server.connect(_on_connection_ok) # emitted only on clients
 	multiplayer.connection_failed.connect(_on_connection_fail)
 	multiplayer.server_disconnected.connect(_on_server_disconnected) # emitted only on clients
-	
+
 	SignalBus.connect("set_current_player", set_current_player)
 
 func create_game():

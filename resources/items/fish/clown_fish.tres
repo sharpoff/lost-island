@@ -9,5 +9,6 @@ name = "Clown fish"
 description = ""
 texture = ExtResource("2_3ylqo")
 sellable = true
+price = 15
 stackable = false
 quantity = 1

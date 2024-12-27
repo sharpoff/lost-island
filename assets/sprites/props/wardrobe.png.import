@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3uibwdquwguw"
-path="res://.godot/imported/clouds.png-957e5275d52eda1e9730def61b952c32.ctex"
+uid="uid://bmpkar5i171di"
+path="res://.godot/imported/wardrobe.png-2deeb9d13049e532730a1b3c4bde3425.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/clouds.png"
-dest_files=["res://.godot/imported/clouds.png-957e5275d52eda1e9730def61b952c32.ctex"]
+source_file="res://assets/sprites/props/wardrobe.png"
+dest_files=["res://.godot/imported/wardrobe.png-2deeb9d13049e532730a1b3c4bde3425.ctex"]
 
 [params]
 

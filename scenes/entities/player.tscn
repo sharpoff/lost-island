@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://qhvm71rgocqy"]
+[gd_scene load_steps=36 format=3 uid="uid://qhvm71rgocqy"]
 
 [ext_resource type="Script" path="res://scripts/enitites/player.gd" id="1_yndhw"]
 [ext_resource type="Script" path="res://scripts/game/item_data.gd" id="2_hdyfj"]
@@ -190,7 +190,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7, 3),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(-16, -4), Vector2(-16, -5), Vector2(-16, -4), Vector2(-16, -5), Vector2(-16, -4), Vector2(-16, -5), Vector2(-16, -4), Vector2(-16, -5), Vector2(-16, -4), Vector2(-16, -5), Vector2(-16, -5)]
+"values": [Vector2(-16, -4), Vector2(-16, -5), Vector2(-16, -3.88889), Vector2(-16, -4.90278), Vector2(-16, -3.77381), Vector2(-16, -4.81151), Vector2(-16, -3.64921), Vector2(-16, -4.73691), Vector2(-16, -3.49127), Vector2(-16, -4.74564), Vector2(-16, -5)]
 }
 
 [sub_resource type="Animation" id="Animation_jqs3d"]
@@ -313,7 +313,7 @@ tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector2(16, 1), Vector2(6, -9), Vector2(-15, -7), Vector2(-16, -4), Vector2(-16, -5)]
 }
 
@@ -609,6 +609,27 @@ tracks/1/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_egd7t"]
+resource_name = "sit_left"
+
+[sub_resource type="Animation" id="Animation_gbaw8"]
+resource_name = "sit_up"
+length = 0.6
+loop_mode = 1
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(13, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_387xp"]
 resource_name = "up"
 length = 0.8
@@ -656,14 +677,16 @@ _data = {
 "idle_up": SubResource("Animation_hbp5c"),
 "left": SubResource("Animation_a3w5u"),
 "right": SubResource("Animation_d1jdf"),
+"sit_left": SubResource("Animation_egd7t"),
+"sit_up": SubResource("Animation_gbaw8"),
 "up": SubResource("Animation_387xp")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "light", "speed_component", "fishing_hook") groups=["player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "light", "speed_component", "fishing_hook") groups=["persistent", "player"]]
 z_index = 1
 y_sort_enabled = true
 collision_layer = 2
-collision_mask = 24
+collision_mask = 28
 motion_mode = 1
 script = ExtResource("1_yndhw")
 animation_tree = NodePath("AnimationTree")
@@ -673,6 +696,9 @@ inventory = SubResource("Resource_fwk85")
 hotbar = SubResource("Resource_0iyed")
 fishing_hook = NodePath("FishingHook")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_4dhnr")
 
@@ -680,11 +706,6 @@ replication_config = SubResource("SceneReplicationConfig_4dhnr")
 
 [node name="SpeedComponent" parent="Components" instance=ExtResource("5_qtokq")]
 speed = 100.0
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
-position_smoothing_speed = 2.0
-editor_draw_limits = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
@@ -702,26 +723,29 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-active = false
 tree_root = ExtResource("3_wydrx")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/fishing = false
+parameters/conditions/fishing = true
 parameters/conditions/idle = false
-"parameters/Fishing Idle/blend_position" = Vector2(0.897797, 0.0758123)
+"parameters/Fishing Idle/blend_position" = Vector2(-0.627981, -0.0318471)
 "parameters/Fishing start/blend_position" = Vector2(-0.155947, -0.887851)
 parameters/Idle/blend_position = Vector2(0.0423728, -0.728459)
 parameters/Run/blend_position = Vector2(0.395867, -0.0613497)
+parameters/Sit/blend_position = Vector2(-0.825119, 0.103448)
 
 [node name="NightLight" parent="." instance=ExtResource("4_mtcp3")]
 enabled = false
 texture = ExtResource("5_hao5w")
 
+[node name="FishTimer" type="Timer" parent="."]
+
 [node name="FishingHook" parent="." instance=ExtResource("7_527hn")]
+z_index = 1
 position = Vector2(0, -3)
-speed_multiplier = 5.0
 
 [node name="ReactionBar" parent="." instance=ExtResource("8_mrjga")]
 
+[connection signal="timeout" from="FishTimer" to="." method="_on_fish_timer_timeout"]
 [connection signal="ended" from="ReactionBar" to="." method="_on_reaction_bar_ended"]
 [connection signal="started" from="ReactionBar" to="." method="_on_reaction_bar_started"]

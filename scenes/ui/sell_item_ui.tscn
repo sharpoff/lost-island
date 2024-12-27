@@ -1,17 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://ba16tyhno4rdi"]
+[gd_scene load_steps=3 format=3 uid="uid://ba16tyhno4rdi"]
 
-[ext_resource type="Texture2D" uid="uid://bp7mo2dlu5k2" path="res://assets/sprites/items/fish/Fish_1.png" id="1_mmg3x"]
 [ext_resource type="Script" path="res://scripts/ui/sell_item_ui.gd" id="1_sov4w"]
 [ext_resource type="Theme" uid="uid://bycwepbj8cxa4" path="res://resources/styles/theme.tres" id="2_rri43"]
 
-[node name="SellItem" type="PanelContainer"]
+[node name="SellItem" type="PanelContainer" node_paths=PackedStringArray("texture_rect", "label")]
 anchors_preset = -1
-anchor_right = 0.339
+anchor_right = 0.082
 anchor_bottom = 0.139
-offset_right = 0.0799866
+offset_right = 0.0399933
 offset_bottom = -0.0800095
-size_flags_horizontal = 0
+size_flags_horizontal = 2
 script = ExtResource("1_sov4w")
+texture_rect = NodePath("HBoxContainer/TextureRect")
+label = NodePath("HBoxContainer/Label")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -21,14 +22,12 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
-texture = ExtResource("1_mmg3x")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2_rri43")
-text = "fish"
 horizontal_alignment = 1
 vertical_alignment = 1
 

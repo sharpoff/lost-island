@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://b306kv5gp1g1d"]
+[gd_scene load_steps=21 format=3 uid="uid://b306kv5gp1g1d"]
 
 [ext_resource type="Script" path="res://scripts/game/main.gd" id="1_b07es"]
 [ext_resource type="Script" path="res://scripts/game/daynight_cycle.gd" id="1_kvkoo"]
 [ext_resource type="PackedScene" uid="uid://qhvm71rgocqy" path="res://scenes/entities/player.tscn" id="3_ed0u7"]
 [ext_resource type="PackedScene" uid="uid://bja5cekt6w7il" path="res://scenes/game/maps/island_map.tscn" id="3_kaw51"]
+[ext_resource type="PackedScene" uid="uid://bf4u5yf3uj8te" path="res://scenes/game/maps/house_map.tscn" id="4_t5t72"]
 [ext_resource type="Texture2D" uid="uid://d33kw7jflx3kd" path="res://resources/styles/day_night_cycle_gradient.tres" id="5_plrb7"]
 [ext_resource type="PackedScene" uid="uid://kh2acv2jodjg" path="res://scenes/game/touch_controls.tscn" id="6_8ksbt"]
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="6_650bn"]
@@ -41,7 +42,8 @@ gradient = SubResource("Gradient_r6sre")
 y_sort_enabled = true
 script = ExtResource("1_b07es")
 player_scene = ExtResource("3_ed0u7")
-island_map = ExtResource("3_kaw51")
+island_map_scene = ExtResource("3_kaw51")
+house_map_scene = ExtResource("4_t5t72")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("../Players")
@@ -58,7 +60,6 @@ environment = SubResource("Environment_ix6ey")
 script = ExtResource("1_kvkoo")
 gradient = ExtResource("5_plrb7")
 time_speed = 2.0
-current_hour = 9
 
 [node name="Players" type="Node2D" parent="."]
 z_index = 2
@@ -145,14 +146,14 @@ text = "12:32"
 label_settings = SubResource("LabelSettings_rpwmi")
 horizontal_alignment = 1
 
-[node name="Line3" type="HBoxContainer" parent="UI/Info/Margin/Top"]
+[node name="Line4" type="HBoxContainer" parent="UI/Info/Margin/Top"]
 layout_mode = 2
 
-[node name="Fish" type="Label" parent="UI/Info/Margin/Top/Line3"]
+[node name="Coins" type="Label" parent="UI/Info/Margin/Top/Line4"]
 layout_mode = 2
 size_flags_horizontal = 2
 theme = ExtResource("8_uphgm")
-text = "Fish: 0
+text = "COINS: 0
 "
 label_settings = SubResource("LabelSettings_rpwmi")
 horizontal_alignment = 1
@@ -217,6 +218,7 @@ offset_right = 34.0
 offset_bottom = 34.0
 
 [node name="Fade" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="TextureRect" type="TextureRect" parent="Fade"]
 anchors_preset = 15

@@ -21,6 +21,7 @@ GameManager="*res://scripts/autoloads/game_manager.gd"
 SettingsManager="*res://scripts/utils/settings_manager.gd"
 AudioManager="*res://scenes/autoloads/audio_manager.tscn"
 SignalBus="*res://scripts/autoloads/signal_bus.gd"
+SaveManager="*res://scripts/autoloads/save_manager.gd"
 
 [display]
 
@@ -40,6 +41,7 @@ project/assembly_name="Lost Island"
 interactable="Object that player can interact with"
 player="Main player group"
 night_light=""
+persistent="Nodes in this group will be saved and loaded"
 
 [gui]
 

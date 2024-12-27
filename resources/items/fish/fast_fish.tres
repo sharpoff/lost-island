@@ -9,5 +9,6 @@ name = "Fast fish"
 description = ""
 texture = ExtResource("2_s2pk4")
 sellable = true
+price = 10
 stackable = false
 quantity = 1

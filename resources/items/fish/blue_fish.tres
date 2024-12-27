@@ -9,5 +9,6 @@ name = "Blue fish"
 description = ""
 texture = ExtResource("2_gscmh")
 sellable = true
+price = 13
 stackable = false
 quantity = 1
