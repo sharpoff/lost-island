@@ -85,7 +85,7 @@ func _animate():
 
 	animation_tree.set("parameters/Run/blend_position", last_direction)
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if can_click and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
 			if current_state == States.FISHING:
