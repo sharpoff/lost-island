@@ -1,3 +1,3 @@
 # Game prototype
 
-![gif](./misc/video.gif)
+![video](./misc/video.mp4)
